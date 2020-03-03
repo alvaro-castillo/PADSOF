@@ -3,12 +3,11 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import ads.assignment3.Appliance;
 
 /**
  * Represents a project inside of the Application
  * 
- * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
  *
  */
 public abstract class Project {
@@ -70,7 +69,7 @@ public abstract class Project {
 	 * 
 	 * @param title Title of the project
 	 * @param description Description of the project
-	 * @param amount Amount of money rquested in Euros
+	 * @param amount Amount of money requested in Euros
 	 */
 	public Project(String title, String description, double amount) {
 		this.title = title;
@@ -78,7 +77,7 @@ public abstract class Project {
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
 		this.acceptDate = acceptDate; // Mirar lo de las modifiable dates
-		this.status = WaitingAcceptance;
+		this.status = ProjectStatus.WAITING_ACCEPTANCE;
 
 		// Assign a unique id to the project
 		this.id = lastId + 1;
@@ -138,31 +137,31 @@ public abstract class Project {
 	}
 	
 	public ProjectStatus getState() {
-		return state;
+		return status;
 	}
 	
 	public void adminAcceptProject() {
-		state = ProjectStatus.AdminAccepted;
+		status = ProjectStatus.ADMIN_ACCEPTED;
 	}
 	
 	public void adminRejectProject() {
-		state = ProjectStatus.AdminRejected;
+		status = ProjectStatus.ADMIN_REJECTED;
 	}
 	
 	public void pendingProject() {
-		state = ProjectStatus.Pending;
+		status = ProjectStatus.PENDING;
 	}
 	
 	public void expireProject() {
-		state = ProjectStatus.Expired;
+		status = ProjectStatus.EXPIRED;
 	}
 	
 	public void rejectProject() {
-		state = ProjectStatus.Rejected;
+		status = ProjectStatus.REJECTED;
 	}
 	
 	public void approveProject() {
-		state = ProjectStatus.Approved;
+		status = ProjectStatus.APPROVED;
 	}
 	
 	public boolean vote(Vote v) {
