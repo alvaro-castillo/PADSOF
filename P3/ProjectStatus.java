@@ -4,10 +4,10 @@ package ads;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 * */
-public enum ProjectSatus {
+public enum ProjectStatus {
 	WAITING_ACCEPTANCE,
 	ADMIN_ACCEPTED,
-	ADMIN_RJECTED,
+	ADMIN_REJECTED,
 	PENDING,
 	EXPIRED,
 	REJECTED,
