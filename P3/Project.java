@@ -1,13 +1,14 @@
-package app;
+package ads;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import ads.assignment3.Appliance;
 
 /**
  * Represents a project inside of the Application
  * 
- * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ * @author Alejandro Benimeli
  *
  */
 public abstract class Project {
@@ -30,6 +31,7 @@ public abstract class Project {
 	/**
 	 * The minimum number of votes needed to send the project to the
 	 * government for approval
+	 * Is -1 until the admin sets the minimum
 	 */
 	private int minimumVotes = -1;
 	
@@ -69,7 +71,7 @@ public abstract class Project {
 	 * 
 	 * @param title Title of the project
 	 * @param description Description of the project
-	 * @param amount Amount of money requested in Euros
+	 * @param amount Amount of money rquested in Euros
 	 */
 	public Project(String title, String description, double amount) {
 		this.title = title;
@@ -77,7 +79,7 @@ public abstract class Project {
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
 		this.acceptDate = acceptDate; // Mirar lo de las modifiable dates
-		this.status = ProjectStatus.WAITING_ACCEPTANCE;
+		this.status = WaitingAcceptance;
 
 		// Assign a unique id to the project
 		this.id = lastId + 1;
@@ -118,52 +120,92 @@ public abstract class Project {
 	
 	/**
 	 * Setter for minimumVotes
-	 * @param minimumVotes 
+	 * @param minimum votes needed for the project
 	 */
 	public void setMinimumVotes(int minimumVotes) {
 		this.minimumVotes = minimumVotes;
 	}
 	
+	/**
+	 * Getter for actualVotes
+	 * @return actual votes of the project
+	 */
 	public int getActualVotes() {
 		return actualVotes;
 	}
 	
+	/**
+	 * Getter for acceptDate
+	 * @return date the project was accepted
+	 */
 	public LocalDate getAcceptDate() {
 		return acceptDate;
 	}
 	
+	/**
+	 * Getter for id
+	 * @return id of the project
+	 */
 	public long getId() {
 		return id;
 	}
 	
+	/**
+	 * Getter for state
+	 * @return state of the project
+	 */
 	public ProjectStatus getState() {
-		return status;
+		return state;
 	}
 	
+	/**
+	 * Changes the state to AdminAccepted
+	 */
 	public void adminAcceptProject() {
-		status = ProjectStatus.ADMIN_ACCEPTED;
+		state = ProjectStatus.AdminAccepted;
 	}
 	
+	/**
+	 * Changes the state to AdminRejected
+	 */
 	public void adminRejectProject() {
-		status = ProjectStatus.ADMIN_REJECTED;
+		state = ProjectStatus.AdminRejected;
 	}
 	
+	/**
+	 * Changes the state to Pending
+	 */
 	public void pendingProject() {
-		status = ProjectStatus.PENDING;
+		state = ProjectStatus.Pending;
 	}
 	
+	/**
+	 * Changes the state to Expired
+	 */
 	public void expireProject() {
-		status = ProjectStatus.EXPIRED;
+		state = ProjectStatus.Expired;
 	}
 	
+	/**
+	 * Changes the state to Rejected
+	 */
 	public void rejectProject() {
-		status = ProjectStatus.REJECTED;
+		state = ProjectStatus.Rejected;
 	}
 	
+	/**
+	 * Changes the state to Approved
+	 */
 	public void approveProject() {
-		status = ProjectStatus.APPROVED;
+		state = ProjectStatus.Approved;
 	}
 	
+	/**
+	 * Adds a vote to the project
+	 * 
+	 * @param v Vote that wull be added
+	 * @return Boolean indication if the vote was added succesfuly
+	 */
 	public boolean vote(Vote v) {
 		// TODO Implementarla. Antes hay que hacer la lista de notificaciones
 	}
