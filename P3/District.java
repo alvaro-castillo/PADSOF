@@ -26,7 +26,7 @@ public enum District {
 	SAN_BLAS_CANILLEJAS("San Blas-Canillejas"),
 	TETUAN("Tetuán"),
 	USERA("Usera"),
-	VICALVARO("Viáalvaro"),
+	VICALVARO("Vicálvaro"),
 	VILLA_DE_VALLECAS("Villa de Vallecas"),
 	VILLAVERDE("Villaverde");
 	
