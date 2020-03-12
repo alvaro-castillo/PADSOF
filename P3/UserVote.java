@@ -2,6 +2,14 @@ package ads;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a user voting for a project
+ * 
+ * @author Álvaro Castillo García
+ * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valienteº
+ *
+ */
 public class UserVote {
 	
 	private User voter;

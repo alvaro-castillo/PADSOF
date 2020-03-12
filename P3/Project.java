@@ -1,14 +1,13 @@
 package ads;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import ads.assignment3.Appliance;
+import java.util.*;
 
 /**
  * Represents a project inside of the Application
  * 
+ * @author Álvaro Castillo García
  * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
  *
  */
 public abstract class Project {
@@ -71,15 +70,15 @@ public abstract class Project {
 	 * 
 	 * @param title Title of the project
 	 * @param description Description of the project
-	 * @param amount Amount of money rquested in Euros
+	 * @param amount Amount of money requested in Euros
 	 */
 	public Project(String title, String description, double amount) {
 		this.title = title;
 		this.description = description;
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
-		this.acceptDate = acceptDate; // Mirar lo de las modifiable dates
-		this.status = WaitingAcceptance;
+		this.acceptDate = acceptDate;
+		this.status = WAITING_ACCEPTANCE;
 
 		// Assign a unique id to the project
 		this.id = lastId + 1;
@@ -155,59 +154,85 @@ public abstract class Project {
 	 * @return state of the project
 	 */
 	public ProjectStatus getState() {
-		return state;
+		return status;
 	}
 	
 	/**
 	 * Changes the state to AdminAccepted
 	 */
 	public void adminAcceptProject() {
-		state = ProjectStatus.AdminAccepted;
+		status = ProjectStatus.ADMIN_ACCEPTED;
 	}
 	
 	/**
 	 * Changes the state to AdminRejected
 	 */
 	public void adminRejectProject() {
-		state = ProjectStatus.AdminRejected;
+		status = ProjectStatus.ADMIN_REJECTED;
 	}
 	
 	/**
 	 * Changes the state to Pending
 	 */
 	public void pendingProject() {
-		state = ProjectStatus.Pending;
+		status = ProjectStatus.PENDING;
 	}
 	
 	/**
 	 * Changes the state to Expired
 	 */
 	public void expireProject() {
-		state = ProjectStatus.Expired;
+		status = ProjectStatus.EXPIRED;
 	}
 	
 	/**
 	 * Changes the state to Rejected
 	 */
 	public void rejectProject() {
-		state = ProjectStatus.Rejected;
+		status = ProjectStatus.REJECTED;
 	}
 	
 	/**
 	 * Changes the state to Approved
 	 */
 	public void approveProject() {
-		state = ProjectStatus.Approved;
+		status = ProjectStatus.APPROVED;
 	}
 	
 	/**
 	 * Adds a vote to the project
 	 * 
-	 * @param v Vote that wull be added
+	 * @param v Vote that will be added
 	 * @return Boolean indication if the vote was added succesfuly
 	 */
 	public boolean vote(Vote v) {
 		// TODO Implementarla. Antes hay que hacer la lista de notificaciones
+		
+		if (v == null) {
+			return false;
+		}
+		
+		// TODO chequear que no hayan votado antes
+		
+		votes.add(v);
+		
+		return true;
+	}
+	
+	private int countVotes() {
+		
+		Set<String> voters = new HashSet<>();
+		
+		for (Vote v: votes) {
+			voters.addAll(v.getVoters());
+		}
+
+		if (actualVotes >= minimumVotes) {
+			// TODO Notificar al creador del project
+			//update(Nofication("Your " + this.getClass().getName() + " project: " + title + " with ID " + id + " has reached the minimun number of votes and is ready to be submited!"));
+		}
+		
+		return voters.size();
 	}
 
 }
