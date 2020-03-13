@@ -12,15 +12,15 @@ import java.util.ArrayList;
  */
 public class UserVote {
 	
-	private User voter;
+	private RegisteredUser voter;
 	
-	public UserVote(User voter) {
+	public UserVote(RegisteredUser voter) {
 		this.voter = voter;
 	}
 	
 	public ArrayList<String> getVoters() {
 		ArrayList<String> voters = new ArrayList<String>();
-		voters.add(voter.getName());
+		voters.add(voter.getUsername());
 		return voters;
 	}
 
