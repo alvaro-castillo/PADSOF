@@ -12,6 +12,8 @@ import java.util.*;
  */
 public abstract class Project {
 	
+	private static final ProjectStatus WAITING_ACCEPTANCE = null;
+
 	/**
 	 * Title of the Project
 	 */
@@ -77,7 +79,7 @@ public abstract class Project {
 		this.description = description;
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
-		this.acceptDate = acceptDate;
+		this.acceptDate = acceptDate; // TODO: Usar modifiable dates
 		this.status = WAITING_ACCEPTANCE;
 
 		// Assign a unique id to the project
@@ -219,7 +221,12 @@ public abstract class Project {
 		return true;
 	}
 	
-	private int countVotes() {
+	/**
+	 * Returns the amount of unique votes the project has
+	 * 
+	 * @return number of votes
+	 */
+	protected int countVotes() {
 		
 		Set<String> voters = new HashSet<>();
 		
@@ -233,6 +240,55 @@ public abstract class Project {
 		}
 		
 		return voters.size();
+	}
+	
+	/**
+	 * Updates the vote count of the project whenever its called
+	 */
+	public void update() {
+		actualVotes = countVotes();
+	}
+	
+	/**
+	 * Determines if a registered user has voted for the project
+	 * 
+	 * @param user
+	 * @return boolean telling us whether the registered user has voted for the project or not
+	 */
+	public boolean hasVoted(RegisteredUser user) {
+		
+		for (Vote v: votes) {
+			
+			if (v instanceof UserVote) {
+				if ( ((UserVote)v).getUser().equals(user) ) {
+					return true;
+				}
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Determines if a group has voted for the project
+	 * 
+	 * @param user
+	 * @return boolean telling us whether the group has voted for the project or not
+	 */
+	public boolean hasVoted(Group group) {
+		
+		for (Vote v: votes) {
+			
+			if (v instanceof GroupVote) {
+				if ( ((GroupVote)v).getGroup().equals(group) ) {
+					return true;
+				}
+			}
+			
+		}
+		
+		return false;
 	}
 
 }
