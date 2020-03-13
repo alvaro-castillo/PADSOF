@@ -1,6 +1,6 @@
 package ads;
 
-import java.util.Date;
+import java.time.*;
 
 /**
 * These are the functions and variables that define the Notification objects, the Notification class.
@@ -9,7 +9,7 @@ import java.util.Date;
 */
 public class Notification {
 	private String content;
-	private Date date;
+	private LocalDate date;
 	private boolean read;
 	
 	/**
@@ -17,7 +17,7 @@ public class Notification {
 	 * @param content of the notification.
 	 * @param date of the creation.
 	 */
-	public Notification(String content, Date date) {
+	public Notification(String content, LocalDate date) {
 		this.content = content;
 		this.date = date;
 		this.read = false;
@@ -52,7 +52,7 @@ public class Notification {
 	 * Notification Date getter.
 	 * @return Date
 	 */
-	public Date getDate() {
+	public LocalDate getDate() {
 		return this.date;
 	}
 }

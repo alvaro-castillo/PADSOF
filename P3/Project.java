@@ -66,6 +66,11 @@ public abstract class Project {
 	 * is set to lastId + 1 
 	 */
 	private static long lastId = -1;
+	
+	/**
+	 * Creator of the project
+	 */
+	private RegisteredUser creator;
 
 	/**
 	 * Project constructor
@@ -74,13 +79,16 @@ public abstract class Project {
 	 * @param description Description of the project
 	 * @param amount Amount of money requested in Euros
 	 */
-	public Project(String title, String description, double amount) {
+	public Project(String title, String description, double amount, RegisteredUser creator) {
 		this.title = title;
 		this.description = description;
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
 		this.acceptDate = acceptDate; // TODO: Usar modifiable dates
 		this.status = WAITING_ACCEPTANCE;
+		this.creator = creator;
+		
+		vote(creator);
 
 		// Assign a unique id to the project
 		this.id = lastId + 1;
@@ -152,6 +160,14 @@ public abstract class Project {
 	}
 	
 	/**
+	 * Returns the creator of the project
+	 * @return creator
+	 */
+	public RegisteredUser getCreator() {
+		return creator;
+	}
+	
+	/**
 	 * Getter for state
 	 * @return state of the project
 	 */
@@ -202,19 +218,47 @@ public abstract class Project {
 	}
 	
 	/**
-	 * Adds a vote to the project
+	 * Adds a UserVote to the project
 	 * 
-	 * @param v Vote that will be added
+	 * @param user RegisteredUser that votes
 	 * @return Boolean indication if the vote was added succesfuly
 	 */
-	public boolean vote(Vote v) {
-		// TODO Implementarla. Antes hay que hacer la lista de notificaciones
+	public boolean vote(RegisteredUser user) {
 		
-		if (v == null) {
+		if (user == null) {
 			return false;
 		}
 		
-		// TODO chequear que no hayan votado antes
+		// If the user has already voted
+		if (hasVoted(user)) {
+			return false;
+		}
+		
+		Vote v = new UserVote(user);
+		
+		votes.add(v);
+		
+		return true;
+	}
+	
+	/**
+	 * Adds a GroupVote to the project
+	 * 
+	 * @param group Group that votes
+	 * @return Boolean indication if the vote was added succesfuly
+	 */
+	public boolean vote(Group group) {
+		
+		if (group == null) {
+			return false;
+		}
+		
+		// If the group has already voted
+		if (hasVoted(group)) {
+			return false;
+		}
+		
+		Vote v = new GroupVote(group);
 		
 		votes.add(v);
 		
@@ -233,10 +277,9 @@ public abstract class Project {
 		for (Vote v: votes) {
 			voters.addAll(v.getVoters());
 		}
-
+		// TODO: Que use modifiable dates
 		if (actualVotes >= minimumVotes) {
-			// TODO Notificar al creador del project
-			//update(Nofication("Your " + this.getClass().getName() + " project: " + title + " with ID " + id + " has reached the minimun number of votes and is ready to be submited!"));
+			creator.update(new Notification("Your " + this.getClass().getName() + " project: " + title + " with ID " + id + " has reached the minimun number of votes and is ready to be submited!", LocalDate.now()));
 		}
 		
 		return voters.size();
