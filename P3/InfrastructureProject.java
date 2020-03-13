@@ -3,23 +3,26 @@ package ads;
 import java.time.LocalDate;
 
 /**
+ * Subclass of Project. Represents a type 
  * 
+ * @author Álvaro Castillo García
  * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
  *
  */
 public class InfrastructureProject extends Project {
 	
-	private String district;
+	private District district;
 	private String image;
 	
 	public InfrastructureProject(String title, String description, double amount, 
-			String district, String image) {
+			District district, String image) {
 		super(title, description, amount);
 		this.district = district;
 		this.image = image;
 	}
 	
-	public String getDistrict() {
+	public District getDistrict() {
 		return district;
 	}
 	
