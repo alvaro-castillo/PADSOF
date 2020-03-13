@@ -2,10 +2,8 @@
 package ads;
 
 /**
- * Añadir al diagrama esta enumeración. 
  * These are the values which the District can take, the District enum. 
  * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
- *
  */
 public enum District {
 	ARGANZUELA("Arganzuela"),
@@ -31,11 +29,20 @@ public enum District {
 	VILLAVERDE("Villaverde");
 	
 	private String districtName;
-
+	
+	/**
+	 * Constructor of this enumeration.
+	 *
+	 * @param districtName
+	 */
 	private District(String districtName) {
 		this.districtName = districtName;
 	}
 
+	/**
+	 * districtName getter
+	 * @return districtName
+	 */
 	public String getDistrictName() {
 		return districtName;
 	}

@@ -1,18 +1,13 @@
 package ads;
 
 import java.util.*;
+import java.io.Serializable;
 /**
- * Cambios en el diagrama:
- * arreglo de notificaciones--> notification
- * boolean de notification--> notifications
- * funcion leaveCreatedGroup recibe Group--> leaveCreatedGroup(Group g)
- * 
- * 
 * These are the functions and variables that define the RegisteredUser objects, the RegisteredUser class.
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class RegisteredUser {
+public class RegisteredUser implements Serializable{
 	private String id;
 	private String username;
 	private String password;
@@ -22,15 +17,15 @@ public class RegisteredUser {
 	private List<Group> createdGroups;
 	private List<Project> createdProjects;
 	private List<Notification> notification;
-		
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	    * Constructor of this class.
 	    *
 	    * @param id of the user.
 	    * @param username of the user.
 	    * @param password of the user.
-	    */
-	
+	    */	
 	public RegisteredUser(String id, String username, String password) {
 		this.id = id;
 		this.ban = false;
@@ -175,5 +170,26 @@ public class RegisteredUser {
 	 */
 	public List<Notification> getNotifications() {
 		return this.notification;
+	}
+	
+	/**
+	 * This method overrides the default equal method among Registered Users.
+	 * @param obj. The object to be compared.
+	 * @return true if both users are equal.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(this==obj) {
+			return true;
+		}
+		if(obj==null) {
+			return false;
+		}
+		RegisteredUser that = (RegisteredUser)obj;
+		if(this.username.equals(that.getUsername())) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

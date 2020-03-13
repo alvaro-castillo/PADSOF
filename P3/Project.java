@@ -1,4 +1,5 @@
 package ads;
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
@@ -10,8 +11,13 @@ import java.util.*;
  * @author Miguel Álvarez Valiente
  *
  */
-public abstract class Project {
+public abstract class Project implements Serializable{
 	
+	/**
+	 * Version for serialize objects
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final ProjectStatus WAITING_ACCEPTANCE = null;
 
 	/**

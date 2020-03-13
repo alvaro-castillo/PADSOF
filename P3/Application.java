@@ -3,31 +3,21 @@ package ads;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+
 /**
- * Cambios en el diagrama:
- * 
- * funcion logOut es void--> no devuelve nada
- * 
- * funciones createUser; createGroup; createInfrastructureProject; createSocialProject ahora son
- * addGroup; addUser; addProject--> simplemente añaden al array cada objeto. La tarea de crear los
- * objetos se realizará desde la interfaz llamando al constructor.
- * 
- * searchProject no puede recibir un string con el nombre ya que puede haber dos proyectos con el mismo 
- * nombre. Recibirá un long id.
- * 
- * unregistered user no existe.
- * 
-* These are the functions and variables that define the Application objects, the Application class.
+* These are the functions and variables that define the Application object, the Application class.
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class Application {
+public class Application implements Serializable{
 	private String name; 
 	private List<Group> groups;
 	private List<Project> projects;
 	private List<RegisteredUser> users;
 	private RegisteredUser currentUser;
-	
+	private RegisteredUser admin; 
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Constructor of this class.
@@ -124,6 +114,19 @@ public class Application {
 		return projects.remove(p);
 	}
 	/**
+	 * Administrator of the application setter.
+	 */
+	public void setAdmin(RegisteredUser a) {
+		this.admin=a;
+	}
+	/**
+	 * Administrator of the application getter.
+	 * @return admin
+	 */
+	public RegisteredUser getAdmin() {
+		return this.admin;
+	}
+	/**
 	 * Function that log in a user.
 	 * It checks if the name is and password coincide with the user ones.
 	 * @param u username we want to log in.
@@ -161,6 +164,20 @@ public class Application {
 		return null;
 	}
 	/**
+	 * Function that search a project from the projects list.
+	 * @param name of the project that we want to look for.
+	 * @return p List of projects with the same name.
+	 */
+	public List<Project> searchProject(String name) {
+		List<Project> ps = new ArrayList<Project>();
+		for(Project p: projects) {
+			if(p.getTitle()==name) {
+				ps.add(p);
+			}
+		}
+		return ps;
+	}
+	/**
 	 * Function that search a group from the groups list.
 	 * @param name the group name that we want to look for.
 	 * @return g 
@@ -172,6 +189,31 @@ public class Application {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Function that saves the application on an external file.
+	 * @param name of the file.
+	 */
+	public void saveApp(String filename) throws IOException{
+		ObjectOutputStream output =
+				new ObjectOutputStream(
+				new FileOutputStream( filename ));
+		
+		output.writeObject(this);
+		output.close();
+	}
+	/**
+	 * Function that loads the application written on an external file.
+	 * @param name of the file.
+	 * @return app an Application object;
+	 */
+	public static Application loadApp(String filename) throws IOException{
+		ObjectInputStream input = 
+				new ObjectInputStream(
+						new FileInputStream(filename));
+		Application app = (Application) input.readObject();
+		return app;
 	}
 	
 	public void notifyObserver(Notification n) {
