@@ -182,7 +182,7 @@ public class Application implements Serializable{
 	 * @param name the group name that we want to look for.
 	 * @return g 
 	 */
-	public Project searchGroup(String name) {
+	public Group searchGroup(String name) {
 		for(Group g: groups) {
 			if(g.getName()==name) {
 				return g;
@@ -207,12 +207,15 @@ public class Application implements Serializable{
 	 * Function that loads the application written on an external file.
 	 * @param name of the file.
 	 * @return app an Application object;
+	 * @throws ClassNotFoundException 
 	 */
-	public static Application loadApp(String filename) throws IOException{
+	public static Application loadApp(String filename) throws IOException, ClassNotFoundException{
 		ObjectInputStream input = 
 				new ObjectInputStream(
 						new FileInputStream(filename));
 		Application app = (Application) input.readObject();
+		input.close();
+		
 		return app;
 	}
 	
@@ -221,6 +224,7 @@ public class Application implements Serializable{
 	}
 	
 	public Project[] checkExpiredProjects() {
+		return null;
 		// TODO Implementarla. Depende de lo del localdate
 	}
 	

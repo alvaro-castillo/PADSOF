@@ -1,6 +1,7 @@
 package ads;
 
 import java.util.*;
+import java.io.Serializable;
 import java.lang.Boolean;
 
 /**
@@ -11,7 +12,7 @@ import java.lang.Boolean;
  * @author Álvaro Castillo García 
  *
  */
-public class Group {
+public class Group implements Serializable{
 	
 	/*
 	 * Name of the group (has to be unique), set by the representative of
@@ -222,6 +223,13 @@ public class Group {
 		Group gr = (Group) g;
 		
 		return this.name.contentEquals(gr.name);
+	}
+	/**
+	 * Group name getter.
+	 * @return name
+	 */
+	public String getName() {
+		return this.name;
 	}
 }
 
