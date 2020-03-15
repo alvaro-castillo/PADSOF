@@ -13,6 +13,11 @@ public class SocialProject extends Project {
 	private boolean national;
 	private String associationDescription;
 	
+	/**
+	 * Version for serialize objects
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public SocialProject(String title, String description, double amount, 
 			RegisteredUser creator, String association, boolean national, 
 			String associationDescription) {

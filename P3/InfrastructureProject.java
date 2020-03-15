@@ -15,6 +15,11 @@ public class InfrastructureProject extends Project {
 	private District district;
 	private String image;
 	
+	/**
+	 * Version for serialize objects
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public InfrastructureProject(String title, String description, double amount, 
 			RegisteredUser creator, District district, String image) {
 		super(title, description, amount, creator);
