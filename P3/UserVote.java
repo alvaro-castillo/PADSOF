@@ -1,6 +1,6 @@
 package ads;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Represents a user voting for a project
@@ -41,7 +41,7 @@ public class UserVote extends Vote {
 	 * @return list with username of voter
 	 */
 	@Override
-	public ArrayList<String> getVoters() {
+	public List<String> getVoters() {
 		ArrayList<String> voters = new ArrayList<String>();
 		voters.add(voter.getUsername());
 		return voters;

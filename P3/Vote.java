@@ -1,6 +1,6 @@
 package ads;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Abstract class that represents a vote for a project
@@ -12,6 +12,6 @@ import java.util.ArrayList;
  */
 public abstract class Vote {
 	
-	public abstract ArrayList<String> getVoters();
+	public abstract List<String> getVoters();
 
 }

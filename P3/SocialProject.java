@@ -14,8 +14,9 @@ public class SocialProject extends Project {
 	private String associationDescription;
 	
 	public SocialProject(String title, String description, double amount, 
-			String association, boolean national, String associationDescription) {
-		super(title, description, amount);
+			RegisteredUser creator, String association, boolean national, 
+			String associationDescription) {
+		super(title, description, amount, creator);
 		this.association = association;
 		this.national = national;
 		this.associationDescription = associationDescription;

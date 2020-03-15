@@ -16,8 +16,8 @@ public class InfrastructureProject extends Project {
 	private String image;
 	
 	public InfrastructureProject(String title, String description, double amount, 
-			District district, String image) {
-		super(title, description, amount);
+			RegisteredUser creator, District district, String image) {
+		super(title, description, amount, creator);
 		this.district = district;
 		this.image = image;
 	}

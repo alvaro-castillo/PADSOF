@@ -1,6 +1,6 @@
 package ads;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Class that represents a vote from a whole project
@@ -34,8 +34,8 @@ public class GroupVote extends Vote {
 	@Override
 	public List<String> getVoters() {
 		List<String> voters = new ArrayList<String>();
-		for (User u: voterGroup.getMembers()) {
-			voters.add(voter.getName());
+		for (RegisteredUser u: voterGroup.getMembers()) {
+			voters.add(voterGroup.getName());
 		}
 		return voters;
 	}
