@@ -186,10 +186,41 @@ public class RegisteredUser implements Serializable{
 			return false;
 		}
 		RegisteredUser that = (RegisteredUser)obj;
-		if(this.username.equals(that.getUsername())) {
+		if(this.username.contains(that.getUsername()) || this.id.contains(that.getId())) {
 			return true;
 		}else {
 			return false;
 		}
+	}
+
+	/**
+	 * This method overrides the default toString method.
+	 * @return s string with the information of the object.
+	 */
+	@Override
+	public String toString() {
+		String s= "\n  User id: " + String.format(Locale.ROOT, "%10s", this.id) + "   Username: "
+	              + String.format(Locale.ROOT, "%8s", this.username) +
+				"   Password: " + String.format(Locale.ROOT, "%8s", this.password) +
+				"   User status: " + String.format(Locale.ROOT, "%8s", this.status) + "\n";
+		if(this.ban==true) {
+			s=s.concat(" User is banned");
+		}
+		if(this.notifications==true) {
+			s=s.concat(" User has notifications: \n");
+			for(Notification n: notification) {
+				s=s.concat(n.toString()+"\n");
+			}			
+		}
+		s=s.concat("  Groups that the user has created: \n");
+		for(Group g: createdGroups) {
+			s=s.concat(g.toString()+"\n");
+		}
+		s=s.concat("  Projects the user has created: \n");
+		for(Project p: createdProjects) {
+			s=s.concat(p.toString()+"\n");
+		}
+		return s;
+		
 	}
 }

@@ -55,4 +55,13 @@ public class Notification {
 	public LocalDate getDate() {
 		return this.date;
 	}
+	
+	/**
+	 * This method overrides the default toString method.
+	 * @return string with the information of the object.
+	 */
+	@Override
+	public String toString() {
+		return "Content: " + this.content+ " Date: " + this.date+ " Message read: "+ this.read;
+	}
 }

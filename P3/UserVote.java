@@ -1,5 +1,6 @@
 package ads;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,8 +11,12 @@ import java.util.*;
  * @author Miguel Álvarez Valienteº
  *
  */
-public class UserVote extends Vote {
+public class UserVote extends Vote implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The RegisteredUser that voted
 	 */

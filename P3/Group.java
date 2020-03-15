@@ -14,6 +14,11 @@ import java.lang.Boolean;
  */
 public class Group implements Serializable{
 	
+	/**
+	 * Version for serializing objects
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/*
 	 * Name of the group (has to be unique), set by the representative of
 	 * the group and can not be modified 

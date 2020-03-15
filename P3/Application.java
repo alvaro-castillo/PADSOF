@@ -77,7 +77,7 @@ public class Application implements Serializable{
 	 */	
 	public boolean addUser(RegisteredUser u) {
 		for(RegisteredUser us: users) {
-			if(us.getId() == u.getId() || u.getUsername() == us.getUsername()) {
+			if(us.equals(u)) {
 				return false;
 			}
 		}
@@ -91,7 +91,7 @@ public class Application implements Serializable{
 	 */
 	public boolean addGroup(Group g) {
 		for(Group gr: groups) {
-			if(gr.getName()==g.getName()) {
+			if(gr.equals(g)) {
 				return false;
 			}
 		}
@@ -103,6 +103,11 @@ public class Application implements Serializable{
 	 * @return boolean
 	 */
 	public boolean addProject(Project p) {
+		for(Project pr: projects) {
+			if(pr.equals(p)) {
+				return false;
+			}
+		}
 		return projects.add(p);
 	}
 	/**
@@ -218,6 +223,34 @@ public class Application implements Serializable{
 		
 		return app;
 	}
+	
+	/**
+	 * This method overrides the default toString method.
+	 * @return s string with the information of the object.
+	 */
+	@Override
+	public String toString() {
+		String s= "App name: " + this.name +"\n" + "Users in the app: ";
+		
+		for(RegisteredUser us: users) {
+			s=s.concat(us.toString());
+		}
+		
+		s=s.concat("\nGroups in the app: \n");
+		for(Group g: groups) {
+			s=s.concat(g.toString()+"\n");
+		}
+		s=s.concat("\nProjects in the app: \n");
+		for(Project p: projects) {
+			s=s.concat(p.toString()+"\n");
+		}
+		
+		s=s.concat("\nCurrent user: "+ this.currentUser +"\n");
+		s=s.concat("Admin: "+ this.admin +"\n");
+		
+		return s;
+	}
+	
 	
 	public void notifyObserver(Notification n) {
 		// TODO Implementarla. Antes hay que hacer la interfaz observer
