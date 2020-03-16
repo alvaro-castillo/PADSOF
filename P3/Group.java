@@ -142,7 +142,7 @@ public class Group implements Serializable{
 	/*
 	 * Changes the status of a group to Rejected
 	 */
-	public void rejecttGroup() {
+	public void rejectGroup() {
 		status = Status.REJECTED;
 	}
 	
@@ -167,6 +167,20 @@ public class Group implements Serializable{
 	 */
 	public boolean deleteUser(RegisteredUser u) {
 		return members.remove(u);
+	}
+	
+	/*
+	 * Adds a project to the created projects list
+	 * 
+	 * @param p Project that is going to be added
+	 * @return boolean that returns true if it was added corrctly
+	 */
+	public boolean addProject(Project p) {
+		if (createdProjects.contains(p)) {
+			return false
+		}
+		createdProjects.add(p);
+		return true;
 	}
 	
 	/*
@@ -229,8 +243,10 @@ public class Group implements Serializable{
 		
 		return this.name.contentEquals(gr.name);
 	}
+	
 	/**
 	 * Group name getter.
+	 * 
 	 * @return name
 	 */
 	public String getName() {
