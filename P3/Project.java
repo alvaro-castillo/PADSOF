@@ -339,5 +339,29 @@ public abstract class Project implements Serializable{
 		
 		return false;
 	}
+	
+	/**
+	 * Equals method override
+	 * @param obj The object to be compared
+	 * @return true if both are equal, false if not
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(this==obj) {
+			return true;
+		}
+		if(obj==null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Project that = (Project)obj;
+		if (this.id == that.id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

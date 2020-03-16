@@ -185,10 +185,13 @@ public class RegisteredUser implements Serializable{
 		if(obj==null) {
 			return false;
 		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
 		RegisteredUser that = (RegisteredUser)obj;
-		if(this.username.contains(that.getUsername()) || this.id.contains(that.getId())) {
+		if (this.username.contains(that.getUsername()) || this.id.contains(that.getId())) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
