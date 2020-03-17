@@ -34,5 +34,13 @@ public class InfrastructureProject extends Project {
 	public String getImage() {
 		return image;
 	}
+	
+	/**
+	 * toString method override
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + "Disctrict: " + this.district + "\nImage path: " + this.image;
+	}
 
 }
