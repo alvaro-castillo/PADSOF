@@ -1,7 +1,6 @@
 package ads;
 import java.io.Serializable;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -91,8 +90,8 @@ public abstract class Project implements Serializable{
 		this.description = description;
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
-		this.acceptDate = null; // TODO: Usar modifiable dates
-		this.status = ProjectStatus.WAITING_ACCEPTANCE;
+		this.acceptDate = acceptDate; // TODO: Usar modifiable dates
+		this.status = WAITING_ACCEPTANCE;
 		this.creator = creator;
 		
 		vote(creator);
@@ -187,7 +186,6 @@ public abstract class Project implements Serializable{
 	 */
 	public void adminAcceptProject() {
 		status = ProjectStatus.ADMIN_ACCEPTED;
-		acceptDate = LocalDate.now();
 	}
 	
 	/**
@@ -245,8 +243,6 @@ public abstract class Project implements Serializable{
 		Vote v = new UserVote(user);
 		
 		votes.add(v);
-		
-		update();
 		
 		return true;
 	}
@@ -366,55 +362,6 @@ public abstract class Project implements Serializable{
 		} else {
 			return false;
 		}
-	}
-	
-	/**
-	 * toString method override
-	 */
-	@Override
-	public String toString() {
-		
-		// la \n al principio la he puesto pq esta tb en RegisteredUser
-		String s = "\n" + this.getClass().getSimpleName() + "\nProject id: " + String.format("%8d", this.id) +   "   Project Title: " 
-					+ String.format("%25s", this.title) + "   Creator: " + String.format("%8s", this.creator.getUsername()) + "\n"
-				+ "Description: \n\t";
-		
-		int lineLength = 100, curr = 0;
-		for (int i=0; i<description.length(); ++i) {
-			if (curr <= lineLength) {
-				s += description.charAt(i);
-				++curr;
-			} else {
-				s += "\n\t";
-				curr = 0;
-			}
-		}
-		
-		s += "\nStatus: " + String.format("%18s", this.status) + "   Accept Date: ";
-		
-		if (this.acceptDate == null) {
-			s += "Not accepted yet";
-		} else {
-			s += this.acceptDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		}
-		
-		s += "\nAmount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
-		
-		if (this.minimumVotes == -1) {
-			s += String.format("%8s", "Not set");
-		} else {
-			s += String.format("%8d", this.minimumVotes);
-		}
-		
-		s += "   Current Votes: " + String.format("%8d", this.actualVotes) + "\n"
-				+ "Votes:\n";
-		
-		for (Vote v: this.votes) {
-			s += "\t" + v + "\n";
-		}
-		
-		
-		return s;
 	}
 
 }

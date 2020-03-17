@@ -51,13 +51,5 @@ public class UserVote extends Vote implements Serializable{
 		voters.add(voter.getUsername());
 		return voters;
 	}
-	
-	/**
-	 * toString method override
-	 */
-	@Override
-	public String toString() {
-		return "Individual vote by: " + voter.getUsername();
-	}
 
 }

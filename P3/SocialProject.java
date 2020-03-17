@@ -38,14 +38,5 @@ public class SocialProject extends Project {
 	public String getAssociationDescription() {
 		return associationDescription;
 	}
-	
-	/**
-	 * toString method override
-	 */
-	@Override
-	public String toString() {
-		return super.toString() + "Association: " + this.association + "   National: " + this.national
-				+ "\nDescription of the Association: " + this.associationDescription;
-	}
 
 }
