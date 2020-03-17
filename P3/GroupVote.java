@@ -35,7 +35,7 @@ public class GroupVote extends Vote {
 	public List<String> getVoters() {
 		List<String> voters = new ArrayList<String>();
 		for (RegisteredUser u: voterGroup.getMembers()) {
-			voters.add(voterGroup.getName());
+			voters.add(u.getUsername());
 		}
 		return voters;
 	}
@@ -47,6 +47,14 @@ public class GroupVote extends Vote {
 	 */
 	public Group getGroup() {
 		return voterGroup;
+	}
+	
+	/**
+	 * toString method override
+	 */
+	@Override
+	public String toString() {
+		return "Group vote by: " + voterGroup.getName();
 	}
 
 }
