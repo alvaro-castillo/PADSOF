@@ -40,7 +40,7 @@ public class InfrastructureProject extends Project {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "Disctrict: " + this.district + "\nImage path: " + this.image;
+		return super.toString() + "     Disctrict: " + this.district + "\n     Image path: " + this.image;
 	}
 
 }

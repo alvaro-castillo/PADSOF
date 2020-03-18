@@ -173,11 +173,11 @@ public class Group implements Serializable{
 	 * Adds a project to the created projects list
 	 * 
 	 * @param p Project that is going to be added
-	 * @return boolean that returns true if it was added corrctly
+	 * @return boolean that returns true if it was added correctly
 	 */
 	public boolean addProject(Project p) {
 		if (createdProjects.contains(p)) {
-			return false
+			return false;
 		}
 		createdProjects.add(p);
 		return true;

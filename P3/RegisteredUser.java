@@ -207,10 +207,10 @@ public class RegisteredUser implements Serializable{
 				"   Password: " + String.format(Locale.ROOT, "%8s", this.password) +
 				"   User status: " + String.format(Locale.ROOT, "%8s", this.status) + "\n";
 		if(this.ban==true) {
-			s=s.concat(" User is banned");
+			s=s.concat("  User is banned");
 		}
 		if(this.notifications==true) {
-			s=s.concat(" User has notifications: \n");
+			s=s.concat("  User has notifications: \n");
 			for(Notification n: notification) {
 				s=s.concat(n.toString()+"\n");
 			}			

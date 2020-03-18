@@ -375,9 +375,9 @@ public abstract class Project implements Serializable{
 	public String toString() {
 		
 		// la \n al principio la he puesto pq esta tb en RegisteredUser
-		String s = "\n" + this.getClass().getSimpleName() + "\nProject id: " + String.format("%8d", this.id) +   "   Project Title: " 
+		String s = "    "+this.getClass().getSimpleName() + "\n     Project id: " + String.format("%8d", this.id) +   "   Project Title: " 
 					+ String.format("%25s", this.title) + "   Creator: " + String.format("%8s", this.creator.getUsername()) + "\n"
-				+ "Description: \n\t";
+				+ "     Description: \n\t";
 		
 		int lineLength = 100, curr = 0;
 		for (int i=0; i<description.length(); ++i) {
@@ -390,7 +390,7 @@ public abstract class Project implements Serializable{
 			}
 		}
 		
-		s += "\nStatus: " + String.format("%18s", this.status) + "   Accept Date: ";
+		s += "\n     Status: " + String.format("%18s", this.status) + "   Accept Date: ";
 		
 		if (this.acceptDate == null) {
 			s += "Not accepted yet";
@@ -398,7 +398,7 @@ public abstract class Project implements Serializable{
 			s += this.acceptDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 		
-		s += "\nAmount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
+		s += "\n     Amount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
 		
 		if (this.minimumVotes == -1) {
 			s += String.format("%8s", "Not set");
@@ -407,7 +407,7 @@ public abstract class Project implements Serializable{
 		}
 		
 		s += "   Current Votes: " + String.format("%8d", this.actualVotes) + "\n"
-				+ "Votes:\n";
+				+ "     Votes:\n";
 		
 		for (Vote v: this.votes) {
 			s += "\t" + v + "\n";

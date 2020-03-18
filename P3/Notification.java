@@ -1,5 +1,6 @@
 package ads;
 
+import java.io.Serializable;
 import java.time.*;
 
 /**
@@ -7,7 +8,11 @@ import java.time.*;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class Notification {
+public class Notification implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String content;
 	private LocalDate date;
 	private boolean read;
@@ -62,6 +67,6 @@ public class Notification {
 	 */
 	@Override
 	public String toString() {
-		return "Content: " + this.content+ " Date: " + this.date+ " Message read: "+ this.read;
+		return "    Content: " + this.content+ " Date: " + this.date+ " Message read: "+ this.read;
 	}
 }
