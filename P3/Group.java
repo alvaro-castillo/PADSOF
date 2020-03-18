@@ -173,11 +173,11 @@ public class Group implements Serializable{
 	 * Adds a project to the created projects list
 	 * 
 	 * @param p Project that is going to be added
-	 * @return boolean that returns true if it was added correctly
+	 * @return boolean that returns true if it was added corrctly
 	 */
 	public boolean addProject(Project p) {
 		if (createdProjects.contains(p)) {
-			return false;
+			return false
 		}
 		createdProjects.add(p);
 		return true;
@@ -252,6 +252,32 @@ public class Group implements Serializable{
 	public String getName() {
 		return this.name;
 	}
+
+	/**
+	 * Override of the toString method
+	 * 
+	 * @return String with the information of the group
+	 */
+	@Override
+	public String toString() {
+		Stirng str= "\n" + this.getClass().getSimpleName() + "\nGroup name: " + String.format("%10s", this.name)
+		+ "\nRepresentative: " + String.format("%8s", this.creator.getUsername()) + "\nStatus: " + String.format("%10s", this.status) 
+		+ "\nParent Group: " + u.getUsername() + "\nMembers: \n"
+		for (RegisteredUser u : members) {
+			str = str.concat("	- " + u.getUsername() + "\n");
+		}
+		str = str.concat("Subgroups: \n");
+		for (Group g : subgroups) {
+			str = str.concat("	- " + g.getName() + "\n");
+		}
+		str = str.concat("Created Projects: \n");
+		for (Project p : createdProjects) {
+			str = str.concat("	- " + g.getTitle() + "\n");
+		}
+		return str;
+	} 
+
+
 }
 
 
