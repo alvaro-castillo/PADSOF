@@ -261,8 +261,8 @@ public class Group implements Serializable{
 	@Override
 	public String toString() {
 		Stirng str= "\n" + this.getClass().getSimpleName() + "\nGroup name: " + String.format("%10s", this.name)
-		+ "\nRepresentative: " + String.format("%8s", this.creator.getUsername()) + "\nStatus: " + String.format("%10s", this.status) 
-		+ "\nParent Group: " + u.getUsername() + "\nMembers: \n"
+		+ "\nRepresentative: " + String.format("%8s", this.representative.getUsername()) + "\nStatus: " + String.format("%10s", this.status) 
+		+ "\nParent Group: " + this.parent.getName() + "\nMembers: \n"
 		for (RegisteredUser u : members) {
 			str = str.concat("	- " + u.getUsername() + "\n");
 		}
@@ -272,7 +272,7 @@ public class Group implements Serializable{
 		}
 		str = str.concat("Created Projects: \n");
 		for (Project p : createdProjects) {
-			str = str.concat("	- " + g.getTitle() + "\n");
+			str = str.concat("	- " + p.getTitle() + "\n");
 		}
 		return str;
 	} 
