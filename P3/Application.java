@@ -123,6 +123,7 @@ public class Application implements Serializable{
 	 * Administrator of the application setter.
 	 */
 	public void setAdmin(RegisteredUser a) {
+		a.acceptRegistration();
 		this.admin=a;
 	}
 	/**
@@ -199,7 +200,7 @@ public class Application implements Serializable{
 	
 	/**
 	 * Function that saves the application on an external file.
-	 * @param name of the file.
+	 * @param filename of the file.
 	 * @throws IOException
 	 */
 	public void saveApp(String filename) throws IOException{
@@ -212,7 +213,7 @@ public class Application implements Serializable{
 	}
 	/**
 	 * Function that loads the application written on an external file.
-	 * @param name of the file.
+	 * @param filename of the file.
 	 * @return app an Application object;
 	 * @throws ClassNotFoundException 
 	 * @throws IOException
@@ -236,7 +237,7 @@ public class Application implements Serializable{
 		String s= "App name: " + this.name +"\n" + "Users in the app: \n";
 		
 		for(RegisteredUser us: users) {
-			s=s.concat(us.toString());
+			s=s.concat(us.toString()+"\n");
 		}
 		
 		s=s.concat("\nGroups in the app: \n");
@@ -249,7 +250,7 @@ public class Application implements Serializable{
 		}
 		
 		s=s.concat("\nCurrent user: \n"+ this.currentUser +"\n");
-		s=s.concat("Admin: "+ this.admin +"\n");
+		s=s.concat("Admin: \n"+ this.admin +"\n");
 		
 		return s;
 	}

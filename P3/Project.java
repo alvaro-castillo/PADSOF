@@ -136,7 +136,7 @@ public abstract class Project implements Serializable{
 	
 	/**
 	 * Setter for minimumVotes
-	 * @param minimum votes needed for the project
+	 * @param minimumVotes votes needed for the project
 	 */
 	public void setMinimumVotes(int minimumVotes) {
 		this.minimumVotes = minimumVotes;
@@ -326,7 +326,7 @@ public abstract class Project implements Serializable{
 	/**
 	 * Determines if a group has voted for the project
 	 * 
-	 * @param user
+	 * @param group
 	 * @return boolean telling us whether the group has voted for the project or not
 	 */
 	public boolean hasVoted(Group group) {
