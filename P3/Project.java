@@ -374,7 +374,6 @@ public abstract class Project implements Serializable{
 	@Override
 	public String toString() {
 		
-		// la \n al principio la he puesto pq esta tb en RegisteredUser
 		String s = "    "+this.getClass().getSimpleName() + "\n     Project id: " + String.format("%8d", this.id) +   "   Project Title: " 
 					+ String.format("%25s", this.title) + "   Creator: " + String.format("%8s", this.creator.getUsername()) + "\n"
 				+ "     Description: \n\t";

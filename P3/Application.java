@@ -4,6 +4,7 @@ package ads;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
+import java.time.LocalDate;
 
 /**
 * These are the functions and variables that define the Application object, the Application class.
@@ -199,6 +200,7 @@ public class Application implements Serializable{
 	/**
 	 * Function that saves the application on an external file.
 	 * @param name of the file.
+	 * @throws IOException
 	 */
 	public void saveApp(String filename) throws IOException{
 		ObjectOutputStream output =
@@ -213,6 +215,7 @@ public class Application implements Serializable{
 	 * @param name of the file.
 	 * @return app an Application object;
 	 * @throws ClassNotFoundException 
+	 * @throws IOException
 	 */
 	public static Application loadApp(String filename) throws IOException, ClassNotFoundException{
 		ObjectInputStream input = 
@@ -230,7 +233,7 @@ public class Application implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		String s= "App name: " + this.name +"\n" + "Users in the app: ";
+		String s= "App name: " + this.name +"\n" + "Users in the app: \n";
 		
 		for(RegisteredUser us: users) {
 			s=s.concat(us.toString());
@@ -245,20 +248,36 @@ public class Application implements Serializable{
 			s=s.concat(p.toString()+"\n");
 		}
 		
-		s=s.concat("\nCurrent user: "+ this.currentUser +"\n");
+		s=s.concat("\nCurrent user: \n"+ this.currentUser +"\n");
 		s=s.concat("Admin: "+ this.admin +"\n");
 		
 		return s;
 	}
-	
+	/**
+	 * Function that checks if there are any expired projects and returns them.
+	 * @return expired List with all expired projects
+	 */
+	public List<Project> checkExpiredProjects() {
+		LocalDate now = LocalDate.now(); 
+		List<Project> expired = new ArrayList<Project>();
+		for(Project p: projects) {
+			if(p.getActualVotes()<p.getMinimumVotes()) {
+			LocalDate d = p.getAcceptDate();
+				if(now.compareTo(d.plusDays(30))==0) {
+					p.expireProject();
+					expired.add(p);
+					RegisteredUser c = p.getCreator();
+					c.update(new Notification("Your " + p.getClass().getName() + " project: " + p.getTitle() + " with ID " + p.getId() + " has expired!", LocalDate.now()));
+				}
+			}
+		}
+		return expired;
+	}
 	
 	public void notifyObserver(Notification n) {
 		// TODO Implementarla. Antes hay que hacer la interfaz observer
 	}
-	
-	public Project[] checkExpiredProjects() {
-		return null;
-		// TODO Implementarla. Depende de lo del localdate
-	}
+
+
 	
 }

@@ -202,7 +202,7 @@ public class RegisteredUser implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		String s= "\n  User id: " + String.format(Locale.ROOT, "%10s", this.id) + "   Username: "
+		String s= "  User id: " + String.format(Locale.ROOT, "%10s", this.id) + "   Username: "
 	              + String.format(Locale.ROOT, "%8s", this.username) +
 				"   Password: " + String.format(Locale.ROOT, "%8s", this.password) +
 				"   User status: " + String.format(Locale.ROOT, "%8s", this.status) + "\n";
