@@ -145,6 +145,14 @@ public class Group implements Serializable{
 		status = Status.REJECTED;
 	}
 	
+	/**
+	 * Representative getter
+	 * @return the creator of a group
+	 */
+	public RegisteredUser getRepresentative(){
+		return this.representative;
+	}
+	
 	/*
 	 * Adds a user to a group
 	 * 

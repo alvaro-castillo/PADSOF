@@ -136,6 +136,14 @@ public class RegisteredUser implements Serializable{
 	 * @return boolean
 	 */
 	public boolean addProject(Project p) {
+		if(p.getCreator().equals(this)==false) {
+			return false;
+		}
+		for(Project pr: createdProjects) {
+			if(pr.equals(p)) {
+				return false;
+			}
+		}
 		return createdProjects.add(p);
 	}
 	/**
@@ -144,6 +152,14 @@ public class RegisteredUser implements Serializable{
 	 * @return boolean
 	 */
 	public boolean addGroup(Group g) {
+		if(g.getRepresentative().equals(this)==false) {
+			return false;
+		}
+		for(Group gr: createdGroups) {
+			if(gr.equals(g)) {
+				return false;
+			}
+		}
 		return createdGroups.add(g);
 	}
 	/**
@@ -159,6 +175,11 @@ public class RegisteredUser implements Serializable{
 	 * @return boolean.
 	 */
 	public boolean update(Notification n) {
+		for(Notification ns: notification) {
+			if(ns.equals(n)) {
+				return false;
+			}
+		}
 		if(this.notifications == false) {
 			this.notifications = true;
 		}
@@ -179,9 +200,6 @@ public class RegisteredUser implements Serializable{
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(this==obj) {
-			return true;
-		}
 		if(obj==null) {
 			return false;
 		}

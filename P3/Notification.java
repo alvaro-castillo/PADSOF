@@ -60,7 +60,26 @@ public class Notification implements Serializable{
 	public LocalDate getDate() {
 		return this.date;
 	}
-	
+	/**
+	 * This method overrides the default equal method among Notifications.
+	 * @param obj. The object to be compared.
+	 * @return true if both users are equal.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj==null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Notification that = (Notification)obj;
+		if (this.date == that.getDate() && this.content.compareTo(that.getContent())==0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	/**
 	 * This method overrides the default toString method.
 	 * @return string with the information of the object.
