@@ -6,6 +6,9 @@ import java.util.List;
 import java.io.*;
 import java.time.LocalDate;
 
+import modifiableDates.ModifiableDate;
+
+
 /**
 * These are the functions and variables that define the Application object, the Application class.
 *
@@ -141,11 +144,13 @@ public class Application implements Serializable{
 	 * @return boolean
 	 */
 	public boolean logIn(String u, String p ) {
-		for(RegisteredUser r: users) {
-			if(u==r.getUsername()) {
-				if(p==r.getPassword()) {
-					this.currentUser=r;
-					return true;
+		if(this.currentUser==null) {
+			for(RegisteredUser r: users) {
+				if(u==r.getUsername()) {
+					if(p==r.getPassword()) {
+						this.currentUser=r;
+						return true;
+					}
 				}
 			}
 		}
