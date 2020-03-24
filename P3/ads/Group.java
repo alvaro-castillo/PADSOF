@@ -2,6 +2,7 @@ package ads;
 
 import java.util.*;
 import java.io.Serializable;
+import java.lang.Boolean;
 
 /**
  * Represents a group of the Application
@@ -100,6 +101,7 @@ public class Group implements Serializable{
 	 */
 	public double createAffinityReport(Group g) {
 		int a=0, b=0 ;
+		if (g == null) { return -1; } 
 		for (Project p : this.createdProjects) {
 			if (p.hasVoted(g)) {
 				++a;
@@ -122,6 +124,7 @@ public class Group implements Serializable{
 	 * @return reference to the new group
 	 */
 	public Group createSubgroup(String name, RegisteredUser representative) {
+		if (name == null) { return null;}
 		if (this.representative.equals(representative)) {
 			Group g = new Group(name, representative, this);
 			this.subgroups.add(g);
@@ -145,34 +148,29 @@ public class Group implements Serializable{
 		status = Status.REJECTED;
 	}
 	
-	/**
-	 * Representative getter
-	 * @return the creator of a group
-	 */
-	public RegisteredUser getRepresentative(){
-		return this.representative;
-	}
-	
 	/*
 	 * Adds a user to a group
 	 * 
 	 * @param u RegisteredUser that is going to be added to the group
 	 * @return boolean which returns true if the user is added without problems
 	 */
-	public boolean addUser(RegisteredUser u) { 
-		if(members.contains(u) || userInParent(u) || userInChild(u)) { return false; }
+	public boolean addUser(RegisteredUser u) {
+		if (u == null) { return false; }
+		if (members.contains(u) || userInParent(u) || userInChild(u)) { return false; }
 		
 		members.add(u);
 		return true;
 	}
 	
 	/*
-	 * Delets a user from a group
+	 * Deletes a user from a group
 	 * 
 	 * @param u RegisteredUser that is going to be deleted from the group
 	 * @return boolean which returns true if the user is deleted without problems
 	 */
 	public boolean deleteUser(RegisteredUser u) {
+		if (u == null) return false;
+		if (representative.equals(u)) { representative = null; }
 		return members.remove(u);
 	}
 	
@@ -183,6 +181,7 @@ public class Group implements Serializable{
 	 * @return boolean that returns true if it was added correctly
 	 */
 	public boolean addProject(Project p) {
+		if (p == null) { return false; }
 		if (createdProjects.contains(p)) {
 			return false;
 		}
@@ -206,6 +205,8 @@ public class Group implements Serializable{
 	 * @return boolean that will return true if the user is found
 	 */
 	private boolean userInParent(RegisteredUser u) {
+		if (u == null) { return false; }
+		
 		if (parent == null) { return false; }
 		
 		if (members.contains(u)) { return true; }
@@ -221,6 +222,8 @@ public class Group implements Serializable{
 	 */
 	private boolean userInChild(RegisteredUser u) {
 		boolean b = false;
+		
+		if (u == null) { return false; }
 		
 		if (subgroups.isEmpty()) { return false; }
 		
@@ -259,6 +262,24 @@ public class Group implements Serializable{
 	public String getName() {
 		return this.name;
 	}
+	
+	/**
+	 * Group name getter.
+	 * 
+	 * @return name
+	 */
+	public List<Group> getSubgroups() {
+		return this.subgroups;
+	}
+	
+	/**
+	 * Group representative getter.
+	 * 
+	 * @return name
+	 */
+	public RegisteredUser getRepresentative() {
+		return this.representative;
+	}
 
 	/**
 	 * Override of the toString method
@@ -267,20 +288,17 @@ public class Group implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		String str= "     Group name: " + String.format("%10s", this.name)
-		+ "\n      Representative: " + String.format("%8s", this.representative.getUsername()) + "\n      Status: " + String.format("%10s", this.status); 
-		if(this.parent!=null) {
-			str = str.concat("\n      Parent Group: " + this.parent.getName());
-		}
-		str = str.concat("\n      Members: \n");
+		String str= "\n" + this.getClass().getSimpleName() + "\nGroup name: " + String.format("%10s", this.name)
+		+ "\nRepresentative: " + String.format("%8s", this.representative.getUsername()) + "\nStatus: " + String.format("%10s", this.status) 
+		+ "\nParent Group: " + this.parent.getName() + "\nMembers: \n";
 		for (RegisteredUser u : members) {
 			str = str.concat("	- " + u.getUsername() + "\n");
 		}
-		str = str.concat("      Subgroups: \n");
+		str = str.concat("Subgroups: \n");
 		for (Group g : subgroups) {
 			str = str.concat("	- " + g.getName() + "\n");
 		}
-		str = str.concat("      Created Projects: \n");
+		str = str.concat("Created Projects: \n");
 		for (Project p : createdProjects) {
 			str = str.concat("	- " + p.getTitle() + "\n");
 		}
