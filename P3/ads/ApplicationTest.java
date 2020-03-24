@@ -8,10 +8,10 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.*;
 
-import javax.imageio.IIOException;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import modifiableDates.ModifiableDate;
 
 /**
 * This is the tester for the Application class
@@ -36,7 +36,7 @@ public class ApplicationTest {
 	public void testAddUser() {
 		RegisteredUser u1 = new RegisteredUser("456789","User1", "padsof2291");
 		RegisteredUser u2 = new RegisteredUser("12345X","User2", "EPS");
-		
+		RegisteredUser u3 = new RegisteredUser("12345X","User2", "EPS");
 		//Adds a new user
 		assertTrue(app.addUser(u1));
 		//Adds another user
@@ -107,10 +107,14 @@ public class ApplicationTest {
 	public void testLogIn() {
 		RegisteredUser u1 = new RegisteredUser("456789","User1", "padsof2291");
 		RegisteredUser u2 = new RegisteredUser("12345X","User2", "EPS");
+		RegisteredUser u3 = new RegisteredUser("0000000A","User3", "uam");
 		
 		app.addUser(u1);
 		app.addUser(u2);
+		app.addUser(u3);
 		
+		u1.acceptRegistration();
+		u2.acceptRegistration();
 		//Logs in the first user
 		assertTrue(app.logIn("User1", "padsof2291"));
 		//Logs in a user while there is already one user using the app
@@ -121,6 +125,18 @@ public class ApplicationTest {
 		assertFalse(app.logIn("User1", "padsof3321"));
 		//Try to log in a user with an erroneous username 
 		assertFalse(app.logIn("User12", "padsof2291"));
+		
+		u2.banUser();
+		//Try to log in a user that is banned
+		assertFalse(app.logIn("User2", "EPS"));
+		
+		u2.rejectRegistration();
+		u2.unbanUser();
+		//Try to log in a user that has been rejected
+		assertFalse(app.logIn("User2", "EPS"));
+		
+		//Try to log in a user that hasn't been accepted yet
+		assertFalse(app.logIn("User3", "uam"));
 
 	}
 
@@ -137,9 +153,10 @@ public class ApplicationTest {
 		app.addProject(p2);
 		
 		//Searches the first project
-		assertEquals(p1, app.searchProject(2));
+		assertEquals(p1, app.searchProject(5));
+
 		//Searches the second project
-		assertEquals(p2, app.searchProject(3));
+		assertEquals(p2, app.searchProject(6));
 		//Searches a project that does not exist
 		assertNull(app.searchProject(4));
 	}
@@ -215,7 +232,42 @@ public class ApplicationTest {
 	 */
 	@Test
 	public void testCheckExpiredProjects() {
-		fail("Not yet implemented");
+		List<Project> expiredProjects;
+
+		RegisteredUser u = new RegisteredUser("12345678A","Rector", "uamMola");
+		InfrastructureProject p1 = new InfrastructureProject("New skate", " This project is created with the intention of build a new skate shop", 2300, u , District.BARAJAS,"image1.png");
+		SocialProject p2 = new SocialProject("Concerts", "We want a concerts week ", 800, u, "MusicLife", true , "We like pop and rock music" );
+		SocialProject p3 = new SocialProject("Food trucks", "There should be a food trucks expo", 800, u, "Food Lovers", false , "Eating is our passion" );
+		
+		app.addProject(p1);
+		app.addProject(p2);
+		app.addProject(p3);
+		
+		ModifiableDate.setToday();
+		
+		p1.setMinimumVotes(200);
+		p2.setMinimumVotes(200);
+		
+		p1.adminAcceptProject();
+		p2.adminAcceptProject();
+		
+		
+		//Check that there are no expired projects. The date is the same of the projects acceptance
+		ModifiableDate.setToday();
+		
+		expiredProjects = app.checkExpiredProjects(ModifiableDate.getModifiableDate() );
+		
+		assertTrue(expiredProjects.isEmpty());
+		
+		//Check that there are two expired projects. p3 should not be expired as the admin has not accepted it yet
+		ModifiableDate.plusDays(30);
+
+		expiredProjects = app.checkExpiredProjects(ModifiableDate.getModifiableDate());
+
+		assertTrue(expiredProjects.contains(p1));
+		assertTrue(expiredProjects.contains(p2));
+		assertFalse(expiredProjects.contains(p3));
+		
 	}
 
 	/**

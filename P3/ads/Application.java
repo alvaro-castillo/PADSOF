@@ -6,8 +6,6 @@ import java.util.List;
 import java.io.*;
 import java.time.LocalDate;
 
-import modifiableDates.ModifiableDate;
-
 
 /**
 * These are the functions and variables that define the Application object, the Application class.
@@ -138,7 +136,7 @@ public class Application implements Serializable{
 	}
 	/**
 	 * Function that log in a user.
-	 * It checks if the name is and password coincide with the user ones.
+	 * It checks if the name is and password coincide with the user ones. In addition the user shouldn't be banned
 	 * @param u username we want to log in.
 	 * @param p password we want to check.
 	 * @return boolean
@@ -146,10 +144,12 @@ public class Application implements Serializable{
 	public boolean logIn(String u, String p ) {
 		if(this.currentUser==null) {
 			for(RegisteredUser r: users) {
-				if(u==r.getUsername()) {
-					if(p==r.getPassword()) {
-						this.currentUser=r;
-						return true;
+				if(r.isBan()==false && r.getStatus()==Status.ACCEPTED) {
+					if(u==r.getUsername()) {
+						if(p==r.getPassword()) {
+							this.currentUser=r;
+							return true;
+						}
 					}
 				}
 			}
@@ -260,7 +260,7 @@ public class Application implements Serializable{
 		return s;
 	}
 	/**
-	 * Function that checks if there are any expired projects and returns them.
+	 * Function that checks if there are any expired projects at the real time and returns them.
 	 * @return expired List with all expired projects
 	 */
 	public List<Project> checkExpiredProjects() {
@@ -279,11 +279,29 @@ public class Application implements Serializable{
 		}
 		return expired;
 	}
-	
+	/**
+	 * Function that checks if there are any expired projects at a time passed by argument (as if it was the real time) and returns them.
+	 * @param actualDate date that is used with modifiable Dates if we want to check the expired projects
+	 * @return expired List with all expired projects
+	 */
+	public List<Project> checkExpiredProjects(LocalDate actualDate) {
+ 
+		List<Project> expired = new ArrayList<Project>();
+		for(Project p: projects) {
+			if(p.getActualVotes()<p.getMinimumVotes()) {
+			LocalDate d = p.getAcceptDate();
+				if(actualDate.compareTo(d.plusDays(30))==0) {
+					p.expireProject();
+					expired.add(p);
+					RegisteredUser c = p.getCreator();
+					c.update(new Notification("Your " + p.getClass().getName() + " project: " + p.getTitle() + " with ID " + p.getId() + " has expired!", LocalDate.now()));
+				}
+			}
+		}
+		return expired;
+	}
 	public void notifyObserver(Notification n) {
 		// TODO Implementarla. Antes hay que hacer la interfaz observer
 	}
-
-
 	
 }

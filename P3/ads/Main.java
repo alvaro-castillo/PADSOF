@@ -23,13 +23,9 @@ public class Main {
 		/*Sets the first user to be registered in as the administrator of the app*/
 		app.setAdmin(u1);
 		
-		/*Creates two users that are equal. Should return error*/
+		/*Creates another user*/
 		RegisteredUser u2 = new RegisteredUser("6789B","User2", "bbbb");
 		if(app.addUser(u2)==false) {
-			System.out.println("Already existing user\n");
-		}
-		RegisteredUser u3 = new RegisteredUser("6789B","User2 ", "bbbb");
-		if(app.addUser(u3)==false) {
 			System.out.println("Already existing user\n");
 		}
 		
