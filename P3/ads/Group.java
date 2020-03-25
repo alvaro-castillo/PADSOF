@@ -2,7 +2,6 @@ package ads;
 
 import java.util.*;
 import java.io.Serializable;
-import java.lang.Boolean;
 
 /**
  * Represents a group of the Application
@@ -80,7 +79,7 @@ public class Group extends Subject
 		members.add(representative);
 		this.subgroups = new ArrayList<Group>();		
 		this.createdProjects = new ArrayList<Project>();
-		
+		this.status = Status.WAITING;
 		// Subgroups share observers with their parents
 		if (parent != null) {
 			this.observers = parent.observers;
@@ -108,7 +107,9 @@ public class Group extends Subject
 	 */
 	public double createAffinityReport(Group g) {
 		int a=0, b=0 ;
-		if (g == null) { return -1; } 
+		if (g == null) { 
+			return -1;
+		} 
 		for (Project p : this.createdProjects) {
 			if (p.hasVoted(g)) {
 				++a;
@@ -131,7 +132,9 @@ public class Group extends Subject
 	 * @return reference to the new group
 	 */
 	public Group createSubgroup(String name, RegisteredUser representative) {
-		if (name == null) { return null;}
+		if (name == null || this.status!=Status.ACCEPTED) { 
+			return null;
+		}
 		if (this.representative.equals(representative)) {
 			Group g = new Group(name, representative, this);
 			this.subgroups.add(g);
@@ -162,8 +165,12 @@ public class Group extends Subject
 	 * @return boolean which returns true if the user is added without problems
 	 */
 	public boolean addUser(RegisteredUser u) {
-		if (u == null) { return false; }
-		if (members.contains(u) || userInParent(u) || userInChild(u)) { return false; }
+		if (u == null) { 
+			return false; 
+		}
+		if (members.contains(u) || userInParent(u) || userInChild(u) || this.status!=Status.ACCEPTED) { 
+			return false;
+		}
 		
 		members.add(u);
 		notifyObservers(null);
@@ -177,7 +184,9 @@ public class Group extends Subject
 	 * @return boolean which returns true if the user is deleted without problems
 	 */
 	public boolean deleteUser(RegisteredUser u) {
-		if (u == null) return false;
+		if (u == null) {
+			return false;
+		}
 		if (representative.equals(u)) { representative = null; }
 		notifyObservers(null);
 		return members.remove(u);
@@ -190,7 +199,9 @@ public class Group extends Subject
 	 * @return boolean that returns true if it was added correctly
 	 */
 	public boolean addProject(Project p) {
-		if (p == null) { return false; }
+		if (p == null) { 
+			return false; 
+		}
 		if (createdProjects.contains(p)) {
 			return false;
 		}
@@ -227,9 +238,13 @@ public class Group extends Subject
 	 * @return boolean that will return true if the user is found
 	 */
 	private boolean userInParent(RegisteredUser u) {
-		if (u == null) { return false; }
+		if (u == null) { 
+			return false; 
+		}
 		
-		if (parent == null) { return false; }
+		if (parent == null) {
+			return false;
+		}
 		
 		if (parent.members.contains(u)) { return true; }
 		
@@ -273,11 +288,17 @@ public class Group extends Subject
 	 */
 	@Override
 	public boolean equals(Object g) {
-		if (g == null) { return false; }
+		if (g == null) { 
+			return false;
+		}
 		
-		if (this == g) { return true; }
+		if (this == g) { 
+			return true;
+		}
 		
-		if (this.getClass() != g.getClass()) { return false; }
+		if (this.getClass() != g.getClass()) { 
+			return false;
+		}
 		
 		Group gr = (Group) g;
 		
@@ -318,24 +339,24 @@ public class Group extends Subject
 	 */
 	@Override
 	public String toString() {
-		String str= "\n" + this.getClass().getSimpleName() + "\nGroup name: " + String.format("%10s", this.name)
-		+ "\nRepresentative: " + String.format("%8s", this.representative.getUsername()) + "\nStatus: " + String.format("%10s", this.status) 
-		+ "\nParent Group: ";
+		String str= "\n    Group name: " + String.format("%10s", this.name)
+		+ "\n    Representative: " + String.format("%8s", this.representative.getUsername()) + "\n    Status: " + String.format("%10s", this.status) 
+		+ "\n    Parent Group: ";
 		
 		if (this.parent == null) {
 			str = str.concat(" Doesn't have");
 		} else {
 			str = str.concat(this.parent.getName());
 		}
-		str = str.concat("\nMembers: \n");
+		str = str.concat("\n    Members: \n");
 		for (RegisteredUser u : members) {
-			str = str.concat("	- " + u.getUsername() + "\n");
+			str = str.concat("	 - " + u.getUsername() + "\n");
 		}
-		str = str.concat("Subgroups: \n");
+		str = str.concat("    Subgroups: \n");
 		for (Group g : subgroups) {
-			str = str.concat("	- " + g.getName() + "\n");
+			str = str.concat("	 - " + g.getName() + "\n");
 		}
-		str = str.concat("Created Projects: \n");
+		str = str.concat("    Created Projects: \n");
 		for (Project p : createdProjects) {
 			str = str.concat("	- " + p.getTitle() + "\n");
 		}

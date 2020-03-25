@@ -11,18 +11,16 @@ import java.util.*;
  * @author Miguel Álvarez Valiente
  * 
  */
-public class GroupVote extends Vote
-					   implements Serializable {
+public class GroupVote extends Vote implements Serializable{
 	
+	/**
+	 * Serializable version
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Group that voted for the project
 	 */
 	private Group voterGroup;
-	
-	/**
-	 * Version for serialize objects
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Constructor of GroupVote

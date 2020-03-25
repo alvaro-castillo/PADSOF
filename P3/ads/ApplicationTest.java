@@ -36,7 +36,6 @@ public class ApplicationTest {
 	public void testAddUser() {
 		RegisteredUser u1 = new RegisteredUser("456789","User1", "padsof2291");
 		RegisteredUser u2 = new RegisteredUser("12345X","User2", "EPS");
-		RegisteredUser u3 = new RegisteredUser("12345X","User2", "EPS");
 		//Adds a new user
 		assertTrue(app.addUser(u1));
 		//Adds another user
@@ -255,7 +254,7 @@ public class ApplicationTest {
 		//Check that there are no expired projects. The date is the same of the projects acceptance
 		ModifiableDate.setToday();
 		
-		expiredProjects = app.checkExpiredProjects(ModifiableDate.getModifiableDate() );
+		expiredProjects = app.checkExpiredProjects(ModifiableDate.getModifiableDate());
 		
 		assertTrue(expiredProjects.isEmpty());
 		
@@ -269,13 +268,4 @@ public class ApplicationTest {
 		assertFalse(expiredProjects.contains(p3));
 		
 	}
-
-	/**
-	 * Test method for {@link ads.Application#notifyObserver(ads.Notification)}.
-	 */
-	@Test
-	public void testNotifyObserver() {
-		fail("Not yet implemented");
-	}
-
 }

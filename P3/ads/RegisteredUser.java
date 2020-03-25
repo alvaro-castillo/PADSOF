@@ -221,8 +221,8 @@ public class RegisteredUser implements Serializable, IObserver {
 	@Override
 	public String toString() {
 		String s= "  User id: " + String.format(Locale.ROOT, "%10s", this.id) + "   Username: "
-	              + String.format(Locale.ROOT, "%8s", this.username) +
-				"   Password: " + String.format(Locale.ROOT, "%8s", this.password) +
+	              + String.format(Locale.ROOT, "%20s", this.username) +
+				"   Password: " + String.format(Locale.ROOT, "%20s", this.password) +
 				"   User status: " + String.format(Locale.ROOT, "%8s", this.status) + "\n";
 		if(this.ban==true) {
 			s=s.concat("  User is banned");

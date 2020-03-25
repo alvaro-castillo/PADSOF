@@ -1,13 +1,12 @@
+/**
+ * 
+ */
 package ads;
 
 import static org.junit.Assert.*;
-
-import java.time.LocalDate;
-import java.time.Month;
-
 import org.junit.Before;
 import org.junit.Test;
-
+import modifiableDates.ModifiableDate;
 /**
 * This is the tester for the Notification class
 * 
@@ -15,13 +14,15 @@ import org.junit.Test;
 */
 public class NotificationTest {
 	private Notification n;
+	
 	/**
 	 * The set up of the tester creates a new Notification
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		n = new Notification("Hello", LocalDate.now());
+		ModifiableDate.setToday();
+		n = new Notification("Hello", ModifiableDate.getModifiableDate());
 	}
 
 	/**
@@ -29,21 +30,20 @@ public class NotificationTest {
 	 */
 	@Test
 	public void testEqualsObject() {
-		Notification n2 = new Notification("Hello", LocalDate.of(2019, Month.JANUARY, 1));
-		Notification n3 = new Notification("Hi", LocalDate.now());
+
+		Notification n3 = new Notification("Hi", ModifiableDate.getModifiableDate());
 		RegisteredUser u = new RegisteredUser("12345678A","User1", "aaaabb");
-		
+		ModifiableDate.plusDays(5);
+		Notification n2 = new Notification("Hello", ModifiableDate.getModifiableDate());
 		//Null object
 		assertFalse(n.equals(null));
 		//Notification with the same data
 		assertTrue(n.equals(n));
 		//Object of different type
 		assertFalse(n.equals(u));
-		//Notification with same message
-		assertTrue(n.equals(n2));
-		//Notification with same Date
-		assertTrue(n.equals(n3));
-
+		//Notification with same message but different date
+		assertFalse(n.equals(n2));
+		//Notification with same Date but different message
+		assertFalse(n.equals(n3));
 	}
-
 }

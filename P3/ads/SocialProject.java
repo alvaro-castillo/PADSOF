@@ -1,7 +1,5 @@
 package ads;
 
-import java.time.LocalDate;
-
 /**
  * 
  * @author Álvaro Castillo García

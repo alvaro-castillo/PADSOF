@@ -422,7 +422,7 @@ public abstract class Project extends Subject
 			s += this.acceptDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 		
-		s += "\n     Amount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
+		s += "\n     Amount Requested: " + String.format(Locale.ROOT,"%8.2f", this.amount) + "€   Minimum Votes Needed: ";
 		
 		if (this.minimumVotes == -1) {
 			s += String.format("%8s", "Not set");

@@ -1,6 +1,5 @@
 package ads;
 
-import java.time.LocalDate;
 
 /**
  * Subclass of Project. Represents a type 
