@@ -1,5 +1,6 @@
 package ads;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,12 +11,18 @@ import java.util.*;
  * @author Miguel Álvarez Valiente
  * 
  */
-public class GroupVote extends Vote {
+public class GroupVote extends Vote
+					   implements Serializable {
 	
 	/**
 	 * Group that voted for the project
 	 */
 	private Group voterGroup;
+	
+	/**
+	 * Version for serialize objects
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Constructor of GroupVote
