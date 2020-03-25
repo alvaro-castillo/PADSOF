@@ -3,6 +3,9 @@ package ads;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import modifiableDates.ModifiableDate;
+
 import java.io.*;
 import java.time.LocalDate;
 
@@ -12,7 +15,9 @@ import java.time.LocalDate;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class Application implements Serializable{
+public class Application extends Subject
+						 implements Serializable {
+	
 	private String name; 
 	private List<Group> groups;
 	private List<Project> projects;
@@ -78,11 +83,15 @@ public class Application implements Serializable{
 	 * @return boolean
 	 */	
 	public boolean addUser(RegisteredUser u) {
+		if (u == null) {
+			return false;
+		}
 		for(RegisteredUser us: users) {
 			if(us.equals(u)) {
 				return false;
 			}
 		}
+		notifyObservers(new Notification("New User '" + u.getUsername() + "' (id " + u.getId() + ") has been created", ModifiableDate.getModifiableDate()));
 		return users.add(u);
 	}
 	/**
@@ -92,11 +101,15 @@ public class Application implements Serializable{
 	 * @return boolean
 	 */
 	public boolean addGroup(Group g) {
+		if (g == null) {
+			return false;
+		}
 		for(Group gr: groups) {
 			if(gr.equals(g)) {
 				return false;
 			}
 		}
+		notifyObservers(new Notification("New Group '" + g.getName() + "' has been created", ModifiableDate.getModifiableDate()));
 		return groups.add(g);
 	}
 	/**
@@ -105,11 +118,15 @@ public class Application implements Serializable{
 	 * @return boolean
 	 */
 	public boolean addProject(Project p) {
+		if (p == null) {
+			return false;
+		}
 		for(Project pr: projects) {
 			if(pr.equals(p)) {
 				return false;
 			}
 		}
+		notifyObservers(new Notification("New Project '" + p.getTitle() + "' with ID " + p.getId() + " has been created", ModifiableDate.getModifiableDate()));
 		return projects.add(p);
 	}
 	/**
@@ -126,6 +143,7 @@ public class Application implements Serializable{
 	public void setAdmin(RegisteredUser a) {
 		a.acceptRegistration();
 		this.admin=a;
+		registerObserver(this.admin);
 	}
 	/**
 	 * Administrator of the application getter.
@@ -299,9 +317,6 @@ public class Application implements Serializable{
 			}
 		}
 		return expired;
-	}
-	public void notifyObserver(Notification n) {
-		// TODO Implementarla. Antes hay que hacer la interfaz observer
 	}
 	
 }

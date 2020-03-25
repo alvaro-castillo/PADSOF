@@ -8,7 +8,7 @@ import java.util.*;
  * 
  * @author Álvaro Castillo García
  * @author Alejandro Benimeli
- * @author Miguel Álvarez Valienteº
+ * @author Miguel Álvarez Valiente
  *
  */
 public class UserVote extends Vote implements Serializable{

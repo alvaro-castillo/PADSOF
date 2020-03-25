@@ -4,7 +4,10 @@ import java.time.LocalDate;
 
 /**
  * 
+ * @author Álvaro Castillo García
  * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
+ * 
  *
  */
 public class SocialProject extends Project {

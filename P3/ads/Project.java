@@ -4,6 +4,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import modifiableDates.ModifiableDate;
+
 /**
  * Represents a project inside of the Application
  * 
@@ -12,14 +14,13 @@ import java.util.*;
  * @author Miguel Álvarez Valiente
  *
  */
-public abstract class Project implements Serializable{
+public abstract class Project extends Subject 
+							  implements Serializable, IObserver {
 	
 	/**
 	 * Version for serialize objects
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private static final ProjectStatus WAITING_ACCEPTANCE = null;
 
 	/**
 	 * Title of the Project
@@ -95,7 +96,12 @@ public abstract class Project implements Serializable{
 		this.status = ProjectStatus.WAITING_ACCEPTANCE;
 		this.creator = creator;
 		
-		vote(creator);
+		// we dont use vote() because if the project isnt accepted it doesnt count the vote
+		votes.add(new UserVote(creator));
+		update(null);
+		
+		// Adds the creator as an observer
+		registerObserver(creator);
 
 		// Assign a unique id to the project
 		this.id = lastId + 1;
@@ -140,6 +146,9 @@ public abstract class Project implements Serializable{
 	 */
 	public void setMinimumVotes(int minimumVotes) {
 		this.minimumVotes = minimumVotes;
+		if (actualVotes >= minimumVotes) {
+			creator.update(new Notification("Your " + this.getClass().getSimpleName() + ": \"" + title + "\" with ID " + id + " has reached the minimun number of votes and is ready to be submited!", ModifiableDate.getModifiableDate()));
+		}
 	}
 	
 	/**
@@ -183,11 +192,12 @@ public abstract class Project implements Serializable{
 	}
 	
 	/**
-	 * Changes the state to AdminAccepted
+	 * Changes the state to AdminAccepted and sets the minimum votes
 	 */
 	public void adminAcceptProject() {
 		status = ProjectStatus.ADMIN_ACCEPTED;
-		acceptDate = LocalDate.now();
+		acceptDate = ModifiableDate.getModifiableDate();
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been accepted by the administrator", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -195,6 +205,7 @@ public abstract class Project implements Serializable{
 	 */
 	public void adminRejectProject() {
 		status = ProjectStatus.ADMIN_REJECTED;
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -202,6 +213,7 @@ public abstract class Project implements Serializable{
 	 */
 	public void pendingProject() {
 		status = ProjectStatus.PENDING;
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " is waiting to be approved by the government", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -209,6 +221,7 @@ public abstract class Project implements Serializable{
 	 */
 	public void expireProject() {
 		status = ProjectStatus.EXPIRED;
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has expired", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -216,6 +229,7 @@ public abstract class Project implements Serializable{
 	 */
 	public void rejectProject() {
 		status = ProjectStatus.REJECTED;
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the government", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -223,13 +237,14 @@ public abstract class Project implements Serializable{
 	 */
 	public void approveProject() {
 		status = ProjectStatus.APPROVED;
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been approved by the government", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
 	 * Adds a UserVote to the project
 	 * 
 	 * @param user RegisteredUser that votes
-	 * @return Boolean indication if the vote was added succesfuly
+	 * @return Boolean indication if the vote was added successfully
 	 */
 	public boolean vote(RegisteredUser user) {
 		
@@ -237,7 +252,7 @@ public abstract class Project implements Serializable{
 			return false;
 		}
 		
-		// If the user has already voted
+		// If the user has already voted or if the project hasn't been accepted or has been rejected
 		if (hasVoted(user)) {
 			return false;
 		}
@@ -246,7 +261,7 @@ public abstract class Project implements Serializable{
 		
 		votes.add(v);
 		
-		update();
+		update(null);
 		
 		return true;
 	}
@@ -255,7 +270,7 @@ public abstract class Project implements Serializable{
 	 * Adds a GroupVote to the project
 	 * 
 	 * @param group Group that votes
-	 * @return Boolean indication if the vote was added succesfuly
+	 * @return Boolean indication if the vote was added successfully
 	 */
 	public boolean vote(Group group) {
 		
@@ -272,6 +287,11 @@ public abstract class Project implements Serializable{
 		
 		votes.add(v);
 		
+		// Updates the vote count and checks if the minimum is reached
+		update(null);
+		// The project now observes the group to see if anyone joins or leaves to recalculate the votes
+		group.registerObserver(this); 
+		
 		return true;
 	}
 	
@@ -281,25 +301,30 @@ public abstract class Project implements Serializable{
 	 * @return number of votes
 	 */
 	protected int countVotes() {
-		
+
 		Set<String> voters = new HashSet<>();
 		
 		for (Vote v: votes) {
 			voters.addAll(v.getVoters());
 		}
-		// TODO: Que use modifiable dates
-		if (actualVotes >= minimumVotes) {
-			creator.update(new Notification("Your " + this.getClass().getName() + " project: " + title + " with ID " + id + " has reached the minimun number of votes and is ready to be submited!", LocalDate.now()));
-		}
-		
+
 		return voters.size();
 	}
 	
 	/**
 	 * Updates the vote count of the project whenever its called
+	 * @param n Notification (Its not needed so pass null instead)
+	 * @return Always returns true
 	 */
-	public void update() {
+	public boolean update(Notification n) {
+		
 		actualVotes = countVotes();
+		
+		if ((actualVotes >= minimumVotes) && (minimumVotes != -1)) {
+			creator.update(new Notification("Your " + this.getClass().getSimpleName() + ": \"" + title + "\" with ID " + id + " has reached the minimun number of votes and is ready to be submited!", ModifiableDate.getModifiableDate()));
+		}
+		
+		return true;
 	}
 	
 	/**

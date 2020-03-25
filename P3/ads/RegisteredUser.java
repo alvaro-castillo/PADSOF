@@ -7,7 +7,7 @@ import java.io.Serializable;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class RegisteredUser implements Serializable{
+public class RegisteredUser implements Serializable, IObserver {
 	private String id;
 	private String username;
 	private String password;
