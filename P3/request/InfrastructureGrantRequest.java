@@ -1,37 +1,35 @@
 package request;
 
 import ads.Project;
-import ads.SocialProject;
+import ads.InfrastructureProject;
 import es.uam.eps.sadp.grants.GrantRequest;
 
 /**
- * Class that represents grant requests for social projects
+ * Class that represents grant requests for infrastructure projects
  * 
  * @author Álvaro Castillo García
  * @author Alejandro Benimeli
  * @author Miguel Álvarez Valiente
  *
  */
-public class SocialGrantRequest extends AbstractGrantRequest {
+public class InfrastructureGrantRequest extends AbstractGrantRequest {
 
 	/**
 	 * Constructor
 	 * @param p Project you want to send
 	 */
-	public SocialGrantRequest(Project p) {
+	public InfrastructureGrantRequest(Project p) {
 		super(p);
 	}
 
-
 	/**
-	 * Returns extra data associated to social projects
+	 * Returns extra data associated to Infrastructure Projects
 	 * @return String containing the extra data
 	 */
 	@Override
 	public String getExtraData() {
-		return "Association: " + ((SocialProject)proj).getAssociation() + "\nIs national: " 
-				+ ((SocialProject)proj).getNational() + "\nDescription: " 
-				+ ((SocialProject)proj).getDescription();
+		return "District: " + ((InfrastructureProject)proj).getDistrict().getDistrictName()
+				+ "\nImage: " + ((InfrastructureProject)proj).getImage();
 	}
 
 	/**
@@ -40,7 +38,9 @@ public class SocialGrantRequest extends AbstractGrantRequest {
 	 */
 	@Override
 	public ProjectKind getProjectKind() {
-		return GrantRequest.ProjectKind.Social;
+		return GrantRequest.ProjectKind.Infrastructure;
 	}
+	
+	
 
 }
