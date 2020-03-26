@@ -1,6 +1,8 @@
 package ads;
 
 import java.io.IOException;
+import request.GovernmentGateway;
+
 /**
 * This is the main class program which illustrates all the functionality we have created.
 *
@@ -123,6 +125,7 @@ public class Main {
 		
 		app.logOut();
 		
+		
 		/*Saves the data of the application*/
 		System.out.println("Finally we save the app in the file 'data.txt' and we print the data of the whole application\n");
 		try{
@@ -144,7 +147,36 @@ public class Main {
 		
 		//System.out.println("-------Loaded app-------\n" + app2);
 			
+		GovernmentGateway gateway = GovernmentGateway.getInstance();
 		
+		System.out.println("\n\nSending a project that has the minimum number of votes\n");
+		for (int i=0; i<2; ++i) {
+			try {
+				if (gateway.sendProject(p) == true) {
+					System.out.println("\tProject sent successfully!");
+				} else {
+					System.out.println("\tError sending the project");
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		
+		System.out.println("\n\nChecking the state of a project grant request\n");
+		// Try to check a project (We retry in case there's any IO error)
+		for (int i=0; i<2; ++i) {
+			try {
+				if (gateway.checkProject(p) != null) {
+					System.out.println("\tProject's request status checked correcly!");
+				} else {
+					System.out.println("\tError checking the state of the project");
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 	}
 

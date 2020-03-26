@@ -79,24 +79,36 @@ public abstract class Project extends Subject
 	 * Creator of the project
 	 */
 	private RegisteredUser creator;
-
+	
+	/**
+	 * Request id. Will be set when sending it to the external entity
+	 */
+	private String requestId = null;
+	
+	/**
+	 * Amount granted by the external entity
+	 */
+	private double grantedAmount = -1;
+	
 	/**
 	 * Project constructor
 	 * 
 	 * @param title Title of the project
 	 * @param description Description of the project
 	 * @param amount Amount of money requested in Euros
+	 * @param creator Creator of the project
 	 */
 	public Project(String title, String description, double amount, RegisteredUser creator) {
 		this.title = title;
 		this.description = description;
 		this.amount = amount;
 		this.minimumVotes = -1; // Not set until the administrator accepts the project
-		this.acceptDate = null; // TODO: Usar modifiable dates
+		this.acceptDate = null;
 		this.status = ProjectStatus.WAITING_ACCEPTANCE;
 		this.creator = creator;
 		
-		// we dont use vote() because if the project isnt accepted it doesnt count the vote
+		// we don't use vote() because if the project isn't accepted it doesn't count the vote
+		// but we want to always have the creator's vote
 		votes.add(new UserVote(creator));
 		update(null);
 		
@@ -189,6 +201,38 @@ public abstract class Project extends Subject
 	 */
 	public ProjectStatus getState() {
 		return status;
+	}
+	
+	/**
+	 * Getter for requestId
+	 * @return id of the request
+	 */
+	public String getRequestId() {
+		return requestId;
+	}
+	
+	/**
+	 * Setter for requestId
+	 * @param requ request id of the project
+	 */
+	public void setRequestId(String requ) {
+		requestId = requ;
+	}
+	
+	/**
+	 * Getter for grantedAmount
+	 * @return amount granted by the entity
+	 */
+	public double getGrantedAmount() {
+		return grantedAmount;
+	}
+	
+	/**
+	 * Setter for grantedAmount
+	 * @param am amount granted by the entity
+	 */
+	public void setGrantedAmount(double am) {
+		grantedAmount = am;
 	}
 	
 	/**
@@ -422,7 +466,7 @@ public abstract class Project extends Subject
 			s += this.acceptDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 		
-		s += "\n     Amount Requested: " + String.format(Locale.ROOT,"%8.2f", this.amount) + "€   Minimum Votes Needed: ";
+		s += "\n     Amount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
 		
 		if (this.minimumVotes == -1) {
 			s += String.format("%8s", "Not set");

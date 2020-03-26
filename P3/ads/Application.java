@@ -8,6 +8,7 @@ import modifiableDates.ModifiableDate;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 
 
 /**
@@ -34,6 +35,9 @@ public class Application extends Subject
 		this.projects = new ArrayList<Project>();
 		this.users = new ArrayList<RegisteredUser>();
 		this.name = "Votify";
+		ModifiableDate.setDate(LocalDate.now().get(ChronoField.DAY_OF_MONTH),
+				LocalDate.now().get(ChronoField.MONTH_OF_YEAR),
+				LocalDate.now().get(ChronoField.YEAR));
 	}
 	/**
 	 * Groups in the application getter.
@@ -247,6 +251,10 @@ public class Application extends Subject
 						new FileInputStream(filename));
 		Application app = (Application) input.readObject();
 		input.close();
+		
+		ModifiableDate.setDate(LocalDate.now().get(ChronoField.DAY_OF_MONTH),
+				LocalDate.now().get(ChronoField.MONTH_OF_YEAR),
+				LocalDate.now().get(ChronoField.YEAR));
 		
 		return app;
 	}
