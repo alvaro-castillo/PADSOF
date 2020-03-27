@@ -11,6 +11,8 @@ import request.GovernmentGateway;
 public class Main {
 	/**
 	* This is the main program.
+	* It prints on the terminal all steps done and at the end it prints the data stored in the application.
+	* The data is correctly indented so that the person executing it, is able to understand everything.
 	* @throws IOException
 	* @throws ClassNotFoundException
 	*/
@@ -23,10 +25,10 @@ public class Main {
 			System.out.println("	Already existing user\n");
 		}
 		
-		/*Sets the first user to be registered in as the administrator of the app*/
+		// Sets the first user to be registered in as the administrator of the app
 		app.setAdmin(u1);
 		
-		/*Creates two users*/
+		// Creates two users
 		System.out.println("Creating two more users: 'User2' and 'User3'\n");
 		RegisteredUser u2 = new RegisteredUser("22222222B","User2", "bbbb");
 		if(app.addUser(u2)==false) {
@@ -37,7 +39,7 @@ public class Main {
 			System.out.println("	Already existing user\n");
 		}
 		
-		/*Logs in the admin to accept registration of user 2 and user 3*/
+		// Logs in the admin to accept registration of user 2 and user 3
 		System.out.println("Administrator accepting the registration of both users\n");
 		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
 			System.out.println("	Could not log in");
@@ -46,7 +48,7 @@ public class Main {
 		u3.acceptRegistration();
 		app.logOut();
 		
-		/*Logs in the second user to create a project and a group*/
+		// Logs in the second user to create a project and a group
 		System.out.println("User2 creates a new Infrastructure Project: 'New skate park'\n");
 		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
 			System.out.println("	Could not log in");
@@ -65,7 +67,7 @@ public class Main {
 		u2.addGroup(g1);
 		app.logOut();
 		
-		/*Logs in the admin to accept the creation of the group*/
+		// Logs in the admin to accept the creation of the group
 		System.out.println("Administator accepts the group: 'UAM'\n");
 		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
 			System.out.println("	Could not log in");
@@ -73,7 +75,7 @@ public class Main {
 		g1.acceptGroup();
 		app.logOut();
 		
-		/*Logs in the second user to create two subgroups*/
+		// Logs in the second user to create two subgroups
 		System.out.println("User2 creates two subgroups of 'UAM': 'EPS' and 'Facultad de Ciencias' \n");
 		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
 			System.out.println("	Could not log in");
@@ -83,7 +85,7 @@ public class Main {
 		app.logOut();
 		
 
-		/*Logs in the admin to accept the creation of the subgroups and the project. It also sets two votes as the minimum of the project*/
+		// Logs in the admin to accept the creation of the subgroups and the project. It also sets two votes as the minimum of the project
 		System.out.println("Administator accepts the subgroups: 'EPS' and 'Facultad de Ciencias'");
 		System.out.println("He accepts the project: 'New skate park' too, and sets the minimum number of votes to 2\n");
 		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
@@ -95,7 +97,7 @@ public class Main {
 		p.setMinimumVotes(2);
 
 		app.logOut();
-		/*Logs in the third user and enrolls subgroup 1a, try to enter in 1 and enrolls 1b*/
+		// Logs in the third user and enrolls subgroup 1a, try to enter in 1 and enrolls 1b
 		System.out.println("User3 enrolls subgroup 'EPS' try to enter in 'UAM' (getting an error) and enrolls 'Facultad de Ciencias'\n");
 		
 		if(app.logIn(u3.getUsername(), u3.getPassword())==false) {
@@ -113,7 +115,7 @@ public class Main {
 		
 		app.logOut();
 		
-		/*Logs in the second user so he can vote to a project as a group representative*/
+		// Logs in the second user so he can vote to a project as a group representative
 		System.out.println("\nUser2 votes to project: 'New skate park' as the representative of the group: 'UAM'\n");
 		
 		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
@@ -123,30 +125,7 @@ public class Main {
 			System.out.println("	Error while voting to project " + p.getTitle());
 		};
 		
-		app.logOut();
-		
-		
-		/*Saves the data of the application*/
-		System.out.println("Finally we save the app in the file 'data.txt' and we print the data of the whole application\n");
-		try{
-			app.saveApp("data.txt");
-		}catch(IOException e) {
-			System.out.println("	Error while saving the app. There is an error with the filename");
-		}
-		
-		/*Loads the data in other variable and checks if they are equal by printing them
-		try{
-			Application app2 = Application.loadApp("data.txt");
-		}catch(ClassNotFoundException c) {
-			System.out.println("	Error while loading the app. There is a class that does not match");
-		}catch(IOException e) {
-			System.out.println("	Error while loading the app. There is an error with the filename");
-		}
-		*/
-		System.out.println("-------Votify Application Data-------\n"+ app + "\n");
-		
-		//System.out.println("-------Loaded app-------\n" + app2);
-			
+		// Gets the instance of the GovernmentGateway and sends the project p for funding as it has the minimum number of votes requiered
 		GovernmentGateway gateway = GovernmentGateway.getInstance();
 		
 		System.out.println("\n\nSending a project that has the minimum number of votes\n");
@@ -168,7 +147,7 @@ public class Main {
 		for (int i=0; i<2; ++i) {
 			try {
 				if (gateway.checkProject(p) != null) {
-					System.out.println("\tProject's request status checked correcly!");
+					System.out.println("\tProject's request status checked correcly!\n");
 				} else {
 					System.out.println("\tError checking the state of the project");
 				}
@@ -177,7 +156,16 @@ public class Main {
 				System.out.println(e);
 			}
 		}
-
+		app.logOut();
+		
+		// Saves the data of the application. No one is logged in.
+		System.out.println("Finally we save the app in the file 'data.txt' and we print the data of the whole application\n");
+		try{
+			app.saveApp("data.txt");
+		}catch(IOException e) {
+			System.out.println("	Error while saving the app. There is an error with the filename");
+		}
+		// Prints the data of all the Application. No user should be stored in the current user attribute.				
+		System.out.println("-------Votify Application Data-------\n"+ app + "\n");
 	}
-
 }

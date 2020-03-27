@@ -8,15 +8,55 @@ import java.io.Serializable;
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
 public class RegisteredUser implements Serializable, IObserver {
+	
+	/**
+	 * The id of the user.
+	 */
 	private String id;
+	
+	/**
+	 * The username of the user.
+	 */
 	private String username;
+	
+	/**
+	 * The password of the user.
+	 */
 	private String password;
+	
+	/**
+	 * This field indicates if the user is banned or not.
+	 */
 	private boolean ban;
+	
+	/**
+	 * This field indicates if the user has notifications or not.
+	 */
 	private boolean notifications;
+	
+	/**
+	 * This field indicates the status of the user.
+	 */
 	private Status status;
+	
+	/**
+	 * A list that contains all the groups that the user has created.
+	 */
 	private List<Group> createdGroups;
+	
+	/**
+	 * A list that contains all the projects that the user has created.
+	 */
 	private List<Project> createdProjects;
+	
+	/**
+	 * A list that contains all the notifications that the user has.
+	 */
 	private List<Notification> notification;
+	
+	/**
+	 * This field stores the version for serialization.
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	/**

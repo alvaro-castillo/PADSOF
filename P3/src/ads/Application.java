@@ -10,7 +10,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 
-
 /**
 * These are the functions and variables that define the Application object, the Application class.
 *
@@ -19,12 +18,39 @@ import java.time.temporal.ChronoField;
 public class Application extends Subject
 						 implements Serializable {
 	
+	/**
+	 * Name of the application.
+	 */
 	private String name; 
+	
+	/**
+	 * A list that contains all the groups in the app.
+	 */
 	private List<Group> groups;
+	
+	/**
+	 * A list that contains all the projects in the app.
+	 */
 	private List<Project> projects;
+	
+	/**
+	 * A list that contains all the users in the app.
+	 */
 	private List<RegisteredUser> users;
+	
+	/**
+	 * An attribute that stores the user that is in the app at the current moment.
+	 */
 	private RegisteredUser currentUser;
+	
+	/**
+	 * This attribute stores the user which is the admin of the application.
+	 */
 	private RegisteredUser admin; 
+	
+	/**
+	 * This field stores the version for serialization.
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -287,6 +313,7 @@ public class Application extends Subject
 	}
 	/**
 	 * Function that checks if there are any expired projects at the real time and returns them.
+	 * This cannot be tested because it needs real time (30 real days passed from the creation of the project).
 	 * @return expired List with all expired projects
 	 */
 	public List<Project> checkExpiredProjects() {

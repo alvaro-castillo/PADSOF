@@ -10,11 +10,23 @@ import java.time.*;
 */
 public class Notification implements Serializable{
 	/**
-	 * 
+	 * This field stores the version for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Attribute that stores the content of the notification.
+	 */
 	private String content;
+	
+	/**
+	 * Date of the creation of the notification.
+	 */
 	private LocalDate date;
+	
+	/**
+	 * Field indicating if the notification has been read or not.
+	 */
 	private boolean read;
 	
 	/**

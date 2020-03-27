@@ -215,15 +215,18 @@ public class ApplicationTest {
 
 	/**
 	 * Test method for {@link ads.Application#loadApp(java.lang.String)}.
-	 * As exceptions are handled we do not need to test other cases than a positive one
+	 * As exceptions are handled we do not need to test other cases than a positive one.
+	 * In addition we do not have an equals() method for Application. It will make no sense to create it, just for this function.
+	 * We were able to print the app, save it, load it, and check the second one. They both showed the same information.
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
 	@Test
 	public void testLoadApp() throws IOException, ClassNotFoundException{
 		app.saveApp("data.dat");
-		//Loads an app
+		// Loads an app
 		assertNotNull(Application.loadApp("data.dat"));
+
 	}
 
 	/**

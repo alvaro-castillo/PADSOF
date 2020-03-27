@@ -102,7 +102,7 @@ public class Group extends Subject
 	/**
 	 * Creates affinity report between two groups
 	 * 
-	 * @param group Group that you wish to execute the affinity report on
+	 * @param g Group that you wish to execute the affinity report on
 	 * @return double with the result of applying the affinity formula
 	 */
 	public double createAffinityReport(Group g) {
