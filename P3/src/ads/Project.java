@@ -344,7 +344,7 @@ public abstract class Project extends Subject
 	 * 
 	 * @return number of votes
 	 */
-	protected int countVotes() {
+	private int countVotes() {
 
 		Set<String> voters = new HashSet<>();
 		
