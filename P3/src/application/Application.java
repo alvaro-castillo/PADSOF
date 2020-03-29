@@ -9,11 +9,11 @@ import application.notification.*;
 import application.project.*;
 import application.group.*;
 import application.registeredUser.*;
+import es.uam.eps.sadp.grants.CCGG;
 import modifiableDates.ModifiableDate;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 
 /**
 * These are the functions and variables that define the Application object, the Application class.
@@ -66,9 +66,8 @@ public class Application extends Subject
 		this.projects = new ArrayList<Project>();
 		this.users = new ArrayList<RegisteredUser>();
 		this.name = "Votify";
-		ModifiableDate.setDate(LocalDate.now().get(ChronoField.DAY_OF_MONTH),
-				LocalDate.now().get(ChronoField.MONTH_OF_YEAR),
-				LocalDate.now().get(ChronoField.YEAR));
+		ModifiableDate.setToday();
+		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
 	}
 	/**
 	 * Groups in the application getter.
@@ -283,9 +282,8 @@ public class Application extends Subject
 		Application app = (Application) input.readObject();
 		input.close();
 		
-		ModifiableDate.setDate(LocalDate.now().get(ChronoField.DAY_OF_MONTH),
-				LocalDate.now().get(ChronoField.MONTH_OF_YEAR),
-				LocalDate.now().get(ChronoField.YEAR));
+		ModifiableDate.setToday();
+		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
 		
 		return app;
 	}
