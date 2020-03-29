@@ -1,7 +1,7 @@
 package request;
 
-import ads.Project;
-import ads.SocialProject;
+import application.project.Project;
+import application.project.SocialProject;
 import es.uam.eps.sadp.grants.GrantRequest;
 
 /**

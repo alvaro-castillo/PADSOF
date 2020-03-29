@@ -1,7 +1,7 @@
 package request;
 
-import ads.Project;
-import ads.InfrastructureProject;
+import application.project.InfrastructureProject;
+import application.project.Project;
 import es.uam.eps.sadp.grants.GrantRequest;
 
 /**

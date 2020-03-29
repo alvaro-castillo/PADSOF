@@ -1,14 +1,11 @@
 package request;
 
-import ads.Project;
-import ads.SocialProject;
-
 import java.io.IOException;
 
-import ads.InfrastructureProject;
-import ads.ProjectStatus;
+import application.project.*;
 import es.uam.eps.sadp.grants.*;
-
+import application.enums.*;
+import application.project.Project;
 /**
  * Class used to communicate with the external entity
  * 

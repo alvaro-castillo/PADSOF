@@ -1,7 +1,7 @@
 package request;
 
+import application.project.Project;
 import es.uam.eps.sadp.grants.*;
-import ads.Project;
 
 /**
  * Abstract class that implements some of the methods of the GrantRequest interface
