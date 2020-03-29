@@ -3,11 +3,14 @@ package main;
 import java.io.IOException;
 
 import application.enums.District;
+import application.enums.ProjectStatus;
 import application.project.InfrastructureProject;
 import request.GovernmentGateway;
 import application.Application;
 import application.group.*;
 import application.registeredUser.*;
+import es.uam.eps.sadp.grants.CCGG;
+import modifiableDates.ModifiableDate;
 /**
 * This is the main class program which illustrates all the functionality we have created.
 *
@@ -147,12 +150,17 @@ public class Main {
 			}
 		}
 		
+		// Advance time
+		ModifiableDate.plusDays(8);
+		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
+		
 		System.out.println("\n\nChecking the state of a project grant request\n");
 		// Try to check a project (We retry in case there's any IO error)
+		ProjectStatus stat;
 		for (int i=0; i<2; ++i) {
 			try {
-				if (gateway.checkProject(p) != null) {
-					System.out.println("\tProject's request status checked correcly!\n");
+				if ((stat = gateway.checkProject(p)) != null) {
+					System.out.println("\tProject's request status checked correcly!. The state is " + stat + "\n");
 				} else {
 					System.out.println("\tError checking the state of the project");
 				}
