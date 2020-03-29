@@ -125,6 +125,9 @@ public class Group extends Subject
 				++b;
 			}
 		}
+		if (this.createdProjects.size() == 0 && g.createdProjects.size() == 0) { 
+			return 0; 
+		}
 		return (a+b)/(this.createdProjects.size()+g.createdProjects.size());
 	}
 	
@@ -335,6 +338,15 @@ public class Group extends Subject
 	 */
 	public RegisteredUser getRepresentative() {
 		return this.representative;
+	}
+	
+	/**
+	 * Group projects getter.
+	 * 
+	 * @return name
+	 */
+	public List<Project> getCreatedProjects() {
+		return this.createdProjects;
 	}
 
 	/**
