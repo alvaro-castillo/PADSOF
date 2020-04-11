@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 
 public class InitialPanel extends JPanel implements ActionListener{
@@ -28,6 +29,8 @@ public class InitialPanel extends JPanel implements ActionListener{
         this.image = new ImagePanelContainer();
         this.buttons = new InitialButtonsPannel(this); 
         
+        this.setBorder(new EmptyBorder(20,20,20,20)); // Padding
+        
     	gbc.gridheight = 1;
     	gbc.gridwidth = 1;
     	gbc.gridx = 0;
@@ -38,20 +41,20 @@ public class InitialPanel extends JPanel implements ActionListener{
         
         this.add(image, gbc);
         
+        
         gbc.gridheight = 1;
     	gbc.gridwidth = 1;
     	gbc.gridx = 0;
     	gbc.gridy = 2;
     	
-    	
         this.add(label, gbc);
+        
         
         gbc.gridheight = 1;
     	gbc.gridwidth = 1;
     	gbc.gridx = 0;
     	gbc.gridy = 3;
 
-    	
         this.add(buttons, gbc);
         
         image.setVisible(true);

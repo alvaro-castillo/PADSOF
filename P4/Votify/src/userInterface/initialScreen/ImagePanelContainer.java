@@ -13,7 +13,7 @@ public class ImagePanelContainer extends JPanel {
 	private TextPanel tPanel;
 	
 	public ImagePanelContainer() {
-		iPanel = new ImagePanel();
+		iPanel = new ImagePanel("Logo.png");
 		tPanel = new TextPanel();
 		
 		GridBagLayout g = new GridBagLayout();
