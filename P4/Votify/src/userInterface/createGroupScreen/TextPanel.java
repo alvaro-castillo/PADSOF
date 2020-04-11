@@ -1,4 +1,4 @@
-package userInterface.initialScreen;
+package userInterface.createGroupScreen;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -10,10 +10,6 @@ public class TextPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-    public TextPanel() {
-
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);  
@@ -22,8 +18,8 @@ public class TextPanel extends JPanel{
 	    Font fuente = new Font("Arial", Font.BOLD, 40);
 	    
 	    g2.setFont(fuente);
-	    g2.setColor(Color.BLUE);
-	    g2.drawString("Votify", (this.getWidth()/2)-120, (this.getHeight()/2));
+	    g2.setColor(Color.BLACK);
+	    g2.drawString("Create a group", (this.getWidth()/2)-170, (this.getHeight()/2)+10);
     }
 
 }
