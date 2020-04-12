@@ -15,14 +15,14 @@ public class UnbanUserPanel extends JPanel implements ActionListener{
 	private TextPanel text;
 	private CenteredButtonPanel<UnbanUserPanel> button;
 	private FeedButtonPanel feed;
-	private ComboBoxPanel combo;
+	private ComboBoxPanel<UnbanUserPanel> combo;
 	private static final long serialVersionUID = 1L;
 	
 	public UnbanUserPanel(Vector<String> v) {
 		this.text = new TextPanel("Unban User", 120, 0);
 		this.button = new CenteredButtonPanel<UnbanUserPanel>("Unban", this);
 		this.feed = new FeedButtonPanel();
-		this.combo = new ComboBoxPanel(this,v);
+		this.combo = new ComboBoxPanel<UnbanUserPanel>(this,v);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

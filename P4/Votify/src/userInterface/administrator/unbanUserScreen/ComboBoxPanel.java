@@ -1,22 +1,23 @@
 package userInterface.administrator.unbanUserScreen;
 
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 
-public class ComboBoxPanel extends JPanel {
+public class ComboBoxPanel <A extends ActionListener>extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> combo;
 	
-	public ComboBoxPanel(UnbanUserPanel p,Vector<String> v) {
+	public ComboBoxPanel(A panel,Vector<String> v) {
 		this.combo = new JComboBox<String>(v);
 		
 		this.add(combo);
 		
-		combo.addActionListener(p);
+		combo.addActionListener(panel);
 	}
 
 }
