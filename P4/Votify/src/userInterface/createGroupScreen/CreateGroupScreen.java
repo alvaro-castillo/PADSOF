@@ -6,23 +6,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import userInterface.CenteredButtonPanel;
 import userInterface.FeedButtonPanel;
+import userInterface.TextPanel;
 
 public class CreateGroupScreen extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	private JButton create;
+	private CenteredButtonPanel<CreateGroupScreen> create;
 	private LabelTextPanel labelText;
     private TextPanel text;
 	private FeedButtonPanel feed;
     
     public CreateGroupScreen() {
     	 
-    	this.create = new JButton("Create");
+    	this.create = new CenteredButtonPanel<CreateGroupScreen>("Create", this);
     	this.labelText = new LabelTextPanel(this);
-    	this.text = new TextPanel();
+    	this.text = new TextPanel("Create a group", 170, 10);
     	this.feed = new FeedButtonPanel();
     	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	this.add(feed);
@@ -34,7 +35,6 @@ public class CreateGroupScreen extends JPanel implements ActionListener{
         feed.setVisible(true);
         text.setVisible(true);
         labelText.setVisible(true);
-        create.addActionListener(this);
     }
     
 	@Override

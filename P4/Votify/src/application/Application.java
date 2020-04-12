@@ -3,6 +3,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import application.enums.*;
 import application.notification.*;
@@ -357,4 +358,20 @@ public class Application extends Subject
 		return expired;
 	}
 	
+	/**
+	 * Function that checks if there are any banned users and returns their username.
+	 * @return banned Vector with all banned usernames
+	 */
+	public Vector <String> getBannedUsers() {
+		Vector<String> banned = new Vector<String> ();
+		
+		for(RegisteredUser r: users) {
+			if(r.isBan()==true) {
+				banned.add(r.getUsername());
+			}
+		}
+		
+		return banned;
+		
+	}
 }

@@ -1,4 +1,4 @@
-package userInterface.createGroupScreen;
+package userInterface;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -6,7 +6,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 public class TextPanel extends JPanel{
-
+	private String message;
+	private int width;
+	private int height;
+	public TextPanel(String message, int width, int height) {
+		this.message = message;
+		this.width = width;
+		this.height = height;
+	}
 
 	private static final long serialVersionUID = 1L;
 	
@@ -19,7 +26,7 @@ public class TextPanel extends JPanel{
 	    
 	    g2.setFont(fuente);
 	    g2.setColor(Color.BLACK);
-	    g2.drawString("Create a group", (this.getWidth()/2)-170, (this.getHeight()/2)+10);
+	    g2.drawString(this.message, (this.getWidth()/2)-this.width, (this.getHeight()/2)+this.height);
     }
 
 }

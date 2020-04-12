@@ -1,0 +1,2 @@
+Añadida función:
+- public Vector <String> getBannedUsers() a Application.java -> Devuelve un vector con los nombres de usuarios baneados
