@@ -1,4 +1,4 @@
-package userInterface.administrator.unbanUserScreen;
+package userInterface.administrator.banning;
 
 import java.awt.FlowLayout;
 

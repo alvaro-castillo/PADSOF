@@ -167,6 +167,15 @@ public class Group extends Subject
 	}
 	
 	/**
+	 * Getter of the status
+	 * 
+	 *  @return status of the group
+	 */
+	public Status getStatus() {
+		return this.status;
+	}
+	
+	/**
 	 * Adds a user to a group
 	 * 
 	 * @param u RegisteredUser that is going to be added to the group
@@ -266,18 +275,6 @@ public class Group extends Subject
 	 * @return boolean that will return true if the user is found
 	 */
 	private boolean userInChild(RegisteredUser u) {
-		//boolean b = false;
-		
-		/*if (u == null) { return false; }
-		
-		if (subgroups.isEmpty()) { return false; }
-		
-		if (members.contains(u)) { return true; }
-		
-		for (Group child : subgroups) {
-			 b = b || child.userInChild(u);
-		}
-		return b;*/
 		for (Group g: this.subgroups) {
 			if (g.members.contains(u)) {
 				return true;

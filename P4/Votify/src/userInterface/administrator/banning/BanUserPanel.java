@@ -1,4 +1,4 @@
-package userInterface.administrator.unbanUserScreen;
+package userInterface.administrator.banning;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -11,25 +11,31 @@ import javax.swing.JPanel;
 
 import userInterface.CenteredButtonPanel;
 import userInterface.FeedButtonPanel;
-import userInterface.TextPanel;
+import userInterface.BigTextPanel;
+import userInterface.administrator.ComboBoxPanel;
+import userInterface.administrator.LabelCenteredPanel;
 
 public class BanUserPanel extends JPanel implements ActionListener{
 	
-	private TextPanel text;
-	private CenteredButtonPanel<BanUserPanel> button;
 	private FeedButtonPanel feed;
+	private BigTextPanel text;
 	private ComboBoxPanel<BanUserPanel> combo;
-	private TextScrollAreaPanel area;
 	private LabelCenteredPanel label;
+	private TextScrollAreaPanel area;
+	private CenteredButtonPanel<BanUserPanel> button;
 	private static final long serialVersionUID = 1L;
 	
 	public BanUserPanel(Vector<String> v) {
-		this.text = new TextPanel("Ban User", 100, 15);
-		this.button = new CenteredButtonPanel<BanUserPanel>("Ban", this);
 		this.feed = new FeedButtonPanel();
+		this.text = new BigTextPanel("Ban User", 100, 15);
 		this.combo = new ComboBoxPanel<BanUserPanel>(this,v);
 		this.label = new LabelCenteredPanel("Reason of the ban: ");
 		this.area = new TextScrollAreaPanel();
+		this.button = new CenteredButtonPanel<BanUserPanel>("Ban", this);
+		
+		
+		
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		this.add(feed);

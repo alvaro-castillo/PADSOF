@@ -10,20 +10,21 @@ import javax.swing.JPanel;
 
 import userInterface.CenteredButtonPanel;
 import userInterface.FeedButtonPanel;
-import userInterface.TextPanel;
+import userInterface.LabelTextPanel;
+import userInterface.BigTextPanel;
 
 public class CreateGroupScreen extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private CenteredButtonPanel<CreateGroupScreen> create;
-	private LabelTextPanel labelText;
-    private TextPanel text;
+	private LabelTextPanel<CreateGroupScreen> labelText;
+    private BigTextPanel text;
 	private FeedButtonPanel feed;
     
     public CreateGroupScreen() {
     	 
     	this.create = new CenteredButtonPanel<CreateGroupScreen>("Create", this);
-    	this.labelText = new LabelTextPanel(this);
-    	this.text = new TextPanel("Create a group", 170, 10);
+    	this.labelText = new LabelTextPanel<CreateGroupScreen>(this, "Introduce a group name: ", 25);
+    	this.text = new BigTextPanel("Create a group", 170, 10);
     	this.feed = new FeedButtonPanel();
     	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     	this.add(feed);

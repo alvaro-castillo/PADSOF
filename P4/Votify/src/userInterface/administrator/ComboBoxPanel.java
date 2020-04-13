@@ -1,4 +1,4 @@
-package userInterface.administrator.unbanUserScreen;
+package userInterface.administrator;
 
 import java.awt.event.ActionListener;
 import java.util.Vector;

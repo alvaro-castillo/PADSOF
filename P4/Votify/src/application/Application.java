@@ -372,6 +372,53 @@ public class Application extends Subject
 		}
 		
 		return banned;
+	}
+	
+	/**
+	 * Function that checks if there are any pending for acceptance projects and returns their title and id.
+	 * @return pending Vector with all pending for acceptance projects
+	 */
+	public Vector <String> getPendingAcceptanceProjects() {
+		Vector<String> pending = new Vector<String> ();
 		
+		for(Project p: projects) {
+			if(p.getState()==ProjectStatus.WAITING_ACCEPTANCE) {
+				pending.add(p.getTitle() + " ID: " + p.getId());
+			}
+		}
+		
+		return pending;
+	}
+	
+	/**
+	 * Function that checks if there are any waiting for acceptance groups and returns their name.
+	 * @return waiting Vector with all waiting for acceptance group names
+	 */
+	public Vector <String> getPendingAcceptanceGroups() {
+		Vector<String> waiting = new Vector<String> ();
+		
+		for(Group g: groups) {
+			if(g.getStatus()==Status.WAITING) {
+				waiting.add(g.getName());
+			}
+		}
+		
+		return waiting;
+	}
+	
+	/**
+	 * Function that checks if there are any waiting for acceptance users and returns their username.
+	 * @return waiting Vector with all waiting for acceptance usernames
+	 */
+	public Vector <String> getPendingAcceptanceUsers() {
+		Vector<String> waiting = new Vector<String> ();
+		
+		for(RegisteredUser r: users) {
+			if(r.getStatus()==Status.WAITING) {
+				waiting.add(r.getUsername());
+			}
+		}
+		
+		return waiting;
 	}
 }

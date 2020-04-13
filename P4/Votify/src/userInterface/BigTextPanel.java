@@ -5,11 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-public class TextPanel extends JPanel{
+public class BigTextPanel extends JPanel{
 	private String message;
 	private int width;
 	private int height;
-	public TextPanel(String message, int width, int height) {
+	public BigTextPanel(String message, int width, int height) {
 		this.message = message;
 		this.width = width;
 		this.height = height;

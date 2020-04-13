@@ -1,4 +1,4 @@
-package userInterface.administrator.unbanUserScreen;
+package userInterface.administrator.acceptance;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,27 +10,28 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import userInterface.*;
+import userInterface.administrator.ComboBoxPanel;
 
-public class UnbanUserPanel extends JPanel implements ActionListener{
-	private TextPanel text;
-	private CenteredButtonPanel<UnbanUserPanel> button;
+
+public class AcceptGroupPanel extends JPanel implements ActionListener {
 	private FeedButtonPanel feed;
-	private ComboBoxPanel<UnbanUserPanel> combo;
+	private BigTextPanel text;
+	private ComboBoxPanel<AcceptGroupPanel> combo;
+	private TwoButtonsPanel<AcceptGroupPanel> buttons;
 	private static final long serialVersionUID = 1L;
 	
-	public UnbanUserPanel(Vector<String> v) {
-		this.text = new TextPanel("Unban User", 120, 0);
-		this.button = new CenteredButtonPanel<UnbanUserPanel>("Unban", this);
+	public AcceptGroupPanel(Vector<String> v) {
 		this.feed = new FeedButtonPanel();
-		this.combo = new ComboBoxPanel<UnbanUserPanel>(this,v);
-		
+		this.text = new BigTextPanel("Accept Group", 145, 0);
+		this.combo = new ComboBoxPanel<AcceptGroupPanel>(this,v);
+		this.buttons = new TwoButtonsPanel<AcceptGroupPanel>(this, "Accept", "Deny");
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
 		this.add(feed);
 		this.add(text);
 		this.add(Box.createRigidArea(new Dimension(0, 20)));
 		this.add(combo);
-		this.add(button);
+		this.add(buttons);
+		this.add(Box.createRigidArea(new Dimension(0, 80)));
 	}
 
 	@Override
@@ -38,4 +39,6 @@ public class UnbanUserPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

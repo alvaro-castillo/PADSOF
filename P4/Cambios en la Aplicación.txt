@@ -1,2 +1,6 @@
-Añadida función:
+Añadidas funciones:
 - public Vector <String> getBannedUsers() a Application.java -> Devuelve un vector con los nombres de usuarios baneados
+- public Vector <String> getPendingAcceptanceProjects() a Application.java -> Devuelve un vector con los nombres e ids de proyectos esperando para ser aceptados
+- public Vector <String> getPendingAcceptanceGroups() a Application.java -> Devuelve un vector con los nombres de grupos esperando para ser aceptados
+- public Vector <String> getPendingAcceptanceUsers() a Application.java -> Devuelve un vector con los nombres de usuarios esperando para ser aceptados
+- public Status getStatus() a Group.java -> Devuelve el status del grupo

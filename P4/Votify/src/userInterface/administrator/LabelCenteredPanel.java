@@ -1,4 +1,4 @@
-package userInterface.administrator.unbanUserScreen;
+package userInterface.administrator;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
