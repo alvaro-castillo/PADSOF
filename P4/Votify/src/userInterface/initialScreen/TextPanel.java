@@ -10,20 +10,17 @@ public class TextPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-    public TextPanel() {
-
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);  
        
         Graphics2D g2 = (Graphics2D) g;
-	    Font fuente = new Font("Arial", Font.BOLD, 40);
+	    Font fuente = new Font("Arial", Font.BOLD, this.getWidth()/6);
 	    
 	    g2.setFont(fuente);
 	    g2.setColor(Color.BLUE);
-	    g2.drawString("Votify", (this.getWidth()/2)-120, (this.getHeight()/2));
+	    g2.drawString("Votify", (this.getWidth()/2)-145, (this.getHeight()/2)+20);
     }
 
 }
