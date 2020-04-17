@@ -8,10 +8,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import userInterface.CenteredButtonPanel;
-import userInterface.FeedButtonPanel;
-import userInterface.LabelTextPanel;
-import userInterface.BigTextPanel;
+import userInterface.commonElements.BigTextPanel;
+import userInterface.commonElements.CenteredButtonPanel;
+import userInterface.commonElements.FeedButtonPanel;
+import userInterface.commonElements.LabelTextPanel;
 
 public class CreateGroupScreen extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;

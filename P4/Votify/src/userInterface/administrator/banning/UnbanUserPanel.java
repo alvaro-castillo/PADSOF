@@ -9,8 +9,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import userInterface.*;
 import userInterface.administrator.ComboBoxPanel;
+import userInterface.commonElements.BigTextPanel;
+import userInterface.commonElements.CenteredButtonPanel;
+import userInterface.commonElements.FeedButtonPanel;
 
 public class UnbanUserPanel extends JPanel implements ActionListener{
 	private BigTextPanel text;

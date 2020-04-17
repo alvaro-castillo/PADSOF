@@ -9,11 +9,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import userInterface.CenteredButtonPanel;
-import userInterface.FeedButtonPanel;
-import userInterface.BigTextPanel;
 import userInterface.administrator.ComboBoxPanel;
 import userInterface.administrator.LabelCenteredPanel;
+import userInterface.commonElements.BigTextPanel;
+import userInterface.commonElements.CenteredButtonPanel;
+import userInterface.commonElements.FeedButtonPanel;
 
 public class BanUserPanel extends JPanel implements ActionListener{
 	

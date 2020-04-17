@@ -8,8 +8,12 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import userInterface.*;
+
 import userInterface.administrator.ComboBoxPanel;
+import userInterface.commonElements.BigTextPanel;
+import userInterface.commonElements.FeedButtonPanel;
+import userInterface.commonElements.LabelTextPanel;
+import userInterface.commonElements.TwoButtonsPanel;
 
 public class AcceptProjectPanel extends JPanel implements ActionListener {
 	private FeedButtonPanel feed;

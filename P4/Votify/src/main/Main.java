@@ -25,17 +25,14 @@ public class Main {
 	* @throws ClassNotFoundException
 	*/
 	public static void main(String[] args) {
-		Application app = new Application();
+		Application app = Application.getApplication();
 		RegisteredUser u1 = new RegisteredUser("00000000A","Administrator", "aaaa");
 		
 		System.out.println("Creating the Administrator user\n");
 		if(app.addUser(u1)==false) {
 			System.out.println("	Already existing user\n");
 		}
-		
-		// Sets the first user to be registered in as the administrator of the app
-		app.setAdmin(u1);
-		
+			
 		// Creates two users
 		System.out.println("Creating two more users: 'User2' and 'User3'\n");
 		RegisteredUser u2 = new RegisteredUser("22222222B","User2", "bbbb");

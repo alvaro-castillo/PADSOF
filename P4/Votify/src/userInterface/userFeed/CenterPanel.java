@@ -6,7 +6,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import userInterface.LabelTextPanel;
+import userInterface.commonElements.LabelTextPanel;
 
 public class CenterPanel extends JPanel {
 
@@ -21,7 +21,7 @@ public class CenterPanel extends JPanel {
 
 		this.add(search);
 		this.add(titles);
-		this.add(Box.createRigidArea(new Dimension(0, 50)));
+		this.add(Box.createRigidArea(new Dimension(0, 160)));
 
 	}
 

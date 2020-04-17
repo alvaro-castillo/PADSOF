@@ -9,8 +9,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import userInterface.*;
 import userInterface.administrator.ComboBoxPanel;
+import userInterface.commonElements.BigTextPanel;
+import userInterface.commonElements.FeedButtonPanel;
+import userInterface.commonElements.TwoButtonsPanel;
 
 
 public class AcceptGroupPanel extends JPanel implements ActionListener {

@@ -27,7 +27,7 @@ public class ApplicationTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		app = new Application();
+		app =Application.getApplication();
 	}
 
 	/**

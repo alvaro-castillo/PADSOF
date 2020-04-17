@@ -1,4 +1,4 @@
-package userInterface;
+package userInterface.commonElements;
 
 import javax.swing.JPanel;
 import java.awt.Color;

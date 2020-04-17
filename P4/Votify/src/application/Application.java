@@ -59,16 +59,31 @@ public class Application extends Subject
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
+	private static Application INSTANCE;
+	
 	/**
-	 * Constructor of this class.
+	 * Constructor of this class. 
+	 * It is private so in can be instantiated just from inside the class.
 	 */
-	public Application() {
+	private Application() {
 		this.groups = new ArrayList<Group>();
 		this.projects = new ArrayList<Project>();
 		this.users = new ArrayList<RegisteredUser>();
 		this.name = "Votify";
 		ModifiableDate.setToday();
 		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
+	}
+	
+	/**
+	 * Application getter. It follows the singleton pattern.
+	 * @return INSTANCE .
+	 */
+	public static Application getApplication() {
+		if(INSTANCE == null) {
+			INSTANCE= new Application();
+		}
+		return INSTANCE;
 	}
 	/**
 	 * Groups in the application getter.
@@ -118,8 +133,8 @@ public class Application extends Subject
 	 * @return boolean
 	 */	
 	public boolean addUser(RegisteredUser u) {
-		if (u == null) {
-			return false;
+		if(this.admin==null) {
+			this.setAdmin(u);
 		}
 		for(RegisteredUser us: users) {
 			if(us.equals(u)) {
@@ -280,13 +295,13 @@ public class Application extends Subject
 		ObjectInputStream input = 
 				new ObjectInputStream(
 						new FileInputStream(filename));
-		Application app = (Application) input.readObject();
+		Application.INSTANCE = (Application) input.readObject();
 		input.close();
 		
 		ModifiableDate.setToday();
 		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
 		
-		return app;
+		return Application.INSTANCE;
 	}
 	
 	/**

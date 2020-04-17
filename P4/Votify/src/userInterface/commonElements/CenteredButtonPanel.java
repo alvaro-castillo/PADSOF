@@ -1,4 +1,4 @@
-package userInterface;
+package userInterface.commonElements;
 
 
 import java.awt.event.ActionListener;

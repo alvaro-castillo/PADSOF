@@ -1,4 +1,4 @@
-package userInterface;
+package userInterface.commonElements;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,8 @@
+package userInterface.registerScreen;
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 
 
 public class RegisterPanel extends JPanel{
@@ -16,9 +16,12 @@ public class RegisterPanel extends JPanel{
     private JTextField nationalIDField = new JTextField(30);
     private JPasswordField passwordField = new JPasswordField(30);
     private JButton createButton = new JButton("Create Account");
-
+    private RegisterController controller;
+    
+    
     public RegisterPanel(){
-        
+    	this.controller = new RegisterController(this);
+    	
     	this.setBorder(new EmptyBorder(20,20,20,20));
     	this.setLayout(new GridBagLayout());
     	
@@ -88,8 +91,21 @@ public class RegisterPanel extends JPanel{
         c.gridy = yPos;
         yPos++;
         this.add(createButton, c);
+                
+        this.createButton.addActionListener(controller);
         
-        
+    }
+    
+    public String getUsername() {
+    	return this.usernameField.getText();
+    }
+    
+    public String getUserId() {
+    	return this.nationalIDField.getText();
+    }
+    
+    public String getUserPassword() {
+    	return new String(this.passwordField.getPassword());
     }
 }
 

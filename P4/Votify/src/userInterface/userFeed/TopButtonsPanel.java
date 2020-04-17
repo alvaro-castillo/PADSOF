@@ -1,5 +1,6 @@
 package userInterface.userFeed;
 
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -41,16 +42,17 @@ public class TopButtonsPanel<A extends ActionListener> extends JPanel {
         button1.addActionListener(panel);
         button2.addActionListener(panel);
         button3.addActionListener(panel);
-        
+        this.setPreferredSize(new Dimension(0,50));
 
-        Spring sp1= Spring.constant(0, 2, 100);
-        
+        Spring sp1= Spring.constant(0, 10, 20);
+        Spring sp2= Spring.constant(0, 10, 100);
+        Spring sp3= Spring.constant(0, 10, 10);
         s.putConstraint(SpringLayout.WEST, button1, sp1, SpringLayout.WEST, this);
-        s.putConstraint(SpringLayout.WEST, button2, sp1, SpringLayout.EAST, button1);
-        s.putConstraint(SpringLayout.WEST, button3, sp1, SpringLayout.EAST, button2);
+        s.putConstraint(SpringLayout.WEST, button2, sp3, SpringLayout.EAST, button1);
+        s.putConstraint(SpringLayout.WEST, button3, sp2, SpringLayout.EAST, button2);
         s.putConstraint(SpringLayout.WEST, label, sp1, SpringLayout.EAST, button3);
         s.putConstraint(SpringLayout.WEST, button4, sp1, SpringLayout.EAST, label);
-        s.putConstraint(SpringLayout.EAST, this, sp1, SpringLayout.EAST, button4);
+        s.putConstraint(SpringLayout.EAST, this, sp3, SpringLayout.EAST, button4);
         
         this.setVisible(true);
     }

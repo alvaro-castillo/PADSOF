@@ -22,8 +22,8 @@ public class UserFeedPanel extends JPanel implements ActionListener {
 		
 		
 		this.setLayout(new BorderLayout());
-		this.add(buttons, BorderLayout.CENTER);
-		this.add(center,BorderLayout.SOUTH);
+		this.add(buttons, BorderLayout.NORTH);
+		this.add(center,BorderLayout.CENTER);
 		this.add(notifications, BorderLayout.EAST);
 	}
 

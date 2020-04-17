@@ -1,4 +1,4 @@
-package userInterface;
+package userInterface.loginScreen;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;

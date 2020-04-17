@@ -10,10 +10,10 @@ public class AppFrame extends JFrame {
 	private Dimension dim;
 	private Image img;
 	
-	
+	private static AppFrame INSTANCE;
 	private static final long serialVersionUID = 1L;
 	
-	public AppFrame() {
+	private AppFrame() {
 		super("Votify");
 		
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,4 +29,11 @@ public class AppFrame extends JFrame {
 		super.setVisible(true);
 	}
 
+	public static AppFrame getAppFrame() {
+		if(INSTANCE == null) {
+			INSTANCE= new AppFrame();
+		}
+		return INSTANCE;
+	}
+	
 }

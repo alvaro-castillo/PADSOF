@@ -4,23 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import userInterface.LoginPanel;
-import userInterface.RegisterPanel;
-import userInterface.TwoButtonsPanel;
+import userInterface.AppFrame;
+import userInterface.commonElements.TwoButtonsPanel;
+import userInterface.loginScreen.LoginPanel;
+import userInterface.registerScreen.RegisterPanel;
 
 public class ButtonsContainer extends JPanel implements ActionListener{
 
 	private TwoButtonsPanel<ButtonsContainer> buttons;
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
 	private InitialPanel initial_panel;
-	public ButtonsContainer(InitialPanel p, JFrame frame) {
+	public ButtonsContainer(InitialPanel p) {
 		this.buttons = new TwoButtonsPanel<ButtonsContainer>(this, "Register", "Log in");
 		this.initial_panel = p;
-		this.frame = frame;
 		this.add(buttons);
 	}
 
@@ -41,7 +39,8 @@ public class ButtonsContainer extends JPanel implements ActionListener{
     		}
     		initial_panel.setVisible(false);
 			j.setVisible(true);
-			frame.add(j);
+			AppFrame.getAppFrame().add(j);
+
     	}else {
     		return;
     	}
