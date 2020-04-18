@@ -1,4 +1,4 @@
-package userInterface.registerScreen;
+package userInterface.loginScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,13 +10,14 @@ import application.Application;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
 import userInterface.loginScreen.LoginPanel;
+import userInterface.userFeed.UserFeedPanel;
 
-public class RegisterController implements ActionListener {
+public class LoginController implements ActionListener {
 	
-	private RegisterPanel panel;
+	private LoginPanel panel;
 	private Application app;
 
-	public RegisterController(RegisterPanel panel) {
+	public LoginController(LoginPanel panel) {
 		this.panel = panel;
 		this.app = Application.getApplication();
 	}
@@ -24,32 +25,36 @@ public class RegisterController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String userName = panel.getUsername();
-		String userId = panel.getUserId();
 		String password = panel.getUserPassword();
+		
 		
 		if (userName.equals("")) {
 			 JOptionPane.showMessageDialog(panel, "You must type a valid username.", "Error", JOptionPane.ERROR_MESSAGE);
-			 return;
-		}else if(userId.equals("")) {
-			 JOptionPane.showMessageDialog(panel, "You must type a valid ID.", "Error", JOptionPane.ERROR_MESSAGE);
 			 return;
 		}else if(password.equals("")) {
 			 JOptionPane.showMessageDialog(panel, "You must type a valid password.", "Error", JOptionPane.ERROR_MESSAGE);
 			 return;
 		}
 		
-		RegisteredUser u = new RegisteredUser(userId,userName,password);
-		
-		if(app.addUser(u)==false) {
-			JOptionPane.showMessageDialog(panel, "Username or ID already registered in the app", "Error", JOptionPane.ERROR_MESSAGE);
+		try{
+			app.logIn(userName, password);
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
-		JOptionPane.showMessageDialog(panel, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 		
 		panel.setVisible(false);
+		RegisteredUser user = app.getCurrentUser();
+		
+		UserFeedPanel feed;
+		if(user.equals(app.getAdmin())) {
+			feed = new UserFeedPanel(userName,user.getNotificationsMessages()); // Cambiar a AdminFeed
+		}else {
+			feed = new UserFeedPanel(userName,user.getNotificationsMessages());
+		}
 		JFrame frame = AppFrame.getAppFrame();
-		frame.add(new LoginPanel());
+		frame.add(feed);
 		frame.remove(panel);
 		return;
 	}

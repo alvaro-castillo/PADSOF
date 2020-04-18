@@ -209,20 +209,30 @@ public class Application extends Subject
 	 * @param p password we want to check.
 	 * @return boolean
 	 */
-	public boolean logIn(String u, String p ) {
+	public void logIn(String u, String p ) throws Exception{
 		if(this.currentUser==null) {
 			for(RegisteredUser r: users) {
-				if(r.isBan()==false && r.getStatus()==Status.ACCEPTED) {
-					if(u==r.getUsername()) {
-						if(p==r.getPassword()) {
-							this.currentUser=r;
-							return true;
+				if(u.equals(r.getUsername())) {
+					if(p.equals(r.getPassword())) {
+						if(r.isBan()==false) {
+							if(r.getStatus()==Status.ACCEPTED) {
+								this.currentUser=r;
+								return;
+							}else if(r.getStatus()==Status.REJECTED) {
+								throw new Exception("User "+ u + " has not been acepted by the administrator.");
+							}else {
+								throw new Exception("User "+ u + " has not been acepted yet by the administrator.");
+							}
+							
 						}
+						throw new Exception("User "+ u + " is banned and can not log in the app.");
 					}
+					throw new Exception("Wrong password.");
 				}
 			}
+			throw new Exception("Username " + u + " does not exist.");
 		}
-		return false;		
+		throw new Exception("There is already a user loged in.");	
 	}
 	/**
 	 * Function that logs out a user by changing the currentUser parameter.

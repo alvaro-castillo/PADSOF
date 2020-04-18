@@ -5,3 +5,9 @@ Añadidas funciones:
 - public Vector <String> getPendingAcceptanceUsers() a Application.java -> Devuelve un vector con los nombres de usuarios esperando para ser aceptados
 - public Status getStatus() a Group.java -> Devuelve el status del grupo
 - Application.java es una clase Singletton. Tiene una constante INSTANCE. Y un nuevo método: public static Application getApplication(). Se han modificado ApplicationTester y Main (prueba) para adaptarlos al singleton pattern.
+- public Vector<String> getNotificationsMessages() a RegisteredUser.java -> Devuelve un vector con los objetos notificación en String que el usuario tiene
+
+
+Modificaciones: 
+
+- public void logIn(String u, String p ) throws Exception en Application.java -> Ahora es void y lanza Excepciones

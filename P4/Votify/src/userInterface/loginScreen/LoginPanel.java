@@ -3,9 +3,14 @@ package userInterface.loginScreen;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import userInterface.AppFrame;
+import userInterface.registerScreen.RegisterPanel;
 
 
 public class LoginPanel extends JPanel {
@@ -19,8 +24,11 @@ public class LoginPanel extends JPanel {
     private JPasswordField passwordField = new JPasswordField(30);
     private JButton loginButton = new JButton("Login");
     private JButton registerButton = new JButton("Register");
-
+    private LoginController controller;
+    
     public LoginPanel() {
+    
+    	this.controller = new LoginController(this);
     	
     	this.setBorder(new EmptyBorder(20,20,20,20));
     	this.setLayout(new GridBagLayout());
@@ -85,9 +93,26 @@ public class LoginPanel extends JPanel {
         c.gridy = yPos;
         yPos++;
         this.add(registerButton, c);
+        
+        this.loginButton.addActionListener(controller);
+        
+        
+        this.registerButton.addActionListener(new ActionListener(){
+        		public void actionPerformed(ActionEvent e){
+        			AppFrame.getAppFrame().add(new RegisterPanel());
+        			LoginPanel.this.setVisible(false);
+        		}
+        	}
+        );
 
     }
 
+    public String getUsername() {
+    	return this.usernameField.getText();
+    }
     
+    public String getUserPassword() {
+    	return new String(this.passwordField.getPassword());
+    } 
 
 }

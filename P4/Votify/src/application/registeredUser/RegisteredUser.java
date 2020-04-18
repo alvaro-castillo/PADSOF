@@ -241,6 +241,22 @@ public class RegisteredUser implements Serializable, IObserver {
 	}
 	
 	/**
+	 * User notifications getter on string format.
+	 * @return notVector a vector with all the notifications strings that the user has.
+	 */
+	public Vector<String> getNotificationsMessages() {
+		Vector <String> notVector = new Vector<String>();
+		
+		if(this.notifications == true) {
+			for(Notification n : notification) {
+				notVector.add(n.toString());
+			}
+		}
+		
+		return notVector;
+	}
+	
+	/**
 	 * This method overrides the default equal method among Registered Users.
 	 * @param obj. The object to be compared.
 	 * @return true if both users are equal.

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import userInterface.AppFrame;
@@ -38,9 +39,12 @@ public class ButtonsContainer extends JPanel implements ActionListener{
     			return;
     		}
     		initial_panel.setVisible(false);
-			j.setVisible(true);
+    		JFrame frame = AppFrame.getAppFrame();
+    		
 			AppFrame.getAppFrame().add(j);
-
+			j.setVisible(true);
+			frame.remove(initial_panel);
+			
     	}else {
     		return;
     	}

@@ -27,6 +27,7 @@ public class AppFrame extends JFrame {
 		super.setSize((int) (this.dim.getWidth()/2), (int) (this.dim.getHeight()/2));
 		super.setLocation((int) (this.dim.getWidth()/4), (int) (this.dim.getHeight()/4));
 		super.setVisible(true);
+		this.addWindowListener(new FrameConfiguration());
 	}
 
 	public static AppFrame getAppFrame() {

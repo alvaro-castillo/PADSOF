@@ -93,7 +93,7 @@ public class RegisterPanel extends JPanel{
         this.add(createButton, c);
                 
         this.createButton.addActionListener(controller);
-        
+       
     }
     
     public String getUsername() {
