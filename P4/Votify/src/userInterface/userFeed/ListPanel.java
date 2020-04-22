@@ -8,32 +8,46 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-
-public class ListPanel extends JPanel implements ListSelectionListener {
+/**
+* This class creates a panel that includes a list added into a sccroll pane.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
+public class ListPanel extends JPanel {
 	private JList<String> list;
 	private JScrollPane scroll;
-
 	private static final long serialVersionUID = 1L;
-	public ListPanel(Vector<String> v) {
+	
+	/**
+	 * Constructor of this class.
+	 * 
+	 * @param v vector that contains notifications in form of string
+	 * @param d dimension used for the scroll pane size
+	 * @param controller the controller of the panel
+	 */
+	public ListPanel(Vector<String> v, Dimension d, UserFeedController controller, int type) {
 		this.list = new JList<String>(v);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		this.scroll = new JScrollPane(list);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
 		this.add(Box.createRigidArea(new Dimension(0, 50)));
-		scroll.setPreferredSize(new Dimension(120,150));
+		scroll.setPreferredSize(d);
 		this.add(scroll);
 
-	} 
-
-	@Override
-	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
+		if(type==-1 ) {
+			list.addListSelectionListener(e -> {controller.valueChangedProject(e, ListPanel.this);});
+		}else if(type==1) {
+			list.addListSelectionListener(e -> {controller.valueChangedGroup(e, ListPanel.this);});
+		}else if(type==0) {
+			list.addListSelectionListener(e -> {controller.valueChangedNotifications(e, ListPanel.this);});
+		}
 		
+		
+	} 
+	
+	public String getSelectedValue() {
+		return list.getSelectedValue();
 	}
-
 }

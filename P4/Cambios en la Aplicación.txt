@@ -6,7 +6,11 @@ Añadidas funciones:
 - public Status getStatus() a Group.java -> Devuelve el status del grupo
 - Application.java es una clase Singletton. Tiene una constante INSTANCE. Y un nuevo método: public static Application getApplication(). Se han modificado ApplicationTester y Main (prueba) para adaptarlos al singleton pattern.
 - public Vector<String> getNotificationsMessages() a RegisteredUser.java -> Devuelve un vector con los objetos notificación en String que el usuario tiene
-
+- public boolean isUserInGroup(RegisteredUser u) a Group.java -> Devuelve true si un usuario pertence a un grupo, false si no está.
+- public Vector<String> getRegisteredUserGroups(RegisteredUser u) a Application.java -> Devuelve un vector con los nombres de grupos en los que está un usuario
+- public Vector<String> getRegisteredUserVotes(RegisteredUser u)  a Application.java -> Devuelve un vector con los nombres e ids de los proyectos que ha votado el usuario
+- public boolean hasVotedInGroup(RegisteredUser u) a Project.java -> Devuelve true si el usuario ha votado como grupo en un proyecto. Falso en caso contrario
+- public Vector<String> getRegisteredUsers() a Application.java -> Devuelve un vector con los nombres de usuarios
 
 Modificaciones: 
 

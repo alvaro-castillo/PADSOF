@@ -7,9 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
-
-
+/**
+* This class represents the initial panel of the Application Votify.
+* It contains a panel with two buttons(login, register), a label 
+* with the name of the app and an image with the logo of the app.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class InitialPanel extends JPanel{
 
     private static final long serialVersionUID = 1L;
@@ -17,8 +21,13 @@ public class InitialPanel extends JPanel{
     private JLabel label;
     private ImagePanelContainer image;
     private ButtonsContainer buttons;
+    private static InitialPanel INSTANCE; 
     
-    public InitialPanel(){
+    /**
+     * Constructor of this class.
+     * It is private to follow the singleton pattern.
+     */
+    private InitialPanel(){
 
     	GridBagLayout g = new GridBagLayout();
     	GridBagConstraints gbc = new GridBagConstraints();
@@ -59,4 +68,15 @@ public class InitialPanel extends JPanel{
         this.setVisible(true);
         
     }
+    
+    /**
+	 * InitialPanel getter. It follows the singleton pattern.
+	 * @return INSTANCE .
+	 */
+	public static InitialPanel getInitialPanel() {
+		if(INSTANCE == null) {
+			INSTANCE= new InitialPanel();
+		}
+		return INSTANCE;
+	}
 }

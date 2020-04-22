@@ -4,7 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
-
+/**
+* This class will create a panel that will act as a container for the logo and the name of the app.
+* It is created so both components will resize if the window is resized.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class ImagePanelContainer extends JPanel {
 	
 
@@ -12,6 +17,9 @@ public class ImagePanelContainer extends JPanel {
 	private ImagePanel iPanel;
 	private TextPanel tPanel;
 	
+	/**
+	 * Constructor of this class.
+	 */
 	public ImagePanelContainer() {
 		iPanel = new ImagePanel("Logo.png");
 		tPanel = new TextPanel();

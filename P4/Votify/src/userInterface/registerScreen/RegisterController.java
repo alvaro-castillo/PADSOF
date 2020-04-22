@@ -10,17 +10,32 @@ import application.Application;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
 import userInterface.loginScreen.LoginPanel;
-
+/**
+* This is the controller of the Register Panel. It will perform some methods when the register
+* button is pressed.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class RegisterController implements ActionListener {
 	
 	private RegisterPanel panel;
 	private Application app;
 
+	/**
+	 * Constructor of this class.
+	 * 
+	 * @param panel the panel that is controlled by this class
+	 */
 	public RegisterController(RegisterPanel panel) {
 		this.panel = panel;
 		this.app = Application.getApplication();
 	}
 
+	/**
+	 * This method will perform the operations for registering a user.
+	 *
+	 * @param e the event caused by an action
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String userName = panel.getUsername();

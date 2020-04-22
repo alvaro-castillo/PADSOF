@@ -1,16 +1,25 @@
 package userInterface.initialScreen;
 
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-public class TextPanel extends JPanel{
 
+/**
+* This class creates a panel with a big text that says Votify.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
+public class TextPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-
+    /**
+     * This function will paint into the panel the title.
+     * @param g graphics object
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);  

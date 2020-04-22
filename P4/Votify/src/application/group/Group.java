@@ -236,6 +236,19 @@ public class Group extends Subject
 	}
 	
 	/**
+	 * Function that checks if a user is a member of a group 
+	 * 
+	 * @param u the registered user we want to check
+	 * @return boolean
+	 * */	
+	public boolean isUserInGroup(RegisteredUser u) {
+		if(members.contains(u)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Returns all the members of the group and subgroups (and subgroups of the subgroups, etc)
 	 * @return list of members
 	 */

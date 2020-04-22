@@ -94,14 +94,14 @@ public class Application extends Subject
 	}
 	/**
 	 * Projects in the application getter.
-	 * @return projects,  a list with all the groups.
+	 * @return projects,  a list with all the projects.
 	 */
 	public List<Project> getProjects() {
 		return projects;
 	}
 	/**
 	 * Users in the application getter.
-	 * @return users, a list with all the groups.
+	 * @return users, a list with all the users.
 	 */
 	public List<RegisteredUser> getUsers() {
 		return users;
@@ -220,7 +220,7 @@ public class Application extends Subject
 								return;
 							}else if(r.getStatus()==Status.REJECTED) {
 								throw new Exception("User "+ u + " has not been acepted by the administrator.");
-							}else {
+							}else if(r.getStatus()==Status.WAITING){
 								throw new Exception("User "+ u + " has not been acepted yet by the administrator.");
 							}
 							
@@ -445,5 +445,49 @@ public class Application extends Subject
 		}
 		
 		return waiting;
+	}
+		
+	/**
+	 * User groups getter on string format.
+	 * @return gr a vector with all the group names that the user is a member of.
+	 */
+	public Vector<String> getRegisteredUserGroups(RegisteredUser u) {
+		Vector <String> gr = new Vector<String>();
+		
+		for(Group g : groups) {
+			if(g.isUserInGroup(u)==true) {
+				gr.add(g.getName());
+			}	
+		}
+		
+		return gr;
+	}
+	
+	/**
+	 * User projects getter on string format.
+	 * @return v a vector with all the project names and ids that the user has voted.
+	 */
+	public Vector<String> getRegisteredUserVotes(RegisteredUser u) {
+		Vector <String> v = new Vector<String>();
+		
+		for(Project p : projects) {
+			if(p.hasVoted(u)==true) {
+				v.add(p.getTitle() + " " + p.getId());
+			}else {
+				if(p.hasVotedInGroup(u)==true) {
+					v.add(p.getTitle() + " " + p.getId());
+				} 
+			}	
+		}
+		
+		return v;
+	}
+	/**
+	 * Users in the application getter. It will return all the usernames except from the admin.
+	 * @return users, a vector with all the usernames.
+	 */
+	public Vector<String> getRegisteredUsers() {
+		Vector <String> u = users.parallelStream().map(usr-> usr.getUsername()).filter(s -> !s.equals(this.admin.getUsername())).collect(Vector::new, Vector::add, Vector::addAll);
+		return u;
 	}
 }

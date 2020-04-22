@@ -21,10 +21,11 @@ public class Main {
 	* This is the main program.
 	* It prints on the terminal all steps done and at the end it prints the data stored in the application.
 	* The data is correctly indented so that the person executing it, is able to understand everything.
+	* @throws Exception 
 	* @throws IOException
 	* @throws ClassNotFoundException
 	*/
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Application app = Application.getApplication();
 		RegisteredUser u1 = new RegisteredUser("00000000A","Administrator", "aaaa");
 		
@@ -46,18 +47,15 @@ public class Main {
 		
 		// Logs in the admin to accept registration of user 2 and user 3
 		System.out.println("Administrator accepting the registration of both users\n");
-		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u1.getUsername(), u1.getPassword());
+
 		u2.acceptRegistration();
 		u3.acceptRegistration();
 		app.logOut();
 		
 		// Logs in the second user to create a project and a group
 		System.out.println("User2 creates a new Infrastructure Project: 'New skate park'\n");
-		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u2.getUsername(), u2.getPassword());
 		InfrastructureProject p = new InfrastructureProject("New skate park", " This project is created with the intention of build a new skate park", 10000.5,u2, District.CENTRO,"image.png");
 		if(app.addProject(p)==false) {
 			System.out.println("	Already existing project");
@@ -74,17 +72,13 @@ public class Main {
 		
 		// Logs in the admin to accept the creation of the group
 		System.out.println("Administator accepts the group: 'UAM'\n");
-		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u1.getUsername(), u1.getPassword());
 		g1.acceptGroup();
 		app.logOut();
 		
 		// Logs in the second user to create two subgroups
 		System.out.println("User2 creates two subgroups of 'UAM': 'EPS' and 'Facultad de Ciencias' \n");
-		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u2.getUsername(), u2.getPassword());
 		Group g1a = g1.createSubgroup("EPS", u2);
 		Group g1b = g1.createSubgroup("Facultad de Ciencias", u2);
 		app.logOut();
@@ -93,9 +87,7 @@ public class Main {
 		// Logs in the admin to accept the creation of the subgroups and the project. It also sets two votes as the minimum of the project
 		System.out.println("Administator accepts the subgroups: 'EPS' and 'Facultad de Ciencias'");
 		System.out.println("He accepts the project: 'New skate park' too, and sets the minimum number of votes to 2\n");
-		if(app.logIn(u1.getUsername(), u1.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u1.getUsername(), u1.getPassword());
 		g1a.acceptGroup();
 		g1b.acceptGroup();
 		p.adminAcceptProject();
@@ -105,9 +97,7 @@ public class Main {
 		// Logs in the third user and enrolls subgroup 1a, try to enter in 1 and enrolls 1b
 		System.out.println("User3 enrolls subgroup 'EPS' try to enter in 'UAM' (getting an error) and enrolls 'Facultad de Ciencias'\n");
 		
-		if(app.logIn(u3.getUsername(), u3.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u3.getUsername(), u3.getPassword());
 		if(g1a.addUser(u3)==false) {
 			System.out.println("	Error while enrolling the group " + g1a.getName());
 		}
@@ -123,9 +113,7 @@ public class Main {
 		// Logs in the second user so he can vote to a project as a group representative
 		System.out.println("\nUser2 votes to project: 'New skate park' as the representative of the group: 'UAM'\n");
 		
-		if(app.logIn(u2.getUsername(), u2.getPassword())==false) {
-			System.out.println("	Could not log in");
-		}
+		app.logIn(u2.getUsername(), u2.getPassword());
 		if(p.vote(g1)==false) {
 			System.out.println("	Error while voting to project " + p.getTitle());
 		};

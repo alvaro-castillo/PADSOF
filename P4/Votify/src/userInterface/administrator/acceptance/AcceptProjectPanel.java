@@ -14,20 +14,32 @@ import userInterface.commonElements.BigTextPanel;
 import userInterface.commonElements.FeedButtonPanel;
 import userInterface.commonElements.LabelTextPanel;
 import userInterface.commonElements.TwoButtonsPanel;
-
+/**
+* This class will create a panel for accepting the creation of projects.
+* It will include a big text indicating the purpose of the panel, a combo box
+* for selecting the project, two buttons panel for selecting the acceptance/rejection of the creation,
+* and the go to feed button.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class AcceptProjectPanel extends JPanel implements ActionListener {
 	private FeedButtonPanel feed;
 	private BigTextPanel text;
 	private ComboBoxPanel<AcceptProjectPanel> combo;
-	private LabelTextPanel<AcceptProjectPanel> label;
+	private LabelTextPanel<?> label; //TODO:Parametrize with the controller
 	private TwoButtonsPanel<AcceptProjectPanel> buttons;
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Constructor of this class.
+	 * 
+	 * @param v vector with all the project names that have just been created
+	 */
 	public AcceptProjectPanel(Vector<String> v) {
 		this.feed = new FeedButtonPanel();
-		this.text = new BigTextPanel("Accept Project", 145, 10);
+		this.text = new BigTextPanel("Accept Project", 145, 10, 40);
 		this.combo = new ComboBoxPanel<AcceptProjectPanel>(this,v);
-		this.label = new LabelTextPanel<AcceptProjectPanel>(this, "Introduce minimum number of votes: ", 10);
+		this.label = new LabelTextPanel<?>(this, "Introduce minimum number of votes: ", 10);
 		this.buttons = new TwoButtonsPanel<AcceptProjectPanel>(this, "Accept", "Deny");
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

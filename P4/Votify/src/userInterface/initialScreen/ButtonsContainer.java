@@ -12,17 +12,34 @@ import userInterface.commonElements.TwoButtonsPanel;
 import userInterface.loginScreen.LoginPanel;
 import userInterface.registerScreen.RegisterPanel;
 
+/**
+* This class creates a panel with two buttons and handles the controller of the buttons.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class ButtonsContainer extends JPanel implements ActionListener{
 
 	private TwoButtonsPanel<ButtonsContainer> buttons;
 	private static final long serialVersionUID = 1L;
 	private InitialPanel initial_panel;
+	
+	/**
+	 * Constructor of this class.
+	 * 
+	 * @param p the initial panel
+	 */
 	public ButtonsContainer(InitialPanel p) {
 		this.buttons = new TwoButtonsPanel<ButtonsContainer>(this, "Register", "Log in");
 		this.initial_panel = p;
 		this.add(buttons);
 	}
-
+	
+	/**
+	 * This method will perform the operations for changing the panel shown in the frame.
+	 * It will depend on the action performed by the user, pressing register or login.
+	 *
+	 * @param e the event caused by an action
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
     	Object o = e.getSource();

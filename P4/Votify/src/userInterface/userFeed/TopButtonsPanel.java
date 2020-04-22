@@ -1,22 +1,44 @@
 package userInterface.userFeed;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
-public class TopButtonsPanel<A extends ActionListener> extends JPanel {
+import application.Application;
+import userInterface.AppFrame;
+import userInterface.createGroupScreen.CreateGroupScreen;
+import userInterface.initialScreen.InitialPanel;
 
-	private static final long serialVersionUID = 1L;
+/**
+* This class creates a panel that includes four buttons an a label.
+* It is used in the user and admin feed
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
+public class TopButtonsPanel<A extends JPanel> extends JPanel {
+
 	private JButton button1;
     private JButton button2;
     private JButton button3;
     private JButton button4;
     private JLabel label;
+	private static final long serialVersionUID = 1L;
+    
+    /**
+     * Constructor of this class.
+     * 
+     * @param panel the action listener for the buttons
+     * @param s1 string that will be shown in the first button
+     * @param s2 string that will be shown in the second button
+     * @param s3 string that will be shown in the third button
+     * @param s4 string that will be shown in the fourth button
+     * @param l string shown in the label
+     */
     public TopButtonsPanel(A panel, String s1, String s2, String s3,String s4, String l) {
     	
         this.button1 = new JButton(s1);
@@ -30,18 +52,36 @@ public class TopButtonsPanel<A extends ActionListener> extends JPanel {
         this.setLayout(s);
         
         this.add(button1); 
-        this.add(button2);
-        //this.add(Box.createRigidArea(new Dimension(80, 0)));
-        
+        this.add(button2);        
         this.add(button3);
-        //this.add(Box.createRigidArea(new Dimension(10, 0)));
         this.add(label);
-        //this.add(Box.createRigidArea(new Dimension(10, 0)));
         this.add(button4);
         
-        button1.addActionListener(panel);
-        button2.addActionListener(panel);
-        button3.addActionListener(panel);
+        button1.addActionListener(e-> {
+        	JFrame m = AppFrame.getAppFrame();
+        	panel.setVisible(false);
+        	m.remove(panel);
+        	m.add(new CreateGroupScreen());
+        });
+        
+        button2.addActionListener(e-> {
+        	JFrame m = AppFrame.getAppFrame();
+        	panel.setVisible(false);
+        	m.remove(panel);
+        	//TODO: Cambiar por el panel correspondiente
+        	//m.add(new CreateProjectScreen());
+        });
+        button3.addActionListener(e-> {
+        	JFrame m = AppFrame.getAppFrame();
+        	panel.setVisible(false);
+        	
+        	Application.getApplication().logOut();
+        	
+        	m.remove(panel);
+        	JPanel p = InitialPanel.getInitialPanel();
+        	m.add(p);
+        	p.setVisible(true);
+        });
         this.setPreferredSize(new Dimension(0,50));
 
         Spring sp1= Spring.constant(0, 10, 20);

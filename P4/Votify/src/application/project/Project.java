@@ -423,6 +423,27 @@ public abstract class Project extends Subject
 	}
 	
 	/**
+	 * Determines if a group has voted for the project in some group
+	 * 
+	 * @param group
+	 * @return boolean telling us whether the user has voted for the project or not
+	 */
+	public boolean hasVotedInGroup(RegisteredUser u) {
+		
+		for (Vote v: votes) {
+			
+			if (v instanceof GroupVote) {
+				if ( ((GroupVote)v).getVoters().contains(u.getUsername())==true) {
+					return true;
+				}
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Equals method override
 	 * @param obj The object to be compared
 	 * @return true if both are equal, false if not

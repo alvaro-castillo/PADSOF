@@ -1,24 +1,44 @@
 package userInterface;
 
 import java.io.IOException;
-import java.util.Vector;
+//import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import application.Application;
+//import userInterface.administrator.feed.AdminFeedPanel;
 import userInterface.initialScreen.InitialPanel;
+//import userInterface.userFeed.UserFeedPanel;
 
-
+/**
+* This is the main class program that will be executed to start the application.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class Main {
-
+	/**
+	* This is the main program.
+	**/
 	public static void main(String[] args) {
 		JFrame m = AppFrame.getAppFrame();
-		
+		/*Vector <String> v = new Vector<String>();
+	
+		v.add("AAAAAA");
+		v.add("BBBBBB");
+		v.add("CCCCCC");
+		v.add("DDDDD");
+		v.add("..........");
+		v.add("EEEEEEEE");
+		v.add("EEEEEEEE");
+		v.add("EEEEEEEE");
+		v.add("EEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		v.add("EEEEEEEE");
+
+		JPanel initial = new UserFeedPanel("User1", v, v,v);*/
 		try {
-			Application app = Application.loadApp("data.dat");
-			
+			Application.loadApp("data.dat");
 		}catch(ClassNotFoundException e) {
 			
 			System.out.println("Internal error: Class Application not found");
@@ -36,7 +56,8 @@ public class Main {
 			
 		}
 		
-		JPanel initial = new InitialPanel();
+		
+		JPanel initial = InitialPanel.getInitialPanel();
 		m.add(initial);
 		initial.setVisible(true);
 		m.revalidate();

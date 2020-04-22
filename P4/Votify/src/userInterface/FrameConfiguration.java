@@ -10,8 +10,19 @@ import javax.swing.JPanel;
 
 import application.Application;
 
+/**
+* This class contains the method that will be executed when we close the frame.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class FrameConfiguration extends WindowAdapter {
 	
+	/**
+	 * This method will log out the user and save the data of the app in the data.dat file.
+	 * It is called when the frame is closed.
+	 *
+	 * @param e the event caused by a window action
+	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		Application app = Application.getApplication();

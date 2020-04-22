@@ -5,23 +5,42 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import application.Application;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
+import userInterface.administrator.feed.AdminFeedPanel;
 import userInterface.loginScreen.LoginPanel;
 import userInterface.userFeed.UserFeedPanel;
 
+/**
+* This is the controller of the Log in Panel. It will perform some methods when the login
+* button is pressed.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class LoginController implements ActionListener {
 	
 	private LoginPanel panel;
 	private Application app;
 
+	/**
+	 * Constructor of this class.
+	 * 
+	 * @param panel the panel that is controlled by this class
+	 */
 	public LoginController(LoginPanel panel) {
 		this.panel = panel;
 		this.app = Application.getApplication();
+
 	}
 
+	/**
+	 * This method will perform the operations for login a user into the app.
+	 *
+	 * @param e the event caused by an action
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String userName = panel.getUsername();
@@ -47,11 +66,11 @@ public class LoginController implements ActionListener {
 		panel.setVisible(false);
 		RegisteredUser user = app.getCurrentUser();
 		
-		UserFeedPanel feed;
+		JPanel feed;
 		if(user.equals(app.getAdmin())) {
-			feed = new UserFeedPanel(userName,user.getNotificationsMessages()); // Cambiar a AdminFeed
+			feed = new AdminFeedPanel(userName,user.getNotificationsMessages(), app.getRegisteredUserGroups(user), app.getRegisteredUserVotes(user));
 		}else {
-			feed = new UserFeedPanel(userName,user.getNotificationsMessages());
+			feed = new UserFeedPanel(userName,user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
 		}
 		JFrame frame = AppFrame.getAppFrame();
 		frame.add(feed);

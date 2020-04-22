@@ -52,8 +52,8 @@ public class ApplicationTest {
 	@Test
 	public void testAddGroup() {
 		RegisteredUser u = new RegisteredUser("12345678A","Rector", "uamMola");
-		Group g1 = new Group("UAM", u);
-		Group g2 = new Group("EPS", u);
+		Group g1 = new Group("SOPER", u);
+		Group g2 = new Group("MICRO", u);
 		
 		//Adds a new group
 		assertTrue(app.addGroup(g1));
@@ -114,29 +114,56 @@ public class ApplicationTest {
 		app.addUser(u3);
 		
 		u1.acceptRegistration();
-		u2.acceptRegistration();
 		//Logs in the first user
-		assertTrue(app.logIn("User1", "padsof2291"));
+
+		try {
+			app.logIn("User1", "padsof2291");
+		}catch(Exception e) {
+			
+		}
 		//Logs in a user while there is already one user using the app
-		assertFalse(app.logIn("User2", "EPS"));
-		
+		try{
+			app.logIn("User2", "EPS");
+		}catch(Exception e) {
+			assertEquals(e.getMessage(), "There is already a user loged in.");
+		}
 		app.logOut();
 		//Try to log in a user with an erroneous password 
-		assertFalse(app.logIn("User1", "padsof3321"));
+		try{
+			app.logIn("User1", "padsof3321");
+		} catch(Exception e) {
+			assertEquals(e.getMessage(), "Wrong password.");
+		}
 		//Try to log in a user with an erroneous username 
-		assertFalse(app.logIn("User12", "padsof2291"));
-		
-		u2.banUser();
-		//Try to log in a user that is banned
-		assertFalse(app.logIn("User2", "EPS"));
-		
-		u2.rejectRegistration();
-		u2.unbanUser();
-		//Try to log in a user that has been rejected
-		assertFalse(app.logIn("User2", "EPS"));
-		
+		try{
+			app.logIn("User12", "padsof2291");
+		} catch(Exception e) {
+			assertEquals(e.getMessage(), "Username User12 does not exist.");
+		}
 		//Try to log in a user that hasn't been accepted yet
-		assertFalse(app.logIn("User3", "uam"));
+		try{
+			app.logIn("User2", "EPS");
+		} catch(Exception e) {
+			assertEquals(e.getMessage(), "User User2 has not been acepted yet by the administrator.");
+		}
+		u3.banUser();
+		//Try to log in a user that is banned
+		try{
+			app.logIn("User3", "uam");
+		} catch(Exception e) {
+			assertEquals(e.getMessage(), "User User3 is banned and can not log in the app.");
+		}
+		u3.unbanUser();
+		
+		u3.rejectRegistration();
+		//Try to log in a user that has been rejected
+		try{
+			app.logIn("User3", "uam");
+		} catch(Exception e) {
+			assertEquals(e.getMessage(), "User User3 has not been acepted by the administrator.");
+		}
+		
+
 
 	}
 
@@ -158,7 +185,7 @@ public class ApplicationTest {
 		//Searches the second project
 		assertEquals(p2, app.searchProject(6));
 		//Searches a project that does not exist
-		assertNull(app.searchProject(4));
+		assertNull(app.searchProject(30));
 	}
 
 	/**
