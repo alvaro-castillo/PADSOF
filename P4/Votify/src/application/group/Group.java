@@ -89,7 +89,7 @@ public class Group extends Subject
 		if (parent != null) {
 			this.observers = parent.observers;
 		}
-		
+		representative.addGroup(this);
 	}
 	
 	/**
@@ -348,6 +348,15 @@ public class Group extends Subject
 	 */
 	public RegisteredUser getRepresentative() {
 		return this.representative;
+	}
+	
+	/**
+	 * Parent group getter
+	 * 
+	 * @return parent reference, null if has no parent
+	 */
+	public Group getParent() {
+		return this.parent;
 	}
 	
 	/**
