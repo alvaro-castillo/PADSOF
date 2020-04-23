@@ -16,7 +16,7 @@ import userInterface.userFeed.*;
 public class AdminFeedPanel extends JPanel{
 	private TopButtonsPanel<AdminFeedPanel> buttons;
 	private ListPanel notifications;
-	private CenterPanel center;
+	private CenterPanel<AdminFeedController> center;
 	private AdminToolsPanel tools;
 	private AdminFeedController controller;
 	private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class AdminFeedPanel extends JPanel{
 		this.controller = new AdminFeedController(this);
 		this.buttons = new TopButtonsPanel<AdminFeedPanel>(this, "Create New Group", "Create New Project", "Log Out","Notifications", username);
 		this.notifications = new ListPanel(notification, new Dimension(120,150), controller, 0);
-		this.center = new CenterPanel(30, 60, groups, projects, new Dimension(130,150), controller);
+		this.center = new CenterPanel<AdminFeedController>(30, 60, groups, projects, new Dimension(130,150), controller);
 		this.tools = new AdminToolsPanel(controller);
 		
 		this.setLayout(new BorderLayout());

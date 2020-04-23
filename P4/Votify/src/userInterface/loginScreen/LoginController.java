@@ -2,6 +2,8 @@ package userInterface.loginScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,7 +22,7 @@ import userInterface.userFeed.UserFeedPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class LoginController implements ActionListener {
+public class LoginController extends KeyAdapter implements ActionListener {
 	
 	private LoginPanel panel;
 	private Application app;
@@ -37,12 +39,34 @@ public class LoginController implements ActionListener {
 	}
 
 	/**
-	 * This method will perform the operations for login a user into the app.
+	 * This will be executed when an action event is received
 	 *
 	 * @param e the event caused by an action
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.logIn();
+		return;
+	}
+	
+	/**
+	 * This will be executed when a key event is received
+	 *
+	 * @param e the event caused by an action
+	 */
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()!=KeyEvent.VK_ENTER) {
+			return;
+		}
+		this.logIn();
+		return;
+	}
+	
+	/**
+	 * This method will perform the operations for login a user into the app.
+	 */
+	private void logIn() {
 		String userName = panel.getUsername();
 		String password = panel.getUserPassword();
 		
@@ -77,5 +101,4 @@ public class LoginController implements ActionListener {
 		frame.remove(panel);
 		return;
 	}
-
 }

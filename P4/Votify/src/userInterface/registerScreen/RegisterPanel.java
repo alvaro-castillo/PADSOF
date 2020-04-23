@@ -93,7 +93,9 @@ public class RegisterPanel extends JPanel{
         this.add(createButton, c);
                 
         this.createButton.addActionListener(controller);
-       
+        passwordField.addKeyListener(controller);
+        usernameField.addKeyListener(controller);
+        nationalIDField.addKeyListener(controller);
     }
     
     public String getUsername() {

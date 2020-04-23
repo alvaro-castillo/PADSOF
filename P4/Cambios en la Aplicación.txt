@@ -10,7 +10,15 @@ Añadidas funciones:
 - public Vector<String> getRegisteredUserGroups(RegisteredUser u) a Application.java -> Devuelve un vector con los nombres de grupos en los que está un usuario
 - public Vector<String> getRegisteredUserVotes(RegisteredUser u)  a Application.java -> Devuelve un vector con los nombres e ids de los proyectos que ha votado el usuario
 - public boolean hasVotedInGroup(RegisteredUser u) a Project.java -> Devuelve true si el usuario ha votado como grupo en un proyecto. Falso en caso contrario
-- public Vector<String> getRegisteredUsers() a Application.java -> Devuelve un vector con los nombres de usuarios
+- public Vector<String> getRegisteredUsers() a Application.java -> Devuelve un vector con los nombres de usuarios, menos los baneados y el admin
+- public RegisteredUser getUser(String username) a Application.java -> Dado el nombre de un usuario devulve el objeto RegisteredUser asociado
+- public Group getGroup(String groupName) a Application.java -> Dado el nombre de un grupo devuelve el objeto Group asociado
+- public Vector<String> queryGroups(String s) a Application.java -> Dado el nombre o parte del nombre de un grupo devuelve una lista con los nombres de grupos que lo contengan
+- public Vector<String> queryProjects(String s) a Application.java -> Dado el nombre o parte del nombre de un proyecto devuelve una lista con los nombres e ids de proyectos que lo contengan
+
+
+- String reasonBanned a RegisteredUser.java 
+- public void banUser(String reason) a RegisteredUser.java para incluir la razón del baneo.
 
 Modificaciones: 
 

@@ -47,6 +47,10 @@ public class RegisteredUser implements Serializable, IObserver {
 	private Status status;
 	
 	/**
+	 * This field indicates the reason of banning.
+	 */
+	private String reasonBanned;
+	/**
 	 * A list that contains all the groups that the user has created.
 	 */
 	private List<Group> createdGroups;
@@ -82,8 +86,8 @@ public class RegisteredUser implements Serializable, IObserver {
 		this.status = Status.WAITING;
 		this.createdGroups = new ArrayList<Group>();
 		this.createdProjects = new ArrayList<Project>();
-		this.notification= new ArrayList<Notification>();
-		
+		this.notification = new ArrayList<Notification>();
+		this.reasonBanned = null;
 	}
 
 	/**
@@ -153,6 +157,15 @@ public class RegisteredUser implements Serializable, IObserver {
 	}
 	/**
 	 * Function that bans a user.
+	 * 
+	 * @param reason the reason of the ban
+	 */
+	public void banUser(String reason) {
+		this.ban = true;
+		this.reasonBanned = reason;
+	}
+	/**
+	 * Function that bans a user without a reason.
 	 */
 	public void banUser() {
 		this.ban = true;
@@ -161,7 +174,16 @@ public class RegisteredUser implements Serializable, IObserver {
 	 * Function that unbans a user.
 	 */
 	public void unbanUser() {
+		this.reasonBanned = null;
 		this.ban = false;
+	}
+	/*
+	 * Reason of the ban getter.
+	 * 
+	 * @return reasonBanned
+	 * */
+	public String getReasonBanned() {
+		return this.reasonBanned;
 	}
 	/**
 	 * User boolean notifications getter.

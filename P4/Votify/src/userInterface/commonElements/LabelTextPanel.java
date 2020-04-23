@@ -31,4 +31,13 @@ public class LabelTextPanel<A extends KeyAdapter> extends JPanel {
     	this.add(textName);
     	textName.addKeyListener(controller);
 	}
+	
+	/**
+	 * Text written in the text field getter.
+	 * 
+	 * @return text written in the text field
+	 */
+	public String getText() {
+		return textName.getText();
+	}
 }

@@ -61,7 +61,7 @@ public abstract class Project extends Subject
 	/**
 	 * Date when the project was approved by the administrator.
 	 */
-	private LocalDate acceptDate; // change to modifiable date?
+	private LocalDate acceptDate;
 	
 	/**
 	 * Unique ID of the project
@@ -425,7 +425,7 @@ public abstract class Project extends Subject
 	/**
 	 * Determines if a group has voted for the project in some group
 	 * 
-	 * @param group
+	 * @param u the registered user we want to check
 	 * @return boolean telling us whether the user has voted for the project or not
 	 */
 	public boolean hasVotedInGroup(RegisteredUser u) {

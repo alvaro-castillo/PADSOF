@@ -207,7 +207,6 @@ public class Application extends Subject
 	 * It checks if the name is and password coincide with the user ones. In addition the user shouldn't be banned
 	 * @param u username we want to log in.
 	 * @param p password we want to check.
-	 * @return boolean
 	 */
 	public void logIn(String u, String p ) throws Exception{
 		if(this.currentUser==null) {
@@ -225,7 +224,12 @@ public class Application extends Subject
 							}
 							
 						}
-						throw new Exception("User "+ u + " is banned and can not log in the app.");
+						String reason = r.getReasonBanned();
+						if(reason == null) {
+							throw new Exception("User "+ u + " is banned and can not log in the app.");
+						}else {
+							throw new Exception("User "+ u + " is banned and can not log in the app. \nReason: " + reason);
+						}
 					}
 					throw new Exception("Wrong password.");
 				}
@@ -395,7 +399,6 @@ public class Application extends Subject
 				banned.add(r.getUsername());
 			}
 		}
-		
 		return banned;
 	}
 	
@@ -482,12 +485,64 @@ public class Application extends Subject
 		
 		return v;
 	}
+	
 	/**
-	 * Users in the application getter. It will return all the usernames except from the admin.
+	 * Users in the application getter. It will return all the usernames except from the admin and the ones banned.
+	 *
 	 * @return users, a vector with all the usernames.
 	 */
 	public Vector<String> getRegisteredUsers() {
-		Vector <String> u = users.parallelStream().map(usr-> usr.getUsername()).filter(s -> !s.equals(this.admin.getUsername())).collect(Vector::new, Vector::add, Vector::addAll);
+		Vector <String> u = users.parallelStream().filter(us-> us.isBan()==false).map(usr-> usr.getUsername()).filter(s -> !s.equals(this.admin.getUsername())).collect(Vector::new, Vector::add, Vector::addAll);
 		return u;
+	}
+	
+	/**
+	 * Given a username it returns it RegisteredUser object associated with it.
+	 * 
+	 * @param username name of the user
+	 * @return user that corresponds with the username.
+	 */
+	public RegisteredUser getUser(String username) {
+		for(RegisteredUser r : users) {
+			if(r.getUsername().equals(username)) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Given a group name it returns it Group object associated with it.
+	 * 
+	 * @param groupName name of the group
+	 * @return group that corresponds with the group Name.
+	 */
+	public Group getGroup(String groupName) {
+		for(Group g : groups) {
+			if(g.getName().equals(groupName)) {
+				return g;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Method that returns group names that contains the string received by parameter.
+	 *
+	 * @param s string we want to check the constraint 
+	 * @return groups, a vector with all the group names.
+	 */
+	public Vector<String> queryGroups(String s){
+		return this.groups.parallelStream().map(g -> g.getName()).filter(n->n.contains(s)).collect(Vector::new, Vector::add, Vector::addAll);
+	}
+	
+	/**
+	 * Method that returns project names and ids that contains the string received by parameter.
+	 *
+	 * @param s string we want to check the constraint 
+	 * @return projects, a vector with all the project names and ids.
+	 */
+	public Vector<String> queryProjects(String s){
+		return this.projects.parallelStream().map(p -> p.getTitle()+ " " + p.getId()).filter(n->n.contains(s)).collect(Vector::new, Vector::add, Vector::addAll);
 	}
 }

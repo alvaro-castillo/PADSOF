@@ -1,6 +1,5 @@
 package userInterface.administrator;
 
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -12,7 +11,7 @@ import javax.swing.JPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class ComboBoxPanel <A extends ActionListener>extends JPanel {
+public class ComboBoxPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> combo;
@@ -20,15 +19,27 @@ public class ComboBoxPanel <A extends ActionListener>extends JPanel {
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param panel action listener panel
 	 * @param v vector of strings that will be shown in the combo box
 	 */
-	public ComboBoxPanel(A panel,Vector<String> v) {
+	public ComboBoxPanel(Vector<String> v) {
 		this.combo = new JComboBox<String>(v);
 		
 		this.add(combo);
 		
-		combo.addActionListener(panel);
+	}
+	
+	/**
+	 * This method returns the object string that is selected on the combo box
+	 * 
+	 * @return string of the object
+	 */
+	public String getSelectedObject() {
+		Object o = combo.getSelectedItem();
+				
+		if(o==null) {
+			return null;
+		}
+		return o.toString();
 	}
 
 }

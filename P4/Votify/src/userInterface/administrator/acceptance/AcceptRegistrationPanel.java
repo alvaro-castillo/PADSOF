@@ -1,8 +1,6 @@
 package userInterface.administrator.acceptance;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -22,11 +20,12 @@ import userInterface.commonElements.TwoButtonsPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class AcceptRegistrationPanel extends JPanel implements ActionListener {
+public class AcceptRegistrationPanel extends JPanel {
 	private FeedButtonPanel feed;
 	private BigTextPanel text;
-	private ComboBoxPanel<AcceptRegistrationPanel> combo;
-	private TwoButtonsPanel<AcceptRegistrationPanel> buttons;
+	private ComboBoxPanel combo;
+	private TwoButtonsPanel<AcceptRegistrationController> buttons;
+	private AcceptRegistrationController controller;
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -35,10 +34,11 @@ public class AcceptRegistrationPanel extends JPanel implements ActionListener {
 	 * @param v vector with all the usernames of the users that have just registrated into the app
 	 */
 	public AcceptRegistrationPanel(Vector<String> v) {
-		this.feed = new FeedButtonPanel();
+		this.controller = new AcceptRegistrationController(this);
+		this.feed = new FeedButtonPanel(this);
 		this.text = new BigTextPanel("Accept Registration", 220, 0, 40);
-		this.combo = new ComboBoxPanel<AcceptRegistrationPanel>(this,v);
-		this.buttons = new TwoButtonsPanel<AcceptRegistrationPanel>(this, "Accept", "Deny");
+		this.combo = new ComboBoxPanel(v);
+		this.buttons = new TwoButtonsPanel<AcceptRegistrationController>(controller, "Accept", "Deny");
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
 		this.add(text);
@@ -47,12 +47,12 @@ public class AcceptRegistrationPanel extends JPanel implements ActionListener {
 		this.add(buttons);
 		this.add(Box.createRigidArea(new Dimension(0, 80)));
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * Combo box panel getter. Used by the controller.
+	 * @return combo
+	 * */
+	public ComboBoxPanel getCombo() {
+		return this.combo;
 	}
-
-
 }

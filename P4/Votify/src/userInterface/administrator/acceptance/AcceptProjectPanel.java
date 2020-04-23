@@ -1,8 +1,6 @@
 package userInterface.administrator.acceptance;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -22,12 +20,13 @@ import userInterface.commonElements.TwoButtonsPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class AcceptProjectPanel extends JPanel implements ActionListener {
+public class AcceptProjectPanel extends JPanel{
 	private FeedButtonPanel feed;
 	private BigTextPanel text;
-	private ComboBoxPanel<AcceptProjectPanel> combo;
-	private LabelTextPanel<?> label; //TODO:Parametrize with the controller
-	private TwoButtonsPanel<AcceptProjectPanel> buttons;
+	private ComboBoxPanel combo;
+	private LabelTextPanel<AcceptProjectController> label; //TODO:Parametrize with the controller
+	private TwoButtonsPanel<AcceptProjectController> buttons;
+	private AcceptProjectController controller;
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -36,11 +35,12 @@ public class AcceptProjectPanel extends JPanel implements ActionListener {
 	 * @param v vector with all the project names that have just been created
 	 */
 	public AcceptProjectPanel(Vector<String> v) {
-		this.feed = new FeedButtonPanel();
+		this.controller = new AcceptProjectController(this);
+		this.feed = new FeedButtonPanel(this);
 		this.text = new BigTextPanel("Accept Project", 145, 10, 40);
-		this.combo = new ComboBoxPanel<AcceptProjectPanel>(this,v);
-		this.label = new LabelTextPanel<?>(this, "Introduce minimum number of votes: ", 10);
-		this.buttons = new TwoButtonsPanel<AcceptProjectPanel>(this, "Accept", "Deny");
+		this.combo = new ComboBoxPanel(v);
+		this.label = new LabelTextPanel<AcceptProjectController>(controller, "Introduce minimum number of votes: ", 10);
+		this.buttons = new TwoButtonsPanel<AcceptProjectController>(controller, "Accept", "Deny");
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
@@ -51,9 +51,20 @@ public class AcceptProjectPanel extends JPanel implements ActionListener {
 		this.add(buttons);
 		this.add(Box.createRigidArea(new Dimension(0, 60)));
 	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * Combo box panel getter. Used by the controller.
+	 * @return combo
+	 * */
+	public ComboBoxPanel getCombo() {
+		return this.combo;
+	}
+	
+	/**
+	 * Label text area panel getter. Used by the controller.
+	 * @return area
+	 * */
+	public LabelTextPanel<AcceptProjectController> getTextPanel() {
+		return this.label;
 	}
 }

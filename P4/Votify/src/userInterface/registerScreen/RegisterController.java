@@ -2,6 +2,8 @@ package userInterface.registerScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,7 +18,7 @@ import userInterface.loginScreen.LoginPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class RegisterController implements ActionListener {
+public class RegisterController extends KeyAdapter implements ActionListener {
 	
 	private RegisterPanel panel;
 	private Application app;
@@ -32,12 +34,33 @@ public class RegisterController implements ActionListener {
 	}
 
 	/**
-	 * This method will perform the operations for registering a user.
+	 * This will be executed when an action event is received.
 	 *
 	 * @param e the event caused by an action
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.register();
+	}
+	
+	/**
+	 * This will be executed when a key event is received
+	 *
+	 * @param e the event caused by an action
+	 */
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()!=KeyEvent.VK_ENTER) {
+			return;
+		}
+		this.register();
+		return;
+	}
+	
+	/**
+	 * This method will perform the operations for registering a user.
+	 */
+	private void register() {
 		String userName = panel.getUsername();
 		String userId = panel.getUserId();
 		String password = panel.getUserPassword();

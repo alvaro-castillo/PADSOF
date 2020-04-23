@@ -1,6 +1,7 @@
 package userInterface.userFeed;
 
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -14,11 +15,11 @@ import userInterface.commonElements.LabelTextPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class CenterPanel extends JPanel {
+public class CenterPanel<A extends KeyAdapter & IListPanel> extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private TwoTitlesPanel titles;
-	private LabelTextPanel<UserFeedController> search;
+	private LabelTextPanel<KeyAdapter> search;
 	private GroupsAndProjectsPanel projectsAndGroups;
 	
 	/**
@@ -30,10 +31,10 @@ public class CenterPanel extends JPanel {
 	 * @param projects a vector with the name of the projects to show
 	 * @param d dimensions of the scroll panels for the projects and groups
 	 */
-	public CenterPanel(int size, int offset, Vector<String> groups, Vector<String> projects, Dimension d, UserFeedController controller) {
+	public CenterPanel(int size, int offset, Vector<String> groups, Vector<String> projects, Dimension d, A controller) {
 		
 		this.titles = new TwoTitlesPanel(size, offset);
-		this.search = new LabelTextPanel<UserFeedController>(controller,"Search a group or a project", 20);
+		this.search = new LabelTextPanel<KeyAdapter>(controller,"Search a group or a project", 20);
 		this.projectsAndGroups = new GroupsAndProjectsPanel(groups,projects, d, controller);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

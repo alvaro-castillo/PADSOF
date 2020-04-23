@@ -27,5 +27,8 @@ public class TextScrollAreaPanel extends JPanel {
 
 		this.add(scroll);
 	}
-
+	
+	public String getBannedReason() {
+    	return this.area.getText();
+    }
 }

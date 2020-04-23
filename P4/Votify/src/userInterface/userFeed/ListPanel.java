@@ -26,7 +26,7 @@ public class ListPanel extends JPanel {
 	 * @param d dimension used for the scroll pane size
 	 * @param controller the controller of the panel
 	 */
-	public ListPanel(Vector<String> v, Dimension d, UserFeedController controller, int type) {
+	public ListPanel(Vector<String> v, Dimension d, IListPanel controller, int type) {
 		this.list = new JList<String>(v);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		

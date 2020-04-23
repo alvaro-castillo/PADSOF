@@ -1,8 +1,6 @@
 package userInterface.commonElements;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,7 +8,7 @@ import javax.swing.JPanel;
 /**
 * This class will create a panel with a button that will return to the feed panel.
 *
-* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo Garcí­a
 */
 public class FeedButtonPanel extends JPanel {
 
@@ -21,7 +19,7 @@ public class FeedButtonPanel extends JPanel {
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param Panel in which this panel is included
+	 * @param superPanel in which this panel is included
 	 */
 	public FeedButtonPanel(JPanel superPanel) {
 		this.controller = new FeedButtonController(superPanel);

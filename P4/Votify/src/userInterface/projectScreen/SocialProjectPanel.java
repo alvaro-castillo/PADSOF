@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 import application.project.SocialProject;
 import application.registeredUser.RegisteredUser;
 import userInterface.commonElements.FeedButtonPanel;
-import userInterface.initialScreen.ImagePanel;
 
 public class SocialProjectPanel extends JPanel {
 	

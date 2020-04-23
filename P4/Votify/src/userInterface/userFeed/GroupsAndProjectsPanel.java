@@ -27,7 +27,7 @@ public class GroupsAndProjectsPanel extends JPanel {
 	 * @param d dimensions of the scroll panels for the projects and groups
 	 * @param controller the controller of the panel
 	 */
-	public GroupsAndProjectsPanel(Vector<String> groups, Vector<String> projects, Dimension d, UserFeedController controller) {
+	public GroupsAndProjectsPanel(Vector<String> groups, Vector<String> projects, Dimension d, IListPanel controller) {
 		this.groups = new ListPanel(groups, d, controller, 1);
 		this.projects = new ListPanel(projects, d, controller, -1);
 		

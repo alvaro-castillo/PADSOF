@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class UserFeedPanel extends JPanel{
 	private TopButtonsPanel<UserFeedPanel> buttons;
 	private ListPanel notifications;
-	private CenterPanel center;
+	private CenterPanel<UserFeedController> center;
 	private UserFeedController controller;
 	
 	private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class UserFeedPanel extends JPanel{
 		this.controller = new UserFeedController(this);
 		this.buttons = new TopButtonsPanel<UserFeedPanel>(this, "Create New Group", "Create New Project", "Log Out","Notifications", username);
 		this.notifications = new ListPanel(notification, new Dimension(120,150), controller, 0);
-		this.center = new CenterPanel(30, 65, groups, projects, new Dimension(150,150), controller);
+		this.center = new CenterPanel<UserFeedController>(30, 65, groups, projects, new Dimension(150,150), controller);
 
 		
 		this.setLayout(new BorderLayout());

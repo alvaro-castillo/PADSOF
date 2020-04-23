@@ -95,7 +95,8 @@ public class LoginPanel extends JPanel {
         this.add(registerButton, c);
         
         this.loginButton.addActionListener(controller);
-        
+        passwordField.addKeyListener(controller);
+        usernameField.addKeyListener(controller);
         
         this.registerButton.addActionListener(new ActionListener(){
         		public void actionPerformed(ActionEvent e){

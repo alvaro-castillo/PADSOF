@@ -1,8 +1,6 @@
 package userInterface.administrator.acceptance;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -22,11 +20,12 @@ import userInterface.commonElements.TwoButtonsPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class AcceptGroupPanel extends JPanel implements ActionListener {
+public class AcceptGroupPanel extends JPanel{
 	private FeedButtonPanel feed;
 	private BigTextPanel text;
-	private ComboBoxPanel<AcceptGroupPanel> combo;
-	private TwoButtonsPanel<AcceptGroupPanel> buttons;
+	private ComboBoxPanel combo;
+	private TwoButtonsPanel<AcceptGroupController> buttons;
+	private AcceptGroupController controller;
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -35,10 +34,11 @@ public class AcceptGroupPanel extends JPanel implements ActionListener {
 	 * @param v vector with all the group names that have just been created
 	 */
 	public AcceptGroupPanel(Vector<String> v) {
-		this.feed = new FeedButtonPanel();
+		this.controller = new AcceptGroupController(this);
+		this.feed = new FeedButtonPanel(this);
 		this.text = new BigTextPanel("Accept Group", 145, 0, 40);
-		this.combo = new ComboBoxPanel<AcceptGroupPanel>(this,v);
-		this.buttons = new TwoButtonsPanel<AcceptGroupPanel>(this, "Accept", "Deny");
+		this.combo = new ComboBoxPanel(v);
+		this.buttons = new TwoButtonsPanel<AcceptGroupController>(controller, "Accept", "Deny");
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
 		this.add(text);
@@ -48,11 +48,12 @@ public class AcceptGroupPanel extends JPanel implements ActionListener {
 		this.add(Box.createRigidArea(new Dimension(0, 80)));
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Combo box panel getter. Used by the controller.
+	 * @return combo
+	 * */
+	public ComboBoxPanel getCombo() {
+		return this.combo;
 	}
-
 
 }

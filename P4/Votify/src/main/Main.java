@@ -61,7 +61,10 @@ public class Main {
 			System.out.println("	Already existing project");
 		};
 		u2.addProject(p);
-		
+		InfrastructureProject p2 = new InfrastructureProject("New big skate park", " This project is created with the intention of build a new skate park", 10000.5,u2, District.CENTRO,"image.png");
+		if(app.addProject(p2)==false) {
+			System.out.println("	Already existing project");
+		};
 		System.out.println("User2 creates a new group: 'UAM'\n");
 		Group g1= new Group("UAM", u2);
 		if(app.addGroup(g1)==false) {

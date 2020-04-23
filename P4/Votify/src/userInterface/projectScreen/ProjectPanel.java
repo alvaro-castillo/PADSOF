@@ -1,6 +1,5 @@
 package userInterface.projectScreen;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -63,7 +62,7 @@ public class ProjectPanel extends JPanel {
 		this.projectDescription = new JTextArea(proj.getDescription(), 6, 40);
 		this.descrPanel = new JScrollPane(projectDescription);
 		
-		if (proj.hasVotedIndividually(reg)) {
+		if (proj.hasVoted(reg)) {
 			indivVote.setEnabled(false);
 		} else {
 			popularityReportButton.setEnabled(false);
