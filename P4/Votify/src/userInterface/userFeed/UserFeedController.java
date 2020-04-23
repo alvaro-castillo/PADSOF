@@ -9,12 +9,17 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 
 import application.Application;
+import application.project.InfrastructureProject;
+import application.project.Project;
+import application.project.SocialProject;
 import userInterface.AppFrame;
+import userInterface.projectScreen.InfrastructureProjectPanel;
+import userInterface.projectScreen.SocialProjectPanel;
 
 /**
 * This is the controller of the User Feed Panel.
 *
-* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
 */
 public class UserFeedController extends KeyAdapter{
 	protected JPanel panel;
@@ -36,8 +41,9 @@ public class UserFeedController extends KeyAdapter{
 	public void valueChangedGroup(ListSelectionEvent e,  ListPanel paux) {
 		panel.setVisible(false);
 		String group = paux.getSelectedValue();
-		//JPanel p = new Panel TODO: donde se vea información del grupo
+		//JPanel p = new Panel TODO: donde se vea informaciÃ³n del grupo
 		//frame.add(p);
+		//System.out.println(group);
 		frame.remove(panel);
 		//p.setVisible(true);
 		
@@ -46,10 +52,36 @@ public class UserFeedController extends KeyAdapter{
 	public void valueChangedProject(ListSelectionEvent e,  ListPanel paux) {
 		panel.setVisible(false);
 		String projectString = paux.getSelectedValue();
-		//JPanel p = new Panel TODO:donde se vea información del proyecto
-		//frame.add(p);
+		
+		String[] partsOfStr = projectString.split(" ");
+		
+		int id = 0;
+		
+		try {
+			id = Integer.parseInt(partsOfStr[partsOfStr.length-1]);
+		} catch (Exception exc) {
+			//error
+			return;
+		}
+		
+		Project p = app.searchProject(id);
+		if (p == null) {
+			// error
+			return;
+		}
+		
+		JPanel pan = null;
+		if (p instanceof InfrastructureProject) {
+			pan = new InfrastructureProjectPanel((InfrastructureProject)p, app.getCurrentUser());
+		} else if (p instanceof SocialProject) {
+			pan = new SocialProjectPanel((SocialProject)p, app.getCurrentUser());
+		} else {
+			return;
+		}
+
+		panel.setVisible(false);
+		frame.add(pan);
 		frame.remove(panel);
-		//p.setVisible(true);
 		
 	}
 
@@ -71,6 +103,6 @@ public class UserFeedController extends KeyAdapter{
 		JTextField aux = (JTextField) o;
 		String s = aux.getText();
 		
-		//TODO: enseñar panel de búsqueda
+		//TODO: enseÃ±ar panel de bÃºsqueda
 	}
 }
