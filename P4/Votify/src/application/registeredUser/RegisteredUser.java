@@ -257,6 +257,14 @@ public class RegisteredUser implements Serializable, IObserver {
 	}
 	
 	/**
+	 * Created Groups getter
+	 * @return createdGroups a list with all the groups created by the user
+	 */
+	public List<Group> getCreatedGroups() {
+		return createdGroups;
+	}
+	
+	/**
 	 * This method overrides the default equal method among Registered Users.
 	 * @param obj. The object to be compared.
 	 * @return true if both users are equal.
