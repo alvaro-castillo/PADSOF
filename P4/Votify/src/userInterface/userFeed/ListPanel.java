@@ -47,6 +47,11 @@ public class ListPanel extends JPanel {
 		
 	} 
 	
+	/**
+	 * Selected value getter used by the controller
+	 * 
+	 * @return the value that is selected
+	 */
 	public String getSelectedValue() {
 		return list.getSelectedValue();
 	}

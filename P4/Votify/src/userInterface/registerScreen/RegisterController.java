@@ -74,6 +74,9 @@ public class RegisterController extends KeyAdapter implements ActionListener {
 		}else if(password.equals("")) {
 			 JOptionPane.showMessageDialog(panel, "You must type a valid password.", "Error", JOptionPane.ERROR_MESSAGE);
 			 return;
+		}else if(userId.length()!=9) {
+			JOptionPane.showMessageDialog(panel, "You must type a valid ID with 9 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+			 return;
 		}
 		
 		RegisteredUser u = new RegisteredUser(userId,userName,password);

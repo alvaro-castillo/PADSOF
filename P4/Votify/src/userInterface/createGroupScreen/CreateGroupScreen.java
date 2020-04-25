@@ -42,7 +42,7 @@ public class CreateGroupScreen extends JPanel{
     	this.add(Box.createRigidArea(new Dimension(0, 60)));
     	this.add(labelText);
         this.add(create);
-        this.add(Box.createRigidArea(new Dimension(0, 80)));
+        this.add(Box.createRigidArea(new Dimension(0, 50)));
         feed.setVisible(true);
         text.setVisible(true);
         labelText.setVisible(true);

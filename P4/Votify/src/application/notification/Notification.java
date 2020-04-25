@@ -98,6 +98,6 @@ public class Notification implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "    Content: " + this.content+ " Date: " + this.date+ " Message read: "+ this.read;
+		return this.content+ " Date: " + this.date+ " Message read: "+ this.read;
 	}
 }

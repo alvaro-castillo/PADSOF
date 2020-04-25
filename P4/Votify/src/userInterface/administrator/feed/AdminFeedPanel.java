@@ -19,10 +19,11 @@ public class AdminFeedPanel extends JPanel{
 	private CenterPanel<AdminFeedController> center;
 	private AdminToolsPanel tools;
 	private AdminFeedController controller;
+	private Vector<String> n;
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * COnstructor of this class.
+	 * Constructor of this class.
 	 * 
 	 * @param username name of the user that is logged in
 	 * @param notification a vector that contains notifications in form of string
@@ -35,11 +36,24 @@ public class AdminFeedPanel extends JPanel{
 		this.notifications = new ListPanel(notification, new Dimension(120,150), controller, 0);
 		this.center = new CenterPanel<AdminFeedController>(30, 60, groups, projects, new Dimension(130,150), controller);
 		this.tools = new AdminToolsPanel(controller);
+		this.n = notification;
 		
 		this.setLayout(new BorderLayout());
 		this.add(buttons, BorderLayout.NORTH);
 		this.add(center,BorderLayout.CENTER);
 		this.add(notifications, BorderLayout.EAST);
 		this.add(tools, BorderLayout.WEST);
+	}
+	
+	/**
+	 * Sets a notification string passed by argument.
+	 * It is used for change the state of the notification from read false to read true.
+	 * 
+	 * @param old notification string that is going to be replaced
+	 * @param newer notification string that is going to replace the older one
+	 */
+	public void setNotifications(String old, String newer) {
+		int index = this.n.indexOf(old);
+		n.set(index, newer);
 	}
 }

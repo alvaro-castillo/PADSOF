@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 
+
 /**
 * This class will create the User Feed Panel.
 * It includes the top buttons panel, the list panel with the notifications and a center panel
@@ -19,7 +20,7 @@ public class UserFeedPanel extends JPanel{
 	private ListPanel notifications;
 	private CenterPanel<UserFeedController> center;
 	private UserFeedController controller;
-	
+	private Vector<String> n;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,12 +36,24 @@ public class UserFeedPanel extends JPanel{
 		this.buttons = new TopButtonsPanel<UserFeedPanel>(this, "Create New Group", "Create New Project", "Log Out","Notifications", username);
 		this.notifications = new ListPanel(notification, new Dimension(120,150), controller, 0);
 		this.center = new CenterPanel<UserFeedController>(30, 65, groups, projects, new Dimension(150,150), controller);
-
+		this.n = notification;
 		
 		this.setLayout(new BorderLayout());
 		this.add(buttons, BorderLayout.NORTH);
 		this.add(center,BorderLayout.CENTER);
 		this.add(notifications, BorderLayout.EAST);
+	}
+	
+	/**
+	 * Sets a notification string passed by argument.
+	 * It is used for change the state of the notification from read false to read true.
+	 * 
+	 * @param old notification string that is going to be replaced
+	 * @param newer notification string that is going to replace the older one
+	 */
+	public void setNotifications(String old, String newer) {
+		int index = this.n.indexOf(old);
+		n.set(index, newer);
 	}
 
 }

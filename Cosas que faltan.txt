@@ -1,0 +1,7 @@
+ListPanelExtender:
+- valueChangedGroup implementar cambio de panel
+
+Revisar los comentarios del código
+Añadir a los tester las funciones nuevas
+//Modificar el diagrama
+//Modificar la matriz

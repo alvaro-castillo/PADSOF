@@ -49,7 +49,7 @@ public class BanUserController implements ActionListener{
 		if(bannedUser == null) {
 			return;
 		}
-		String reason = panel.getArea().getBannedReason();
+		String reason = panel.getArea().getReason();
 		
 		if(reason.equals("")) {
 			bannedUser.banUser();

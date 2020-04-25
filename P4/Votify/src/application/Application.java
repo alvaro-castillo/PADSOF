@@ -265,7 +265,7 @@ public class Application extends Subject
 	public List<Project> searchProject(String name) {
 		List<Project> ps = new ArrayList<Project>();
 		for(Project p: projects) {
-			if(p.getTitle()==name) {
+			if(p.getTitle().equals(name)) {
 				ps.add(p);
 			}
 		}
@@ -278,7 +278,7 @@ public class Application extends Subject
 	 */
 	public Group searchGroup(String name) {
 		for(Group g: groups) {
-			if(g.getName()==name) {
+			if(g.getName().equals(name)) {
 				return g;
 			}
 		}
@@ -510,22 +510,7 @@ public class Application extends Subject
 		}
 		return null;
 	}
-	
-	/**
-	 * Given a group name it returns it Group object associated with it.
-	 * 
-	 * @param groupName name of the group
-	 * @return group that corresponds with the group Name.
-	 */
-	public Group getGroup(String groupName) {
-		for(Group g : groups) {
-			if(g.getName().equals(groupName)) {
-				return g;
-			}
-		}
-		return null;
-	}
-	
+
 	/**
 	 * Method that returns group names that contains the string received by parameter.
 	 *

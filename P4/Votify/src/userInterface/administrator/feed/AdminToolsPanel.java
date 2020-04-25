@@ -32,6 +32,8 @@ public class AdminToolsPanel extends JPanel{
 
 	/**
 	 * Constructor of this class.
+	 * 
+	 * @param controller of this panel
 	 */
 	public AdminToolsPanel(AdminFeedController controller) {
 		this.text = new JLabel("          Admin Tools");

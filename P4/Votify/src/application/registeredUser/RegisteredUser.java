@@ -263,6 +263,21 @@ public class RegisteredUser implements Serializable, IObserver {
 	}
 	
 	/**
+	 * User notification getter given a string.
+	 * @param s the content
+	 * @return notification a list with all the notifications that the user has.
+	 */
+	public Notification getNotificationSelected(String s) {
+		
+		for(Notification n : notification){
+			if(n.toString().equals(s)) {
+				return n;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * User notifications getter on string format.
 	 * @return notVector a vector with all the notifications strings that the user has.
 	 */

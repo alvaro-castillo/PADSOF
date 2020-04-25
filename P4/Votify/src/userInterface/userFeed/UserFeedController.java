@@ -3,6 +3,8 @@ package userInterface.userFeed;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 
+import application.notification.Notification;
+
 
 /**
 * This is the controller of the User Feed Panel.
@@ -29,6 +31,18 @@ public class UserFeedController extends ListPanelExtender{
 	 **/
 	@Override
 	public void valueChangedNotifications(ListSelectionEvent e,  ListPanel paux) {
-		//TODO: Realizar acciones con las notificaciones
+		String s = paux.getSelectedValue();
+		
+		Notification n = app.getCurrentUser().getNotificationSelected(s);
+		
+		if(n==null) {
+			return;
+		}
+		if(n.isRead()==true) {
+			return;
+		}
+		n.setRead();
+		UserFeedPanel p = (UserFeedPanel) panel;
+		p.setNotifications(s, n.toString());
 	}
 }

@@ -31,6 +31,7 @@ public class BanUserPanel extends JPanel{
 	private CenteredButtonPanel<BanUserController> button;
 	private static final long serialVersionUID = 1L;
 	private BanUserController controller;
+	
 	/**
 	 * Constructor of this class.
 	 * 

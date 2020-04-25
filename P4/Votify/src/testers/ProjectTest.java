@@ -50,13 +50,13 @@ public class ProjectTest {
 	}
 
 	/**
-	 * Test for {@link application.project.Project#adminRejectProject()}
+	 * Test for {@link application.project.Project#adminRejectProject(String)}
 	 */
 	@Test
 	public void testAdminRejectProject() {
 		
 		// We make sure it properly changes the state
-		proj.adminRejectProject();
+		proj.adminRejectProject("No reason");
 		assertEquals(ProjectStatus.ADMIN_REJECTED, proj.getState());
 		
 		// We make sure the creator received a notification telling them about the

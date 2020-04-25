@@ -19,7 +19,8 @@ Añadidas funciones:
 
 - String reasonBanned a RegisteredUser.java 
 - public void banUser(String reason) a RegisteredUser.java para incluir la razón del baneo.
-
+- public Notification getNotificationSelected(String s) a RegisteredUser.java para dada una notifcación en string conseguir el objeto.
 Modificaciones: 
 
 - public void logIn(String u, String p ) throws Exception en Application.java -> Ahora es void y lanza Excepciones
+- public void adminRejectProject(String reason) en Project.java -> Ahora recibe una string

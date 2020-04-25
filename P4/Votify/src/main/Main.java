@@ -56,7 +56,7 @@ public class Main {
 		// Logs in the second user to create a project and a group
 		System.out.println("User2 creates a new Infrastructure Project: 'New skate park'\n");
 		app.logIn(u2.getUsername(), u2.getPassword());
-		InfrastructureProject p = new InfrastructureProject("New skate park", " This project is created with the intention of build a new skate park", 10000.5,u2, District.CENTRO,"image.png");
+		InfrastructureProject p = new InfrastructureProject("New skate park", " This project is created with the intention of build a new skate park", 10000.5,u2, District.CENTRO,"Logo.png");
 		if(app.addProject(p)==false) {
 			System.out.println("	Already existing project");
 		};

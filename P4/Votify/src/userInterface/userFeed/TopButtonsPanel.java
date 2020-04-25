@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
@@ -15,7 +16,7 @@ import userInterface.createGroupScreen.CreateGroupScreen;
 import userInterface.initialScreen.InitialPanel;
 
 /**
-* This class creates a panel that includes four buttons an a label.
+* This class creates a panel that includes four buttons an a label on a scroll pane.
 * It is used in the user and admin feed
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
@@ -50,11 +51,13 @@ public class TopButtonsPanel<A extends JPanel> extends JPanel {
       
         SpringLayout s = new SpringLayout();
         this.setLayout(s);
+        JScrollPane scroll = new JScrollPane(label);
+        scroll.setPreferredSize(new Dimension(l.length(),35));
         
         this.add(button1); 
         this.add(button2);        
         this.add(button3);
-        this.add(label);
+        this.add(scroll);
         this.add(button4);
         
         button1.addActionListener(e-> {
@@ -90,8 +93,8 @@ public class TopButtonsPanel<A extends JPanel> extends JPanel {
         s.putConstraint(SpringLayout.WEST, button1, sp1, SpringLayout.WEST, this);
         s.putConstraint(SpringLayout.WEST, button2, sp3, SpringLayout.EAST, button1);
         s.putConstraint(SpringLayout.WEST, button3, sp2, SpringLayout.EAST, button2);
-        s.putConstraint(SpringLayout.WEST, label, sp1, SpringLayout.EAST, button3);
-        s.putConstraint(SpringLayout.WEST, button4, sp1, SpringLayout.EAST, label);
+        s.putConstraint(SpringLayout.WEST, scroll, sp2, SpringLayout.EAST, button3);
+        s.putConstraint(SpringLayout.WEST, button4, sp1, SpringLayout.EAST, scroll);
         s.putConstraint(SpringLayout.EAST, this, sp3, SpringLayout.EAST, button4);
         
         this.setVisible(true);
