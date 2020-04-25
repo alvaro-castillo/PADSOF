@@ -42,9 +42,10 @@ public class ProjectPanel extends JPanel {
 	private JComboBox<String> userGroups;
 	private JButton voteButton = new JButton("Vote");
 	private JButton popularityReportButton = new JButton("Create Popularity Report");
-	private JButton notifButton = new JButton("Get Notifications/DOESNT WORK YET");
+	private JButton notifButton = new JButton("Get Notifications");
 	private JPanel bottomPanel = new JPanel();
 	private JPanel popularityAndNotif = new JPanel();
+	private JPanel voteButtonPanel = new JPanel();
 	
 	private ProjectController controller;
 	
@@ -155,6 +156,10 @@ public class ProjectPanel extends JPanel {
         
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
         bottomPanel.add(votePanel);
+        
+        voteButtonPanel.add(voteButton);
+        bottomPanel.add(voteButtonPanel);
+        
         bottomPanel.add(popularityAndNotif);
 
         c.gridx = 1;
