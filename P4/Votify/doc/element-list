@@ -9,3 +9,16 @@ main
 modifiableDates
 request
 testers
+userInterface
+userInterface.administrator
+userInterface.administrator.acceptance
+userInterface.administrator.banning
+userInterface.administrator.feed
+userInterface.commonElements
+userInterface.createGroupScreen
+userInterface.initialScreen
+userInterface.loginScreen
+userInterface.projectScreen
+userInterface.registerScreen
+userInterface.searchPanel
+userInterface.userFeed
