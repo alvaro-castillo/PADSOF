@@ -45,7 +45,7 @@ public class InfrastructureProjectPanel extends JPanel {
         
         c.gridx = 1;
         c.gridy = 0;
-        c.gridwidth = 5;
+        c.gridwidth = 1;
         c.gridheight = 3;
         infrProjPanel.add(proj, c);
         

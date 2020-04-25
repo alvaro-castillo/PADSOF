@@ -43,6 +43,8 @@ public class ProjectPanel extends JPanel {
 	private JButton voteButton = new JButton("Vote");
 	private JButton popularityReportButton = new JButton("Create Popularity Report");
 	private JButton notifButton = new JButton("Get Notifications/DOESNT WORK YET");
+	private JPanel bottomPanel = new JPanel();
+	private JPanel popularityAndNotif = new JPanel();
 	
 	private ProjectController controller;
 	
@@ -138,37 +140,28 @@ public class ProjectPanel extends JPanel {
         c.gridheight = 3;
         c.gridx = xPos;
         c.gridy = yPos; 
-        descrPanel.setBorder(new EmptyBorder(20,20,20,20));
         this.add(descrPanel, c);
         
-        votePanel.setLayout(new GridLayout(5,3));
-        
+        votePanel.setLayout(new GridLayout(2,2));
         votePanel.add(groupVote);
-        votePanel.add(new JLabel());
         votePanel.add(userGroups);
-        
         votePanel.add(indivVote);
-        votePanel.add(new JLabel());
-        votePanel.add(new JLabel());
+        votePanel.add(new JPanel());
         
-        votePanel.add(new JLabel());
-        votePanel.add(voteButton);
-        votePanel.add(new JLabel());
         
-        votePanel.add(new JLabel());
-        votePanel.add(new JLabel());
-        votePanel.add(new JLabel());
+        popularityAndNotif.add(popularityReportButton);
+        popularityAndNotif.add(notifButton);
         
-        votePanel.add(popularityReportButton);
-        votePanel.add(new JLabel());
-        votePanel.add(notifButton);
+        
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        bottomPanel.add(votePanel);
+        bottomPanel.add(popularityAndNotif);
 
         c.gridx = 1;
         c.gridy = 4; 
         c.gridwidth = 2;
         c.gridheight = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        this.add(votePanel, c);
+        this.add(bottomPanel, c);
         
         voteButton.addActionListener(event -> controller.voteButtonPressed(event));
         popularityReportButton.addActionListener(event -> controller.createPopularityReport(event));
