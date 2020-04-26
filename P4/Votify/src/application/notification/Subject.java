@@ -1,14 +1,20 @@
 package application.notification;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Abstract class that represents a subject that notifies its observers whenever
  * something in particular changes
  * 
- * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ * @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
  */
-public abstract class Subject {
+public abstract class Subject implements Serializable {
+	
+	/**
+	 * Version for serialize objects
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * List of observers a certain subject has
@@ -44,6 +50,14 @@ public abstract class Subject {
 		for (IObserver obs: observers) {
 			obs.update(n);
 		}
+	}
+	
+	/**
+	 * Gets all of the observers
+	 * @return observers
+	 */
+	public List<IObserver> getObservers() {
+		return observers;
 	}
 
 }
