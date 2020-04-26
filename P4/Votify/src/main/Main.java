@@ -83,7 +83,9 @@ public class Main {
 		System.out.println("User2 creates two subgroups of 'UAM': 'EPS' and 'Facultad de Ciencias' \n");
 		app.logIn(u2.getUsername(), u2.getPassword());
 		Group g1a = g1.createSubgroup("EPS", u2);
+		app.addGroup(g1a);
 		Group g1b = g1.createSubgroup("Facultad de Ciencias", u2);
+		app.addGroup(g1b);
 		app.logOut();
 		
 
