@@ -11,9 +11,9 @@ import java.io.Serializable;
 /**
  * Represents a group of the Application
  * 
- * @author Miguel Álvarez Valiente
+ * @author Miguel Ã�lvarez Valiente
  * @author Alejandro Benimeli Miranda
- * @author Álvaro Castillo García 
+ * @author Ã�lvaro Castillo GarcÃ­a 
  *
  */
 public class Group extends Subject
@@ -185,7 +185,7 @@ public class Group extends Subject
 		if (u == null) { 
 			return false; 
 		}
-		if (members.contains(u) || userInParent(u) || userInChild(u) || this.status!=Status.ACCEPTED) { 
+		if ((members.contains(u) || userInParent(u) || userInChild(u) || this.status!=Status.ACCEPTED) && !u.equals(representative)) { 
 			return false;
 		}
 		
@@ -204,7 +204,6 @@ public class Group extends Subject
 		if (u == null) {
 			return false;
 		}
-		if (representative.equals(u)) { representative = null; }
 		notifyObservers(null);
 		return members.remove(u);
 	}
@@ -267,7 +266,7 @@ public class Group extends Subject
 	 * @param u RegisteredUser which will be looked for in the parent groups
 	 * @return boolean that will return true if the user is found
 	 */
-	private boolean userInParent(RegisteredUser u) {
+	public boolean userInParent(RegisteredUser u) {
 		if (u == null) { 
 			return false; 
 		}
@@ -287,7 +286,7 @@ public class Group extends Subject
 	 * @param u RegisteredUser which will be looked for in the children groups
 	 * @return boolean that will return true if the user is found
 	 */
-	private boolean userInChild(RegisteredUser u) {
+	public boolean userInChild(RegisteredUser u) {
 		for (Group g: this.subgroups) {
 			if (g.members.contains(u)) {
 				return true;
