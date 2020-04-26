@@ -315,7 +315,7 @@ public class RegisteredUser implements Serializable, IObserver {
 			return false;
 		}
 		RegisteredUser that = (RegisteredUser)obj;
-		if (this.username.contains(that.getUsername()) || this.id.contains(that.getId())) {
+		if (this.username.equals(that.getUsername()) || this.id.equals(that.getId())) {
 			return true;
 		} else {
 			return false;
