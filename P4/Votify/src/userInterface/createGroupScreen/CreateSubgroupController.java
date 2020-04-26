@@ -55,6 +55,7 @@ public class CreateSubgroupController extends KeyAdapter implements ActionListen
 			return;
 		} else if (gr.getStatus() != Status.ACCEPTED) {
 			JOptionPane.showMessageDialog(panel, "Parent group has to be accepted by the admin." , "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		Group g = gr.createSubgroup(name, user);
 		if(app.addGroup(g)==false) {
@@ -107,6 +108,7 @@ public class CreateSubgroupController extends KeyAdapter implements ActionListen
 			return;
 		} else if (gr.getStatus() != Status.ACCEPTED) {
 			JOptionPane.showMessageDialog(panel, "Parent group has to be accepted by the admin." , "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		Group g = gr.createSubgroup(name, user);
 		if(app.addGroup(g)==false) {
