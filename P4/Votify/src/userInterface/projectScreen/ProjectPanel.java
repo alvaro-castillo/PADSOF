@@ -28,6 +28,8 @@ public class ProjectPanel extends JPanel {
 	private JPanel namePanel = new JPanel();
 	private JLabel projectType;
 	private JLabel status;
+	private JLabel moneyAsked;
+	private JLabel moneyGranted;
 	private JPanel typePanel = new JPanel();
 	private JTextArea projectDescription;
 	private JScrollPane descrPanel;
@@ -41,7 +43,7 @@ public class ProjectPanel extends JPanel {
 	private JComboBox<String> userGroups;
 	private JButton voteButton = new JButton("Vote");
 	private JButton popularityReportButton = new JButton("Create Popularity Report");
-	private JButton notifButton = new JButton("Get Notifications");
+	private JButton notifButton;
 	private JPanel bottomPanel = new JPanel();
 	private JPanel popularityAndNotif = new JPanel();
 	private JPanel voteButtonPanel = new JPanel();
@@ -58,6 +60,23 @@ public class ProjectPanel extends JPanel {
 			projectType = new JLabel("(Infrastructure)");
 		} else {
 			projectType = new JLabel("(Social)");
+		}
+		
+		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + "€");
+		if (proj.getGrantedAmount() != -1) {
+			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + "€");
+		} else {
+			moneyGranted = new JLabel();
+		}
+		
+		
+		if (reg.equals(proj.getCreator())) {
+			notifButton = new JButton("You are the creator");
+			notifButton.setEnabled(false);
+		} else if (proj.getObservers().contains(reg)) {
+			notifButton = new JButton("Stop Notifications");
+		} else {
+			notifButton = new JButton("Get Notifications");
 		}
 		
 		this.status = new JLabel(proj.getState().toString());
@@ -126,6 +145,8 @@ public class ProjectPanel extends JPanel {
         typePanel.setLayout(new BoxLayout(typePanel, BoxLayout.Y_AXIS));
         typePanel.add(projectType);
         typePanel.add(status);
+        typePanel.add(moneyAsked);
+        typePanel.add(moneyGranted);
         this.add(typePanel, c);
         
         c.gridx = xPos;
@@ -149,6 +170,7 @@ public class ProjectPanel extends JPanel {
         votePanel.add(new JPanel());
         
         
+        popularityAndNotif.setLayout(new GridLayout(1,2));
         popularityAndNotif.add(popularityReportButton);
         popularityAndNotif.add(notifButton);
         
@@ -169,6 +191,7 @@ public class ProjectPanel extends JPanel {
         
         voteButton.addActionListener(event -> controller.voteButtonPressed(event));
         popularityReportButton.addActionListener(event -> controller.createPopularityReport(event));
+        notifButton.addActionListener(event -> controller.notifButtonPressed(event));
         
 	}
 	
@@ -188,6 +211,10 @@ public class ProjectPanel extends JPanel {
 	
 	public void activatePopularityReportButton() {
 		this.popularityReportButton.setEnabled(true);
+	}
+	
+	public void setNotifButton(String s) {
+		notifButton.setText(s);
 	}
 
 }

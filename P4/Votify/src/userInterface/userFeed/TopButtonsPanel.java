@@ -19,7 +19,7 @@ import userInterface.initialScreen.InitialPanel;
 * This class creates a panel that includes four buttons an a label on a scroll pane.
 * It is used in the user and admin feed
 *
-* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
 */
 public class TopButtonsPanel<A extends JPanel> extends JPanel {
 

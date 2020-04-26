@@ -56,4 +56,16 @@ public class ProjectController {
 		
 	}
 	
+	public void notifButtonPressed(ActionEvent e) {
+		
+		if (!app.getCurrentUser().equals(proj.getCreator()) && proj.getObservers().contains(app.getCurrentUser())) {
+			proj.unregisterObserver(app.getCurrentUser());
+			panel.setNotifButton("Get Notifications");
+		} else if (!proj.getObservers().contains(app.getCurrentUser())) {
+			proj.registerObserver(app.getCurrentUser());
+			panel.setNotifButton("Stop Notifications");
+		}
+		
+	}
+	
 }

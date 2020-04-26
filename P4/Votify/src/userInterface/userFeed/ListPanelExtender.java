@@ -9,10 +9,12 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 
 import application.Application;
+import application.group.Group;
 import application.project.InfrastructureProject;
 import application.project.Project;
 import application.project.SocialProject;
 import userInterface.AppFrame;
+import userInterface.groupScreen.GroupPanel;
 import userInterface.projectScreen.InfrastructureProjectPanel;
 import userInterface.projectScreen.SocialProjectPanel;
 import userInterface.searchPanel.SearchPanel;
@@ -21,7 +23,7 @@ import userInterface.searchPanel.SearchPanel;
 * This is the abstract class used in the search controller and user feed controller
 * as both have the same methods.
 *
-* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
 */
 public abstract class ListPanelExtender extends KeyAdapter implements IListPanel{
 	protected JFrame frame;
@@ -50,11 +52,18 @@ public abstract class ListPanelExtender extends KeyAdapter implements IListPanel
 	public void valueChangedGroup(ListSelectionEvent e,  ListPanel paux) {
 		panel.setVisible(false);
 		String group = paux.getSelectedValue();
-		//JPanel p = new Panel TODO: donde se vea informaciÃ³n del grupo
-		//frame.add(p);
-		//System.out.println(group);
+		Group g = app.searchGroup(group);
+		if (g == null) {
+			// error
+			return;
+		}
+		
+		JPanel p = new GroupPanel(g, app.getCurrentUser());
+		
+		panel.setVisible(false);
+		frame.add(p);
 		frame.remove(panel);
-		//p.setVisible(true);
+		
 		
 	}
 

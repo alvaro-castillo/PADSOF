@@ -18,7 +18,7 @@ import userInterface.userFeed.UserFeedPanel;
 /**
 * This is the controller of the Create Group Panel.
 *
-* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
 */
 public class CreateGroupController extends KeyAdapter implements ActionListener{
 	private CreateGroupScreen panel;

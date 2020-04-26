@@ -17,16 +17,16 @@ import userInterface.commonElements.LabelTextPanel;
 * a button for pressing when the user has written a name,
 * a big text and a button that if pressed will go back to the feed panel.
 *
-* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+* @author Miguel Ã�lvarez Valiente, Alejandro Benimeli Miranda, Ã�lvaro Castillo GarcÃ­a
 */
 public class CreateGroupScreen extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private CenteredButtonPanel<CreateGroupController> create;
 	private LabelTextPanel<CreateGroupController> labelText;
-    private BigTextPanel text;
+	private BigTextPanel text;
 	private FeedButtonPanel feed;
-    private CreateGroupController controller;
+	private CreateGroupController controller;
     /**
      * Constructor of this class.
      */
