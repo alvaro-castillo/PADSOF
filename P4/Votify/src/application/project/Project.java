@@ -61,7 +61,7 @@ public abstract class Project extends Subject
 	/**
 	 * Date when the project was approved by the administrator.
 	 */
-	private LocalDate acceptDate;
+	private LocalDate acceptDate; // change to modifiable date?
 	
 	/**
 	 * Unique ID of the project
@@ -88,6 +88,11 @@ public abstract class Project extends Subject
 	 * Creator of the project
 	 */
 	private RegisteredUser creator;
+	
+	/**
+	 * Group of the creator given when creating the project
+	 */
+	private Group group;
 	
 	/**
 	 * Request id. Will be set when sending it to the external entity
@@ -119,6 +124,37 @@ public abstract class Project extends Subject
 		// we don't use vote() because if the project isn't accepted it doesn't count the vote
 		// but we want to always have the creator's vote
 		votes.add(new UserVote(creator));
+		update(null);
+		
+		// Adds the creator as an observer
+		registerObserver(creator);
+
+		// Assign a unique id to the project
+		this.id = lastId + 1;
+		Project.lastId ++;
+	}
+	
+	/**
+	 * Project constructor
+	 * 
+	 * @param title Title of the project
+	 * @param description Description of the project
+	 * @param amount Amount of money requested in Euros
+	 * @param group Group chosen by its representative to create the project
+	 */
+	public Project(String title, String description, double amount, Group group) {
+		this.title = title;
+		this.description = description;
+		this.amount = amount;
+		this.minimumVotes = -1; // Not set until the administrator accepts the project
+		this.acceptDate = null;
+		this.status = ProjectStatus.WAITING_ACCEPTANCE;
+		this.creator = group.getRepresentative();
+		this.group = group;
+		
+		// we don't use vote() because if the project isn't accepted it doesn't count the vote
+		// but we want to always have the creator's vote
+		votes.add(new GroupVote(group));
 		update(null);
 		
 		// Adds the creator as an observer
@@ -254,17 +290,11 @@ public abstract class Project extends Subject
 	}
 	
 	/**
-	 * Changes the state to AdminRejected and add a reason to the notification
-	 * 
-	 * @param reason the reason of the rejection
+	 * Changes the state to AdminRejected
 	 */
-	public void adminRejectProject(String reason) {
+	public void adminRejectProject() {
 		status = ProjectStatus.ADMIN_REJECTED;
-		if(reason.equals("")) {
-			notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator", ModifiableDate.getModifiableDate()));
-		}else {
-			notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator. Reason: " + reason, ModifiableDate.getModifiableDate()));
-		}
+		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator", ModifiableDate.getModifiableDate()));
 	}
 	
 	/**
@@ -431,7 +461,7 @@ public abstract class Project extends Subject
 	/**
 	 * Determines if a group has voted for the project in some group
 	 * 
-	 * @param u the registered user we want to check
+	 * @param group
 	 * @return boolean telling us whether the user has voted for the project or not
 	 */
 	public boolean hasVotedInGroup(RegisteredUser u) {
