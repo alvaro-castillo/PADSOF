@@ -2,6 +2,7 @@ package application.project;
 
 import application.registeredUser.*;
 import application.enums.District;
+import application.group.Group;
 
 /**
  * Subclass of Project. Represents a infrastructure one 
@@ -40,6 +41,23 @@ public class InfrastructureProject extends Project {
 	public InfrastructureProject(String title, String description, double amount, 
 			RegisteredUser creator, District district, String image) {
 		super(title, description, amount, creator);
+		this.district = district;
+		this.image = image;
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param title Title of the project
+	 * @param description Description of the project
+	 * @param amount Amount requested for the project
+	 * @param group Group chosen by its representative to create the project
+	 * @param district District where the project will be done
+	 * @param image Path to the image
+	 */
+	public InfrastructureProject(String title, String description, double amount, 
+			Group group, District district, String image) {
+		super(title, description, amount, group);
 		this.district = district;
 		this.image = image;
 	}

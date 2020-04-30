@@ -1,5 +1,6 @@
 package application.project;
 
+import application.group.Group;
 import application.registeredUser.*;
 
 /**
@@ -45,6 +46,25 @@ public class SocialProject extends Project {
 			RegisteredUser creator, String association, boolean national, 
 			String associationDescription) {
 		super(title, description, amount, creator);
+		this.association = association;
+		this.national = national;
+		this.associationDescription = associationDescription;
+	}
+	
+	/**
+	 * Constructor
+	 * @param title Title of the project
+	 * @param description Description of the project
+	 * @param amount Amount requested
+	 * @param group Group chosen by its representative to create the project
+	 * @param association Association associated to the project
+	 * @param national Is the association national?
+	 * @param associationDescription Description of the association
+	 */
+	public SocialProject(String title, String description, double amount, 
+			Group group, String association, boolean national, 
+			String associationDescription) {
+		super(title, description, amount, group);
 		this.association = association;
 		this.national = national;
 		this.associationDescription = associationDescription;
