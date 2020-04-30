@@ -290,11 +290,17 @@ public abstract class Project extends Subject
 	}
 	
 	/**
-	 * Changes the state to AdminRejected
+	 * Changes the state to AdminRejected and add a reason to the notification
+	 * 
+	 * @param reason the reason of the rejection
 	 */
-	public void adminRejectProject() {
+	public void adminRejectProject(String reason) {
 		status = ProjectStatus.ADMIN_REJECTED;
-		notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator", ModifiableDate.getModifiableDate()));
+		if(reason.equals("")) {
+			notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator", ModifiableDate.getModifiableDate()));
+		}else {
+			notifyObservers(new Notification("Project '" + title + "' with ID " + id + " has been rejected by the administrator. Reason: " + reason, ModifiableDate.getModifiableDate()));
+		}
 	}
 	
 	/**

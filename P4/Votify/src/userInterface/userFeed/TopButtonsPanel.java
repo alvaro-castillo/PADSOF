@@ -13,6 +13,7 @@ import javax.swing.SpringLayout;
 import application.Application;
 import userInterface.AppFrame;
 import userInterface.createGroupScreen.CreateGroupScreen;
+import userInterface.createProjectScreens.CreateProjectPanel1;
 import userInterface.initialScreen.InitialPanel;
 
 /**
@@ -71,8 +72,7 @@ public class TopButtonsPanel<A extends JPanel> extends JPanel {
         	JFrame m = AppFrame.getAppFrame();
         	panel.setVisible(false);
         	m.remove(panel);
-        	//TODO: Cambiar por el panel correspondiente
-        	//m.add(new CreateProjectScreen());
+        	m.add(new CreateProjectPanel1());
         });
         button3.addActionListener(e-> {
         	JFrame m = AppFrame.getAppFrame();

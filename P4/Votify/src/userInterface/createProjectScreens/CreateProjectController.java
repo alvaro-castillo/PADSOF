@@ -14,6 +14,8 @@ import application.project.InfrastructureProject;
 import application.project.SocialProject;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
+import userInterface.administrator.feed.AdminFeedPanel;
+import userInterface.userFeed.UserFeedPanel;
 
 public class CreateProjectController {
 	
@@ -195,11 +197,22 @@ public class CreateProjectController {
 			if(individual) {
 				InfrastructureProject iP = new InfrastructureProject(title, description, amount, creator, district, image); 
 				app.addProject(iP);
+				creator.addProject(iP);
 			} else {
 				InfrastructureProject iP = new InfrastructureProject(title, description, amount, group, district, image);
 				app.addProject(iP);
+				group.addProject(iP);
 			}
 			
+			JPanel feed;
+			
+			if(creator.equals(app.getAdmin())) {
+				feed = new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator), app.getRegisteredUserVotes(creator));
+			}else {
+				feed = new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}
+			
+			frame.add(feed);
 		}
 		
 	}
@@ -245,10 +258,23 @@ public class CreateProjectController {
 			if (individual) {
 				SocialProject sP = new SocialProject(title, description, amount, creator, socialGroup, national, socialGroupDescription);
 				app.addProject(sP);
+				creator.addProject(sP);
 			} else {
 				SocialProject sP = new SocialProject(title, description, amount, group, socialGroup, national, socialGroupDescription);
 				app.addProject(sP);
+				group.addProject(sP);
 			}
+			
+			
+			JPanel feed;
+			
+			if(creator.equals(app.getAdmin())) {
+				feed = new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator), app.getRegisteredUserVotes(creator));
+			}else {
+				feed = new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}
+			
+			frame.add(feed);
 			
 		}
 		

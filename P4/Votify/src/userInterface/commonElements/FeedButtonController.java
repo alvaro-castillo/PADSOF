@@ -44,7 +44,6 @@ public class FeedButtonController {
 		
 		JPanel feed;
 		
-		new UserFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
 		if(user.equals(app.getAdmin())) {
 			feed = new AdminFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user), app.getRegisteredUserVotes(user));
 		}else {

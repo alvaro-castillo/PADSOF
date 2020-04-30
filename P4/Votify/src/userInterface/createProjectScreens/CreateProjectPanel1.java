@@ -26,7 +26,7 @@ public class CreateProjectPanel1 extends JPanel{
 	private JPanel secondPanel = new JPanel();
 	private CreateProjectController controller = new CreateProjectController(this); 
 	
-	public CreateProjectPanel1(JFrame frame) {
+	public CreateProjectPanel1() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);

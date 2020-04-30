@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.*;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,14 +19,14 @@ import javax.swing.LayoutStyle;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
-import application.Application;
 import application.group.Group;
 import application.registeredUser.RegisteredUser;
 import userInterface.commonElements.FeedButtonPanel;
-import userInterface.userFeed.ListPanel;
 
 public class GroupPanel extends JPanel {
 	
+
+	private static final long serialVersionUID = 1L;
 	private FeedButtonPanel feed;
 	private JPanel mainPanel = new JPanel();
 	private JLabel groupName;

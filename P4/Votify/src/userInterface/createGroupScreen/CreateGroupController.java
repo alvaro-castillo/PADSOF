@@ -14,6 +14,7 @@ import application.Application;
 import application.group.Group;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
+import userInterface.administrator.feed.AdminFeedPanel;
 import userInterface.userFeed.UserFeedPanel;
 /**
 * This is the controller of the Create Group Panel.
@@ -60,15 +61,17 @@ public class CreateGroupController extends KeyAdapter implements ActionListener{
 		
 		panel.setVisible(false);
 		
+		JPanel feed;
+		
 		if(user.equals(app.getAdmin())) {
-			user = app.getAdmin();	
+			feed = new AdminFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user), app.getRegisteredUserVotes(user));
+		}else {
+			feed = new UserFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
 		}
-		JPanel p =  new UserFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
 		
-		frame.add(p);
-		frame.remove(panel);
-		p.setVisible(true);
-		
+		JFrame frame = AppFrame.getAppFrame();
+		frame.add(feed);
+		frame.remove(panel);		
 	}
 
 	/**
