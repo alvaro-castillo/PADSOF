@@ -11,9 +11,9 @@ import java.io.Serializable;
 /**
  * Represents a group of the Application
  * 
- * @author Miguel ¡lvarez Valiente
- * @author Alejandro Benimeli Miranda
- * @author ¡lvaro Castillo GarcÌa 
+ * @author √Ålvaro Castillo Garc√≠a
+ * @author Alejandro Benimeli
+ * @author Miguel √Ålvarez Valiente
  *
  */
 public class Group extends Subject

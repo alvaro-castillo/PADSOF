@@ -16,9 +16,9 @@ import userInterface.initialScreen.ImagePanel;
 /**
  * This JPanel shows Infrastructure Projects
  * 
- * @author ¡lvaro Castillo GarcÌa
+ * @author √Ålvaro Castillo Garc√≠a
  * @author Alejandro Benimeli
- * @author Miguel ¡lvarez Valiente
+ * @author Miguel √Ålvarez Valiente
  *
  */
 public class InfrastructureProjectPanel extends JPanel {

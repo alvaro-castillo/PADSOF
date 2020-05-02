@@ -16,9 +16,9 @@ import request.GovernmentGateway;
 /**
  * This is the controller of the Project JPanel
  * 
- * @author Álvaro Castillo García
+ * @author ï¿½lvaro Castillo Garcï¿½a
  * @author Alejandro Benimeli
- * @author Miguel Álvarez Valiente
+ * @author Miguel ï¿½lvarez Valiente
  *
  */
 public class ProjectController {
@@ -56,6 +56,14 @@ public class ProjectController {
 			JOptionPane.showMessageDialog(panel, "Can't vote until the project is approved by the administrator!", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		if (proj.getState() == ProjectStatus.ADMIN_REJECTED) {
+			JOptionPane.showMessageDialog(panel, "The project has been rejected, you can't vote!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if (proj.getState() == ProjectStatus.EXPIRED) {
+			JOptionPane.showMessageDialog(panel, "The project has expired, you can't vote!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		
 		if (voteType == true) { // individual vote
 			if (!proj.vote(app.getCurrentUser())) {
@@ -83,7 +91,16 @@ public class ProjectController {
 	 * @param e event
 	 */
 	public void createPopularityReport(ActionEvent e) {
-
+		
+		if (proj.getState() == ProjectStatus.ADMIN_REJECTED) {
+			JOptionPane.showMessageDialog(panel, "The project has been rejected, you can't view the affinity report!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if (proj.getState() == ProjectStatus.EXPIRED) {
+			JOptionPane.showMessageDialog(panel, "The project has expired, you can't view the affinity report!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		if (proj.hasVoted(app.getCurrentUser())) {
 			JOptionPane.showMessageDialog(panel, "This project has " + proj.getActualVotes() + " unique votes", "Popularity Report", JOptionPane.INFORMATION_MESSAGE);
 		}

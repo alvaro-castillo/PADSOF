@@ -50,7 +50,7 @@ public class CreateProjectController {
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param panel the panel that is controlled by this class
+	 * @param cp1 the panel that is controlled by this class
 	 */
 	public CreateProjectController(CreateProjectPanel1 cp1) {
 		this.cp1 = cp1;

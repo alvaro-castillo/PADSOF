@@ -6,6 +6,7 @@ application.project
 application.registeredUser
 application.vote
 main
+mainTester
 modifiableDates
 request
 testers
@@ -16,6 +17,8 @@ userInterface.administrator.banning
 userInterface.administrator.feed
 userInterface.commonElements
 userInterface.createGroupScreen
+userInterface.createProjectScreens
+userInterface.groupScreen
 userInterface.initialScreen
 userInterface.loginScreen
 userInterface.projectScreen

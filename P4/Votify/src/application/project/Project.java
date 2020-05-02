@@ -482,9 +482,9 @@ public abstract class Project extends Subject
 	}
 	
 	/**
-	 * Determines if a group has voted for the project in some group
+	 * Determines if a user has voted for the project in some group
 	 * 
-	 * @param group
+	 * @param u the user we want to check
 	 * @return boolean telling us whether the user has voted for the project or not
 	 */
 	public boolean hasVotedInGroup(RegisteredUser u) {

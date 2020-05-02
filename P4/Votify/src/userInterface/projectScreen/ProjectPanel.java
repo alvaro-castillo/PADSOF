@@ -25,9 +25,9 @@ import application.registeredUser.RegisteredUser;
 /**
  * This JPanel has the common Project user interface elements. Will be used by all the social and infrastructure panels
  * 
- * @author ¡lvaro Castillo GarcÌa
+ * @author √Ålvaro Castillo Garc√≠a
  * @author Alejandro Benimeli
- * @author Miguel ¡lvarez Valiente
+ * @author Miguel √Ålvarez Valiente
  *
  */
 public class ProjectPanel extends JPanel {
@@ -85,9 +85,9 @@ public class ProjectPanel extends JPanel {
 		}
 		
 		// Shows different funding information depending on the state of the project
-		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + "Ä");
+		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + "‚Ç¨");
 		if (proj.getGrantedAmount() != -1) {
-			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + "Ä");
+			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + "‚Ç¨");
 		} else {
 			moneyGranted = new JLabel();
 		}

@@ -17,9 +17,9 @@ import userInterface.commonElements.FeedButtonPanel;
 /**
  * This JPanel shows Social Projects
  * 
- * @author ¡lvaro Castillo GarcÌa
+ * @author √Ålvaro Castillo Garc√≠a
  * @author Alejandro Benimeli
- * @author Miguel ¡lvarez Valiente
+ * @author Miguel √Ålvarez Valiente
  *
  */
 public class SocialProjectPanel extends JPanel {

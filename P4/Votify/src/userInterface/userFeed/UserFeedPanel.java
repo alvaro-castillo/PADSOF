@@ -6,8 +6,6 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-
-
 /**
 * This class will create the User Feed Panel.
 * It includes the top buttons panel, the list panel with the notifications and a center panel

@@ -4,7 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+* This class will create the Register Panel.
+* It includes three text fields and three labels explaining each field. In addition it includes
+* a title and a button to create the new user.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class RegisterPanel extends JPanel{
 
     private static final long serialVersionUID=1L;
@@ -19,6 +25,9 @@ public class RegisterPanel extends JPanel{
     private RegisterController controller;
     
     
+    /**
+	 * Constructor of this class.
+     */
     public RegisterPanel(){
     	this.controller = new RegisterController(this);
     	
@@ -98,14 +107,29 @@ public class RegisterPanel extends JPanel{
         nationalIDField.addKeyListener(controller);
     }
     
+    /**
+     * Username introduced by the user getter.
+     * 
+     * @return username
+     */
     public String getUsername() {
     	return this.usernameField.getText();
     }
     
+    /**
+     * Id introduced by the user getter.
+     * 
+     * @return id
+     */
     public String getUserId() {
     	return this.nationalIDField.getText();
     }
     
+    /**
+     * Password introduced by the user getter.
+     * 
+     * @return password introduced
+     */
     public String getUserPassword() {
     	return new String(this.passwordField.getPassword());
     }

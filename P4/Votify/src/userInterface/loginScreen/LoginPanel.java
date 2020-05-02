@@ -12,7 +12,14 @@ import javax.swing.border.EmptyBorder;
 import userInterface.AppFrame;
 import userInterface.registerScreen.RegisterPanel;
 
-
+/**
+* This class will create the Log In Panel.
+* It includes two text fields and two labels explaining each field. In addition it includes
+* a title and a button to log in.
+* There is also a label and a button to go to the register panel.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class LoginPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +33,9 @@ public class LoginPanel extends JPanel {
     private JButton registerButton = new JButton("Register");
     private LoginController controller;
     
+    /**
+   	 * Constructor of this class.
+        */
     public LoginPanel() {
     
     	this.controller = new LoginController(this);
@@ -108,10 +118,20 @@ public class LoginPanel extends JPanel {
 
     }
 
+    /**
+     * Username introduced by the user getter.
+     * 
+     * @return username
+     */
     public String getUsername() {
     	return this.usernameField.getText();
     }
     
+    /**
+     * Password introduced by the user getter.
+     * 
+     * @return password introduced
+     */
     public String getUserPassword() {
     	return new String(this.passwordField.getPassword());
     } 
