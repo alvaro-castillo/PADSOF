@@ -1,6 +1,6 @@
 package application.vote;
 
-import java.io.Serializable;
+
 import java.util.*;
 
 import application.group.Group;
@@ -14,7 +14,7 @@ import application.registeredUser.RegisteredUser;
  * @author Miguel Álvarez Valiente
  * 
  */
-public class GroupVote extends Vote implements Serializable{
+public class GroupVote extends Vote {
 	
 	/**
 	 * Serializable version

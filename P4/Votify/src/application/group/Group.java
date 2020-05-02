@@ -11,9 +11,9 @@ import java.io.Serializable;
 /**
  * Represents a group of the Application
  * 
- * @author Miguel Ãƒï¿½lvarez Valiente
+ * @author Miguel Álvarez Valiente
  * @author Alejandro Benimeli Miranda
- * @author Ãƒï¿½lvaro Castillo GarcÃƒÂ­a 
+ * @author Álvaro Castillo García 
  *
  */
 public class Group extends Subject
@@ -111,7 +111,7 @@ public class Group extends Subject
 	 * @return double with the result of applying the affinity formula
 	 */
 	public double createAffinityReport(Group g) {
-		int a=0, b=0 ;
+		int a=0, b=0;
 		if (g == null) { 
 			return -1;
 		} 
@@ -128,7 +128,8 @@ public class Group extends Subject
 		if (this.createdProjects.size() == 0 && g.createdProjects.size() == 0) { 
 			return 0; 
 		}
-		return (a+b)/(this.createdProjects.size()+g.createdProjects.size());
+
+		return ((double)a+(double)b)/((double)this.createdProjects.size()+(double)g.createdProjects.size());
 	}
 	
 	/**

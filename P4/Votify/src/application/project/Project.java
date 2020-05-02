@@ -166,6 +166,23 @@ public abstract class Project extends Subject
 	}
 	
 	/**
+	 * Getter for laasId. Used by application to save the last id before closing the app
+	 * because serialization doesnt save static fields
+	 * @return lastId
+	 */
+	public static long getLastId() {
+		return lastId;
+	}
+	
+	/**
+	 * Setter for last id. Used after reading the app to restore the last id
+	 * @param lId lastId to restore
+	 */
+	public static void setLastId(long lId) {
+		lastId = lId;
+	}
+	
+	/**
 	 * Getter for title
 	 * @return title of the project
 	 */
@@ -538,7 +555,7 @@ public abstract class Project extends Subject
 			s += this.acceptDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 		
-		s += "\n     Amount Requested: " + String.format("%8.2f", this.amount) + "€   Minimum Votes Needed: ";
+		s += "\n     Amount Requested: " + String.format("%8.2f", this.amount) + "â‚¬   Minimum Votes Needed: ";
 		
 		if (this.minimumVotes == -1) {
 			s += String.format("%8s", "Not set");

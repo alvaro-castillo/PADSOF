@@ -1,8 +1,6 @@
 package application.vote;
 
-import java.io.Serializable;
 import java.util.*;
-
 import application.registeredUser.RegisteredUser;
 
 /**
@@ -13,12 +11,13 @@ import application.registeredUser.RegisteredUser;
  * @author Miguel Álvarez Valiente
  *
  */
-public class UserVote extends Vote implements Serializable{
+public class UserVote extends Vote {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * The RegisteredUser that voted
 	 */

@@ -63,6 +63,11 @@ public class Application extends Subject
 	private static Application INSTANCE;
 	
 	/**
+	 * Used to save the last projectId before serializing
+	 */
+	private long lastProjectId;
+	
+	/**
 	 * Constructor of this class. 
 	 * It is private so in can be instantiated just from inside the class.
 	 */
@@ -291,6 +296,10 @@ public class Application extends Subject
 	 * @throws IOException
 	 */
 	public void saveApp(String filename) throws IOException{
+		
+		// Saves the lastId because its static and doesnt serialize
+		this.lastProjectId = Project.getLastId();
+		
 		ObjectOutputStream output =
 				new ObjectOutputStream(
 				new FileOutputStream( filename ));
@@ -311,6 +320,8 @@ public class Application extends Subject
 						new FileInputStream(filename));
 		Application.INSTANCE = (Application) input.readObject();
 		input.close();
+		
+		Project.setLastId(INSTANCE.lastProjectId);
 		
 		ModifiableDate.setToday();
 		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
