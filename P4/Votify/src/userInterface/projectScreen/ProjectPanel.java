@@ -16,11 +16,20 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import application.enums.ProjectStatus;
 import application.group.Group;
 import application.project.InfrastructureProject;
 import application.project.Project;
 import application.registeredUser.RegisteredUser;
 
+/**
+ * This JPanel has the common Project user interface elements. Will be used by all the social and infrastructure panels
+ * 
+ * @author Álvaro Castillo García
+ * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
+ *
+ */
 public class ProjectPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -47,12 +56,25 @@ public class ProjectPanel extends JPanel {
 	private JPanel bottomPanel = new JPanel();
 	private JPanel popularityAndNotif = new JPanel();
 	private JPanel voteButtonPanel = new JPanel();
+	private JButton sendButton = new JButton("Send Project");
 	
 	private ProjectController controller;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param proj Project that is shown in the panel
+	 * @param reg User registered currently in the application
+	 */
 	public ProjectPanel(Project proj, RegisteredUser reg) {
 		
+		// Sets the controller
 		this.controller = new ProjectController(this, proj);
+		
+		// In this cases you cant vote any more
+		if (proj.getState() == ProjectStatus.EXPIRED || proj.getState() == ProjectStatus.APPROVED || proj.getState() == ProjectStatus.APPROVED || proj.getState() == ProjectStatus.PENDING) {
+			voteButton.setEnabled(false);
+		}
 		
 		// Set the component data
 		this.projectName = new JLabel(proj.getTitle());
@@ -62,6 +84,7 @@ public class ProjectPanel extends JPanel {
 			projectType = new JLabel("(Social)");
 		}
 		
+		// Shows different funding information depending on the state of the project
 		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + "€");
 		if (proj.getGrantedAmount() != -1) {
 			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + "€");
@@ -69,7 +92,7 @@ public class ProjectPanel extends JPanel {
 			moneyGranted = new JLabel();
 		}
 		
-		
+		// Shows the get/dont get notifications depending on if the user already has them activated
 		if (reg.equals(proj.getCreator())) {
 			notifButton = new JButton("You are the creator");
 			notifButton.setEnabled(false);
@@ -79,32 +102,35 @@ public class ProjectPanel extends JPanel {
 			notifButton = new JButton("Get Notifications");
 		}
 		
+		// Initialize other components
 		this.status = new JLabel(proj.getState().toString());
 		this.projectDescription = new JTextArea(proj.getDescription(), 6, 40);
 		this.descrPanel = new JScrollPane(projectDescription);
 		
+		// Only show popularity report if you have voted and dont show individual vote if the user already individually voted
 		if (proj.hasVoted(reg)) {
 			indivVote.setEnabled(false);
 		} else {
 			popularityReportButton.setEnabled(false);
 		}
 		
+		// Radio button group with individual vote and group vote
 		radioGroup.add(indivVote);
 		radioGroup.add(groupVote);
 
+		// Combo box with groups you can vote for
 		for (Group g: reg.getCreatedGroups()) {
 			if (proj.hasVoted(g) == false) {
 				groups.add(g);
 			}
 		}
-		
 		String groupsArray[] = new String[groups.size()];
 		for (int i=0; i<groups.size(); i++) {
 			groupsArray[i] = groups.get(i).getName();
 		}
 		this.userGroups = new JComboBox<String>(groupsArray);
 		
-		
+		// Initialize more components
 		projectName.setFont(new Font(projectName.getFont().getName(), Font.PLAIN, 30));
         projectType.setFont(new Font(projectType.getFont().getName(), Font.PLAIN, 18));
         projectDescription.setLineWrap(true);
@@ -112,7 +138,7 @@ public class ProjectPanel extends JPanel {
         projectDescription.setEditable(false);
         projectDescription.setFont(projectDescription.getFont().deriveFont(16f));
 
-		
+		// Set the layout and build the panel
     	this.setLayout(new GridBagLayout());
     	
         GridBagConstraints c = new GridBagConstraints(); 
@@ -182,6 +208,10 @@ public class ProjectPanel extends JPanel {
         bottomPanel.add(voteButtonPanel);
         
         bottomPanel.add(popularityAndNotif);
+        
+        if ( (proj.getState() == ProjectStatus.ADMIN_ACCEPTED) && (proj.getActualVotes() >= proj.getMinimumVotes()) && (proj.getRequestId() == null) && (proj.getCreator().equals(reg))) {
+        	bottomPanel.add(sendButton);
+        }
 
         c.gridx = 1;
         c.gridy = 4; 
@@ -192,9 +222,14 @@ public class ProjectPanel extends JPanel {
         voteButton.addActionListener(event -> controller.voteButtonPressed(event));
         popularityReportButton.addActionListener(event -> controller.createPopularityReport(event));
         notifButton.addActionListener(event -> controller.notifButtonPressed(event));
+        sendButton.addActionListener(event -> controller.sendButtonPressed(event));
         
 	}
 	
+	/**
+	 * Returns information about which radio button was selected
+	 * @return true if indivVote is selected, false if groupVote and null if none is selected
+	 */
 	public Boolean getVoteType() {
 		if (indivVote.isSelected()) {
 			return true;
@@ -205,16 +240,34 @@ public class ProjectPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Gets the group name selected in the combo box
+	 * @return group name
+	 */
 	public String getSelectedGroup() {
 		return (String)userGroups.getSelectedItem();
 	}
 	
+	/**
+	 * Enables the popularity report button
+	 */
 	public void activatePopularityReportButton() {
 		this.popularityReportButton.setEnabled(true);
 	}
 	
+	/**
+	 * Sets the notification button text
+	 * @param s string that we change the button to
+	 */
 	public void setNotifButton(String s) {
 		notifButton.setText(s);
+	}
+	
+	/**
+	 * Disables the sendButton
+	 */
+	public void disableSendButton() {
+		sendButton.setEnabled(false);
 	}
 
 }

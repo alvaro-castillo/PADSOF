@@ -21,6 +21,12 @@ public class GroupController {
 	private Application app;
 	private JFrame frame;
 	
+	/**
+	 * Controller
+	 * 
+	 * @param panel panel it controls
+	 * @param gr group you controll
+	 */
 	public GroupController(GroupPanel panel, Group gr) {
 		this.panel = panel;
 		this.gr = gr;
@@ -28,6 +34,10 @@ public class GroupController {
 		this.frame = AppFrame.getAppFrame();
 	}
 	
+	/**
+	 * Controls the behavior of the join button
+	 * @param e event
+	 */
 	public void joinButtonPressed(ActionEvent e) {
 
 		if (!gr.getMembers().contains(app.getCurrentUser())) {
@@ -45,6 +55,10 @@ public class GroupController {
 
 	}
 	
+	/**
+	 * Controls the behavior of the leave button
+	 * @param e event
+	 */
 	public void leaveButtonPressed(ActionEvent e) {
 		
 		if (gr.getMembers().contains(app.getCurrentUser())) {
@@ -57,12 +71,26 @@ public class GroupController {
 		
 	}
 	
+	/**
+	 * Creates a pop up with the affinity report
+	 * @param e event
+	 */
 	public void createAffinityReport(ActionEvent e) {
 		
-		// todo
+		Group g2 = app.searchGroup(panel.getSelectedGroup());
+		if (g2 == null) {
+			return;
+		}
+		
+		JOptionPane.showMessageDialog(panel, "This 2 groups have a " + gr.createAffinityReport(g2) + " affinity!", "Affinity Report", JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 	
+	/**
+	 * Changes the screen to the subgroup selected
+	 * @param e event
+	 * @param subgroups list of subgroups
+	 */
 	public void selectSubgroup(ListSelectionEvent e, JList<String> subgroups) {
 		
 		String group = subgroups.getSelectedValue();
@@ -77,6 +105,10 @@ public class GroupController {
 		
 	}
 	
+	/**
+	 * Changes the screen to the group passed
+	 * @param g group you want to show
+	 */
 	public void changeToGroup(Group g) {
 		
 		JPanel p = new GroupPanel(g, app.getCurrentUser());
@@ -87,6 +119,10 @@ public class GroupController {
 		
 	}
 	
+	/**
+	 * Changes the screen to the create subgroup screen
+	 * @param e event
+	 */
 	public void createSubgroup(ActionEvent e) {
 		
 		JPanel p = new CreateSubgroupScreen(gr);
@@ -96,6 +132,5 @@ public class GroupController {
 		frame.remove(panel);
 		
 	}
-	
 	
 }

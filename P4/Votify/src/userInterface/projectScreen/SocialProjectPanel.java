@@ -14,6 +14,14 @@ import application.project.SocialProject;
 import application.registeredUser.RegisteredUser;
 import userInterface.commonElements.FeedButtonPanel;
 
+/**
+ * This JPanel shows Social Projects
+ * 
+ * @author Álvaro Castillo García
+ * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
+ *
+ */
 public class SocialProjectPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -26,6 +34,12 @@ public class SocialProjectPanel extends JPanel {
 	private JScrollPane descrPanel;
 	private FeedButtonPanel feed;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param soci Social project that shows in the panel
+	 * @param reg Registered user currently logged in the app
+	 */
 	public SocialProjectPanel(SocialProject soci, RegisteredUser reg) {
 		
 		// Initialize component content

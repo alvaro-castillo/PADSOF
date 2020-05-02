@@ -13,6 +13,14 @@ import application.registeredUser.RegisteredUser;
 import userInterface.commonElements.FeedButtonPanel;
 import userInterface.initialScreen.ImagePanel;
 
+/**
+ * This JPanel shows Infrastructure Projects
+ * 
+ * @author Álvaro Castillo García
+ * @author Alejandro Benimeli
+ * @author Miguel Álvarez Valiente
+ *
+ */
 public class InfrastructureProjectPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -23,6 +31,12 @@ public class InfrastructureProjectPanel extends JPanel {
 	private JPanel infrProjPanel = new JPanel(); 
 	private FeedButtonPanel feed;
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param infr Infrastructure project that shows in the panel
+	 * @param reg Registered user currently logged in the application
+	 */
 	public InfrastructureProjectPanel(InfrastructureProject infr, RegisteredUser reg) {
 		
 		// Initialize component content
@@ -31,6 +45,7 @@ public class InfrastructureProjectPanel extends JPanel {
 		this.districtLabel = new JLabel(infr.getDistrict().toString());
 		this.feed = new FeedButtonPanel(this);
 
+		// Sets the layout and build the jpanel
 		infrProjPanel.setLayout(new GridBagLayout());
     	
         GridBagConstraints c = new GridBagConstraints(); 
@@ -68,7 +83,6 @@ public class InfrastructureProjectPanel extends JPanel {
         districtPanel.setLayout(new GridBagLayout());
         districtPanel.add(districtLabel);
         infrProjPanel.add(districtPanel, c);
-        
         
         
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
