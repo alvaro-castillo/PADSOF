@@ -79,6 +79,13 @@ public class RegisterController extends KeyAdapter implements ActionListener {
 			 return;
 		}
 		
+		for(int i=0; i<9; i++) {
+			if(Character.isLetter(userId.charAt(i))) {
+				JOptionPane.showMessageDialog(panel, "You must type a valid ID with 9 digits.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		}
+		
 		RegisteredUser u = new RegisteredUser(userId,userName,password);
 		
 		if(app.addUser(u)==false) {
