@@ -107,12 +107,13 @@ public class CreateGroupController extends KeyAdapter implements ActionListener{
 		JOptionPane.showMessageDialog(panel, "Group " + name +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
 		
 		panel.setVisible(false);
-		
+		JPanel p;
 		if(user.equals(app.getAdmin())) {
-			user = app.getAdmin();	
+			user = app.getAdmin();
+			p =  new AdminFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
+		}else {
+			p =  new UserFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
 		}
-		JPanel p =  new UserFeedPanel(user.getUsername(),user.getNotificationsMessages(), app.getRegisteredUserGroups(user),  app.getRegisteredUserVotes(user));
-		
 		frame.add(p);
 		frame.remove(panel);
 		p.setVisible(true);

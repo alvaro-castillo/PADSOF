@@ -41,7 +41,7 @@ public class CreateProjectPanel2 extends JPanel {
 	private JLabel labelIndividualOrGroup = new JLabel("Create as individual or group representative:");
 	private JRadioButton individualRButton = new JRadioButton("Create as individual");
 	private JRadioButton groupRButton = new JRadioButton("Create as a group rep   ");
-	private JComboBox groupCBox = new JComboBox();
+	private JComboBox<String> groupCBox = new JComboBox<String>();
 	private ButtonGroup individualOrGroupBG = new ButtonGroup();
 	private JButton nextButton = new JButton("Next");
 	private JPanel secondPanel = new JPanel();

@@ -1,6 +1,9 @@
 package application.project;
 
 import application.registeredUser.*;
+
+import java.io.File;
+
 import application.enums.District;
 import application.group.Group;
 

@@ -58,10 +58,10 @@ public class RegisteredUserTest {
 	public void testAddGroup() {
 		
 		RegisteredUser u2 = new RegisteredUser("456789","User2", "ddssc");
-		Group g = new Group("UAM", r);
+		Group g = new Group("Skate", r);
 		
-		//Links the group to its creator
-		assertTrue(r.addGroup(g));
+		//Links the group to its creator, but it was linked while creating a group
+		assertFalse(r.addGroup(g));
 		
 		//Links the group twice to its creator
 		assertFalse(r.addGroup(g));

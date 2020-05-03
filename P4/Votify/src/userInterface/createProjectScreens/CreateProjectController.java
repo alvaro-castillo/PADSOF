@@ -1,7 +1,6 @@
 package userInterface.createProjectScreens;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -73,7 +72,7 @@ public class CreateProjectController {
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param panel the first panel of all the create project screens
+	 * @param cp1 the first panel of all the create project screens
 	 */
 	public CreateProjectController(CreateProjectPanel1 cp1) {
 		this.cp1 = cp1;

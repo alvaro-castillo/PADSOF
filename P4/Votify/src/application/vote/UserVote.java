@@ -14,7 +14,7 @@ import application.registeredUser.RegisteredUser;
 public class UserVote extends Vote {
 	
 	/**
-	 * 
+	 * Serializable version
 	 */
 	private static final long serialVersionUID = 1L;
 	

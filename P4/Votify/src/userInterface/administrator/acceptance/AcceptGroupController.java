@@ -14,6 +14,11 @@ import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
 import userInterface.administrator.feed.AdminFeedPanel;
 
+/**
+* This is the controller of the Accept Group Panel.
+*
+* @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+*/
 public class AcceptGroupController implements ActionListener {
 
 	private AcceptGroupPanel panel;

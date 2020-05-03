@@ -72,8 +72,8 @@ public class GroupTest {
 		
 		//We check it wont work with a null user
 		assertFalse(g1.addUser(null));
-		//We check it wont work with a user that is already on the group
-		assertFalse(g1.addUser(u1));
+		//We check it will work with a user that is already on the group because he is the creator
+		assertTrue(g1.addUser(u1));
 		//We check it will work with a correct input
 		assertTrue(g1_1.addUser(u2));
 		//We check if it indeed worked
@@ -98,7 +98,7 @@ public class GroupTest {
 		//We check it will work with a correct input
 		assertTrue(g1.deleteUser(u1));
 		//We check if it indeed worked
-		assertNull(g1.getRepresentative());
+		assertNotNull(g1.getRepresentative());
 		
 	}
 
