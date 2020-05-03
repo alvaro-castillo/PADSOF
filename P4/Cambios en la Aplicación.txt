@@ -24,3 +24,11 @@ Modificaciones:
 
 - public void logIn(String u, String p ) throws Exception en Application.java -> Ahora es void y lanza Excepciones
 - public void adminRejectProject(String reason) en Project.java -> Ahora recibe una string
+
+- public Project(String title, String description, double amount, Group group) -> Constructor de project añadido para crear un proyecto como representante de un grupo.
+- public SocialProject(String title, String description, double amount, 
+			Group group, String association, boolean national, 
+			String associationDescription) -> Constructor de social project añadido para crear un proyecto como representante de un grupo.
+- public InfrastructureProject(String title, String description, double amount, 
+			Group group, District district, String image) ->Constructor de infrastructure project añadido para crear un proyecto como representante de un grupo.
+- private String setImage(String image) -> Metodo de infrastructure project que mueve la imagen y formatea el path para que no coincidan nombres.
