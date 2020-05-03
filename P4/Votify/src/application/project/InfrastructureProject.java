@@ -42,7 +42,7 @@ public class InfrastructureProject extends Project {
 			RegisteredUser creator, District district, String image) {
 		super(title, description, amount, creator);
 		this.district = district;
-		this.image = image;
+		this.image = setImage(image);
 	}
 	
 	/**
@@ -59,7 +59,24 @@ public class InfrastructureProject extends Project {
 			Group group, District district, String image) {
 		super(title, description, amount, group);
 		this.district = district;
-		this.image = image;
+		this.image = setImage(image);
+	}
+
+	/**
+	 * Method in charge of moving the image and renaming it so there are no images with
+	 * equal names
+	 * 
+	 * @param image path of the image related to the project
+	 * @return formated path of the image related to the project
+	 */
+	private String setImage(String image) {
+		File originalFile = new File(image);
+	    String path = image;
+	    String newPath = path.substring(path.lastIndexOf('/') + 1);
+	    newPath = getLastId() + newPath;
+	    File newFile = new File(newPath);
+		originalFile.renameTo(newFile);
+		return newPath;
 	}
 	
 	/**
