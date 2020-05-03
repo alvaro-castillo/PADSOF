@@ -9,6 +9,18 @@ import javax.swing.border.EmptyBorder;
 
 import userInterface.commonElements.FeedButtonPanel;
 
+/**
+ * This class represents the first screen to create a project.
+ * It contains three labels, three fields and one button. The fields and labels
+ * are organized in pairs, one pair is for the title, another for the description,
+ * and a last one for the money. The next button is used when all the fields are
+ * filled in and shows the next screen
+ * There is also a feed button, to be used when you want to quit the creation of a
+ * project and return to the user feed screen.
+ * 
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ *
+ */
 public class CreateProjectPanel1 extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
@@ -26,11 +38,15 @@ public class CreateProjectPanel1 extends JPanel{
 	private JPanel secondPanel = new JPanel();
 	private CreateProjectController controller = new CreateProjectController(this); 
 	
+	/**
+	 * Constructor of this class
+	 * 
+	 */
 	public CreateProjectPanel1() {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
-		this.add(Box.createRigidArea(new Dimension(0, 60)));
+		this.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		mainPanel.setBorder(new EmptyBorder(20,20,20,20));
     	mainPanel.setLayout(new GridBagLayout());
@@ -107,15 +123,29 @@ public class CreateProjectPanel1 extends JPanel{
         
 	}
 	
-	
+	/**
+	 * Title field getter. Used by the controller
+	 * 
+	 * @return String in the title field
+	 */
 	public String getTitle() {
 		return this.titleField.getText();
 	}
 	
+	/**
+	 * Description field getter. Used by the controller
+	 * 
+	 * @return String in the descriptions field
+	 */
 	public String getDescription() {
 		return this.descriptionArea.getText();
 	}
 	
+	/**
+	 * Money field getter. Used by the controller
+	 * 
+	 * @return String in the money field
+	 */
 	public String getMoney() {
 		return moneyField.getText();
 	}

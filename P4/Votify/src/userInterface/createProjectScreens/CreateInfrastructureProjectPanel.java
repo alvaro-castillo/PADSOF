@@ -16,6 +16,19 @@ import application.enums.District;
 import userInterface.commonElements.FeedButtonPanel;
 import userInterface.initialScreen.ImagePanel;
 
+/**
+ * This class represents the screen to create an infrastructure project.
+ * It has a label that asks the user for an image, and a button to browse for that 
+ * image, and an area where that image is shown (in the beginning a default image is
+ * shown). It also contains a CBox in order to chose the district of the project and a
+ * create button, which is used when all the fields are filled in, and leads you to 
+ * the feed screen. At the end of this step the project has been created.
+ * There is also a feed button, to be used when you want to quit the creation of a
+ * project and return to the user feed screen.
+ * 
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ *
+ */
 public class CreateInfrastructureProjectPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -31,11 +44,16 @@ public class CreateInfrastructureProjectPanel extends JPanel {
 	private JComboBox<String> districtCBox = new JComboBox<String>();
 	private JButton createButton = new JButton("Create");
 	
+	/**
+	 * Constructor for this class
+	 * 
+	 * @param cpC Reference to the class with all the controllers
+	 */
 	public CreateInfrastructureProjectPanel(CreateProjectController cpC) {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
-		this.add(Box.createRigidArea(new Dimension(0, 60)));
+		this.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		mainPanel.setBorder(new EmptyBorder(20,20,20,20));
 		mainPanel.setLayout(new GridBagLayout());
@@ -135,10 +153,20 @@ public class CreateInfrastructureProjectPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Getter of the path of the chosen image. Used by the controller
+	 * 
+	 * @return String with the path of the image
+	 */
 	public String getPath() {
 		return this.path;
 	}
 	
+	/**
+	 * Getter of the option of the district CBox selected. Used by the controller
+	 * 
+	 * @return String of the item of the district CBox
+	 */
 	public String getDistrict() {
 		return districtCBox.getSelectedItem().toString();
 	}

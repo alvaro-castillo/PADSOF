@@ -14,24 +14,47 @@ import application.project.InfrastructureProject;
 import application.project.SocialProject;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
-import userInterface.administrator.feed.AdminFeedPanel;
 import userInterface.userFeed.UserFeedPanel;
 
+/**
+ * This is a class to contain and manage the different controllers in charged 
+ * of the different panels that have to do with the creation of a project
+ * 
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ *
+ */
 public class CreateProjectController {
 	
-	public CP1Controller cp1C = null;
-	public CP2Controller cp2C = null;
-	public CIPController cipC = null;
-	public CSPController cspC = null;
+	/**
+	 * References to all the controllers that the class manages. Each of them is
+	 * instantiated when the corresponding panel is instantiated too
+	 */
+	public CP1Controller cp1C;
+	public CP2Controller cp2C;
+	public CIPController cipC;
+	public CSPController cspC;
 	
+	/**
+	 * References to all the panels managed by the different controllers. Each of
+	 * them is instantiated when the one before it has ended its function
+	 */
 	private CreateProjectPanel1 cp1;
 	private CreateProjectPanel2 cp2;
 	private CreateInfrastructureProjectPanel cip;
 	private CreateSocialProjectPanel csp;
 	
+	/**
+	 * Reference to Application
+	 */
 	private Application app;
+	/**
+	 * Reference to the main frame
+	 */
 	private JFrame frame;
 	
+	/**
+	 * All the fields that will be filled in with the data of the project 
+	 */
 	private String title;
 	private String description;
 	private double amount;
@@ -50,7 +73,7 @@ public class CreateProjectController {
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param cp1 the panel that is controlled by this class
+	 * @param panel the first panel of all the create project screens
 	 */
 	public CreateProjectController(CreateProjectPanel1 cp1) {
 		this.cp1 = cp1;
@@ -60,16 +83,36 @@ public class CreateProjectController {
 		this.creator = app.getCurrentUser();
 	}
 	
+	
+	/**
+	 * Controller of the first panel to create project
+	 *
+	 */
 	private class CP1Controller implements ActionListener {
 
+		/**
+		 * Reference to the container class
+		 */
 		private CreateProjectController cpC;
 		
+		/**
+		 * Constructor of this class 
+		 * 
+		 * @param cpC Reference to the container class
+		 */
 		public CP1Controller(CreateProjectController cpC) {
 			this.cpC = cpC;
 		}
-
+		
+		/**
+		 * Method that will be performed when the "next" button is pressed on the
+		 * CreateProjectPanel1 screen.
+		 * It collects all the fields from this screen and checks for errors
+		 * 
+		 * @param e the event caused by an action
+		 */
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 
 			if(cp1.getTitle().length()>25) {
 				JOptionPane.showMessageDialog(cp1, "The title must be 25 characters max.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -91,6 +134,7 @@ public class CreateProjectController {
 			try {
 				if(cp1.getMoney().length()==0) {
 					JOptionPane.showMessageDialog(cp1, "Incomplete field: Money", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
 				} else {
 					amount = Double.parseDouble(cp1.getMoney());
 				}
@@ -113,17 +157,35 @@ public class CreateProjectController {
 	
 	}
 	
+	/**
+	 * Controller of the second panel to create project
+	 *
+	 */
 	private class CP2Controller implements ActionListener {
 		
+		/**
+		 * Reference to the container class
+		 */
 		private CreateProjectController cpC;
 		
+		/**
+		 * Constructor of this class 
+		 * 
+		 * @param cpC Reference to the container class
+		 */
 		public CP2Controller(CreateProjectController cpC) {
 			this.cpC = cpC;
 		}
 
-
+		/**
+		 * Method that will be performed when the "next" button is pressed on the
+		 * CreateProjectPanel2 screen.
+		 * It collects all the fields from this screen and checks for errors
+		 * 
+		 * @param e the event caused by an action
+		 */
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 			
 			if(cp2.getType()==null) {
 				JOptionPane.showMessageDialog(cp2, "A project type must be selected", "Error", JOptionPane.ERROR_MESSAGE);
@@ -165,12 +227,29 @@ public class CreateProjectController {
 		
 	}
 	
+	
+	/**
+	 * Controller of the panel to create infrastructure project
+	 *
+	 */
 	private class CIPController implements ActionListener {
 		
-		public CIPController() { }
-
+		/**
+		 * Constructor of this class 
+		 * 
+		 * @param cpC Reference to the container class
+		 */
+		public CIPController(){}
+		
+		/**
+		 * Method that will be performed when the "create" button is pressed on the
+		 * CreateInfrastructreProjectPanel screen.
+		 * It collects all the fields from this screen and checks for errors
+		 * 
+		 * @param e the event caused by an action
+		 */
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 			
 			if(cip.getPath()==null) {
 				JOptionPane.showMessageDialog(cip, "Incomplete field: Image", "Error", JOptionPane.ERROR_MESSAGE);
@@ -191,38 +270,43 @@ public class CreateProjectController {
 				}
 			}
 			
-			cip.setVisible(false);
-			frame.remove(cip);
-			
 			if(individual) {
 				InfrastructureProject iP = new InfrastructureProject(title, description, amount, creator, district, image); 
 				app.addProject(iP);
-				creator.addProject(iP);
 			} else {
 				InfrastructureProject iP = new InfrastructureProject(title, description, amount, group, district, image);
 				app.addProject(iP);
-				group.addProject(iP);
 			}
 			
-			JPanel feed;
+			JOptionPane.showMessageDialog(cip, "Infrastructure Project " + title +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
+			JPanel p =  new UserFeedPanel(app.getCurrentUser().getUsername(),app.getCurrentUser().getNotificationsMessages(), app.getRegisteredUserGroups(app.getCurrentUser()),  app.getRegisteredUserVotes(app.getCurrentUser()));
+			frame.add(p);
+			cip.setVisible(false);
+			frame.remove(cip);
+			p.setVisible(true);
 			
-			if(creator.equals(app.getAdmin())) {
-				feed = new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator), app.getRegisteredUserVotes(creator));
-			}else {
-				feed = new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
-			}
-			
-			frame.add(feed);
 		}
 		
 	}
 	
+	
+	/**
+	 * Controller of the panel to create social project
+	 *
+	 */
 	private class CSPController implements ActionListener {
 		
-		public CSPController() { }			
-
+		public CSPController(){}			
+		
+		/**
+		 * Method that will be performed when the "next" button is pressed on the
+		 * CreateSocialProjectPanel screen.
+		 * It collects all the fields from this screen and checks for errors
+		 * 
+		 * @param e the event caused by an action
+		 */
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 			
 			if(csp.getSocialGroup().length()==0) {
 				JOptionPane.showMessageDialog(csp, "Incomplete field: Associated Social Group", "Error", JOptionPane.ERROR_MESSAGE);
@@ -235,7 +319,7 @@ public class CreateProjectController {
 			}
 			
 			if(csp.getDescription().length()>50) {
-				JOptionPane.showMessageDialog(csp, "The description must be 500 characters max.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(csp, "The description must be 50 characters max.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			} else if (csp.getDescription().length()==0){
 				JOptionPane.showMessageDialog(csp, "Incomplete field: Description", "Error", JOptionPane.ERROR_MESSAGE);
@@ -252,34 +336,29 @@ public class CreateProjectController {
 			
 			socialGroupDescription = csp.getDescription();
 			
-			csp.setVisible(false);
-			frame.remove(csp);
-			
 			if (individual) {
 				SocialProject sP = new SocialProject(title, description, amount, creator, socialGroup, national, socialGroupDescription);
 				app.addProject(sP);
-				creator.addProject(sP);
 			} else {
 				SocialProject sP = new SocialProject(title, description, amount, group, socialGroup, national, socialGroupDescription);
 				app.addProject(sP);
-				group.addProject(sP);
 			}
 			
-			
-			JPanel feed;
-			
-			if(creator.equals(app.getAdmin())) {
-				feed = new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator), app.getRegisteredUserVotes(creator));
-			}else {
-				feed = new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
-			}
-			
-			frame.add(feed);
-			
+			JOptionPane.showMessageDialog(csp, "Social Project " + title +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
+			JPanel p =  new UserFeedPanel(app.getCurrentUser().getUsername(),app.getCurrentUser().getNotificationsMessages(), app.getRegisteredUserGroups(app.getCurrentUser()),  app.getRegisteredUserVotes(app.getCurrentUser()));
+			frame.add(p);
+			csp.setVisible(false);
+			frame.remove(csp);
+			p.setVisible(true);
 		}
 		
 	}
 	
+	/**
+	 * Getter for the CreateInfrastructureProjectPanel
+	 * 
+	 * @return cip CreateInfrastructureProjectPanel
+	 */
 	public CreateInfrastructureProjectPanel getCip() {
 		return cip;
 	}

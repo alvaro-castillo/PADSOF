@@ -10,7 +10,19 @@ import javax.swing.border.EmptyBorder;
 
 import userInterface.commonElements.FeedButtonPanel;
 
-
+/**
+ * This class represents the screen to create a social project
+ * It contains two labels and tow fields, which are again organized in pairs, one pair
+ * for the associated social group, and another for its description. It also has a 
+ * button group with two radio buttons to define the scope of the project, and a create
+ * button, which is used when all the fields are filled in, and leads you to the feed
+ * screen. At the end of this step the project has been created.
+ * There is also a feed button, to be used when you want to quit the creation of a
+ * project and return to the user feed screen.
+ * 
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ *
+ */
 public class CreateSocialProjectPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -28,12 +40,17 @@ public class CreateSocialProjectPanel extends JPanel {
     private JButton createButton = new JButton("Create");
     private JPanel secondPanel = new JPanel();
     private JPanel natOrInterPanel = new JPanel();
-    	
+    
+    /**
+     * Constructor of this class
+     * 
+     * @param cpC Reference to the class with all the controllers
+     */
     public CreateSocialProjectPanel(CreateProjectController cpC) {
     	
     	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
-		this.add(Box.createRigidArea(new Dimension(0, 60)));
+		this.add(Box.createRigidArea(new Dimension(0, 30)));
     	
 		mainPanel.setBorder(new EmptyBorder(20,20,20,20));
 		mainPanel.setLayout(new GridBagLayout());
@@ -119,11 +136,20 @@ public class CreateSocialProjectPanel extends JPanel {
         
 	}
     
-    
+    /**
+	 * Associated social group field getter. Used by the controller
+	 * 
+	 * @return String in the associated social group field
+	 */
     public String getSocialGroup() {
     	return associatedSGField.getText();
     }
     
+    /**
+	 * Scope getter. Used by the controller
+	 * 
+	 * @return String of the scope of the project
+	 */
     public String getNatOrInter() {
     	if(natOrInterBG.getSelection()==null) {
     		return null;
@@ -131,6 +157,11 @@ public class CreateSocialProjectPanel extends JPanel {
     	return natOrInterBG.getSelection().getActionCommand();
     }
     
+    /**
+	 * Description field getter. Used by the controller
+	 * 
+	 * @return String in the descriptions field
+	 */
     public String getDescription() {
     	return descriptionArea.getText();
     }

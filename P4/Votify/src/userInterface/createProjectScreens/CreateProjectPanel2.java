@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -18,7 +16,18 @@ import userInterface.commonElements.FeedButtonPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * This class represents the second screen to create a project
+ * It contains two button groups (with two radio buttons each), each of them with the corresponding label, a
+ * combo box that will be shown only if the corresponding radio button is selected.
+ * Finally it also has the "next" button, which is used when all the required fields
+ * are selected, and it shows the next screen after being selected.
+ * There is also a feed button, to be used when you want to quit the creation of a
+ * project and return to the user feed screen.
+ * 
+ * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
+ *
+ */
 public class CreateProjectPanel2 extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -39,11 +48,17 @@ public class CreateProjectPanel2 extends JPanel {
 	private JPanel projectTypePanel = new JPanel();
 	private JPanel individualOrGroupPanel = new JPanel();
 	
+	/**
+	 * Constructor of this class
+	 * 
+	 * @param cpC Reference to the class with all the controllers
+	 * @param user Reference to the RegisteredUser who is creating the project/interacting with the app
+	 */
 	public CreateProjectPanel2(CreateProjectController cpC, RegisteredUser user) {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(feed);
-		this.add(Box.createRigidArea(new Dimension(0, 60)));
+		this.add(Box.createRigidArea(new Dimension(0, 30)));
 		
 		mainPanel.setBorder(new EmptyBorder(20,20,20,20));
 		mainPanel.setLayout(new GridBagLayout());
@@ -162,7 +177,11 @@ public class CreateProjectPanel2 extends JPanel {
        
 	}
 	
-	
+	/**
+	 * Type getter. Used by the controller
+	 * 
+	 * @return String of the type of the project
+	 */
 	public String getType() {
 		if(projectTypeBG.getSelection()==null) {
 			return null;
@@ -170,6 +189,11 @@ public class CreateProjectPanel2 extends JPanel {
 		return projectTypeBG.getSelection().getActionCommand();
 	}
 	
+	/**
+	 * Way of creating the projetc getter. Used by the controller
+	 * 
+	 * @return String of the way of creating the project
+	 */
 	public String getIndOrGroup() {
 		if(individualOrGroupBG.getSelection()==null) {
 			return null;
@@ -177,6 +201,11 @@ public class CreateProjectPanel2 extends JPanel {
 		return individualOrGroupBG.getSelection().getActionCommand();
 	}
 	
+	/**
+	 * Getter of the option of the group CBox selected. Used by the controller
+	 * 
+	 * @return String of the item of the group CBox
+	 */
 	public String getGroup() {
 		return groupCBox.getSelectedItem().toString();
 	}
