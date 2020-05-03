@@ -256,12 +256,7 @@ public class CreateProjectController {
 				return;
 			}
 			
-			File originalFile = new File(cip.getPath());
-		    String path = cip.getPath();
-		    String newPath = path.substring(path.lastIndexOf('/') + 1);
-		    File newFile = new File(newPath);
-			originalFile.renameTo(newFile);
-			image = newPath;
+			image = cip.getPath();
 			
 			District districts[] = District.values(); 
 			for(District d : districts) {
@@ -271,13 +266,14 @@ public class CreateProjectController {
 			}
 			
 			if(individual) {
-				InfrastructureProject iP = new InfrastructureProject(title, description, amount, creator, district, image); 
+				InfrastructureProject iP = new InfrastructureProject(title, description, amount, creator, district, image);
 				app.addProject(iP);
+				System.out.println(iP);
 			} else {
 				InfrastructureProject iP = new InfrastructureProject(title, description, amount, group, district, image);
 				app.addProject(iP);
+				System.out.println(iP);
 			}
-			
 			JOptionPane.showMessageDialog(cip, "Infrastructure Project " + title +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
 			JPanel p =  new UserFeedPanel(app.getCurrentUser().getUsername(),app.getCurrentUser().getNotificationsMessages(), app.getRegisteredUserGroups(app.getCurrentUser()),  app.getRegisteredUserVotes(app.getCurrentUser()));
 			frame.add(p);

@@ -14,7 +14,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import application.enums.District;
 import userInterface.commonElements.FeedButtonPanel;
-import userInterface.initialScreen.ImagePanel;
 
 /**
  * This class represents the screen to create an infrastructure project.
@@ -39,7 +38,6 @@ public class CreateInfrastructureProjectPanel extends JPanel {
 	private JButton browseButton = new JButton("Browse");
 	private JPanel browsePanel = new JPanel();
 	private ImagePanel imgPanel = new ImagePanel("no-image-1.jpg");
-	private JPanel contImgPanel = new JPanel();
 	private String path = null;
 	private JComboBox<String> districtCBox = new JComboBox<String>();
 	private JButton createButton = new JButton("Create");
@@ -89,13 +87,10 @@ public class CreateInfrastructureProjectPanel extends JPanel {
 	    yPos++;
 	    mainPanel.add(browsePanel, c);
 	    
-	    contImgPanel.setSize(new Dimension(100,100));
-	    
-	    contImgPanel.add(imgPanel);
-	    
 	    c.gridy = yPos;
+	    int imgPos = yPos;
 	    yPos++;
-	    mainPanel.add(contImgPanel, c);
+	    mainPanel.add(imgPanel, c);
 	    
 	    browseButton.addActionListener(new ActionListener() {
 	    	
@@ -111,11 +106,13 @@ public class CreateInfrastructureProjectPanel extends JPanel {
 	    		if (res == JFileChooser.APPROVE_OPTION) {
 	    			File selectedFile = file.getSelectedFile();
 	    			path = selectedFile.getAbsolutePath();
+	    			c.gridy = imgPos;
+	    			mainPanel.remove(imgPanel);
 	    			imgPanel = new ImagePanel(path);
-	    			contImgPanel.removeAll();
-	    			contImgPanel.add(imgPanel);
-	    			contImgPanel.revalidate();
-	    			contImgPanel.repaint();
+	    			c.gridy = imgPos;
+	    		    mainPanel.add(imgPanel, c);
+	    		    mainPanel.revalidate();
+	    		    mainPanel.repaint();
 	    		} else if (res == JFileChooser.CANCEL_OPTION) {
 	    			JOptionPane.showMessageDialog(cpC.getCip(), "There was a problem with the selected image", "Error", JOptionPane.ERROR_MESSAGE);
 	    		}
