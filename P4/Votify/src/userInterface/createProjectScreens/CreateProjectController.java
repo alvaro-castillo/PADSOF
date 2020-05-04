@@ -13,6 +13,7 @@ import application.project.InfrastructureProject;
 import application.project.SocialProject;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
+import userInterface.administrator.feed.AdminFeedPanel;
 import userInterface.userFeed.UserFeedPanel;
 
 /**
@@ -272,7 +273,12 @@ public class CreateProjectController {
 				app.addProject(iP);
 			}
 			JOptionPane.showMessageDialog(cip, "Infrastructure Project " + title +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
-			JPanel p =  new UserFeedPanel(app.getCurrentUser().getUsername(),app.getCurrentUser().getNotificationsMessages(), app.getRegisteredUserGroups(app.getCurrentUser()),  app.getRegisteredUserVotes(app.getCurrentUser()));
+			JPanel p;
+			if(creator.equals(app.getAdmin())) {
+				p =  new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}else {
+				p =  new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}
 			frame.add(p);
 			cip.setVisible(false);
 			frame.remove(cip);
@@ -338,7 +344,12 @@ public class CreateProjectController {
 			}
 			
 			JOptionPane.showMessageDialog(csp, "Social Project " + title +  " has been created.", "Success", JOptionPane.INFORMATION_MESSAGE);
-			JPanel p =  new UserFeedPanel(app.getCurrentUser().getUsername(),app.getCurrentUser().getNotificationsMessages(), app.getRegisteredUserGroups(app.getCurrentUser()),  app.getRegisteredUserVotes(app.getCurrentUser()));
+			JPanel p;
+			if(creator.equals(app.getAdmin())) {
+				p =  new AdminFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}else {
+				p =  new UserFeedPanel(creator.getUsername(),creator.getNotificationsMessages(), app.getRegisteredUserGroups(creator),  app.getRegisteredUserVotes(creator));
+			}
 			frame.add(p);
 			csp.setVisible(false);
 			frame.remove(csp);
