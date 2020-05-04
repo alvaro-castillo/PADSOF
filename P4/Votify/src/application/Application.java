@@ -11,7 +11,6 @@ import application.project.*;
 import application.group.*;
 import application.registeredUser.*;
 import es.uam.eps.sadp.grants.CCGG;
-import es.uam.eps.sadp.grants.InvalidIDException;
 import modifiableDates.ModifiableDate;
 import request.GovernmentGateway;
 
