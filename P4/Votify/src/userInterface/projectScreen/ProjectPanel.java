@@ -85,9 +85,9 @@ public class ProjectPanel extends JPanel {
 		}
 		
 		// Shows different funding information depending on the state of the project
-		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + "euros");
+		moneyAsked = new JLabel("Asked: " + String.format("%.2f", proj.getAmount()) + " euros");
 		if (proj.getGrantedAmount() != -1) {
-			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + "euros");
+			moneyGranted = new JLabel("Granted: " + String.format("%.2f", proj.getGrantedAmount()) + " euros");
 		} else {
 			moneyGranted = new JLabel();
 		}
