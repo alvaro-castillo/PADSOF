@@ -1,0 +1,6 @@
+To use the application you have to execute the main file that is located in src/main.
+
+When you first boot up the application it doesn't have any data, so you have to create an account. The first created account will automatically become the administrator. You can then log in because the admin's register is accepted automatically, but the rest of the registers will have to be accepted before they are allowed to log in.
+To delete the data you just have to delete the data.dat file, which is located in the project folder,
+
+You can also execute the MainTester located in src/mainTester before opening up the application. This will delete the data and load a few users, projects and groups.
