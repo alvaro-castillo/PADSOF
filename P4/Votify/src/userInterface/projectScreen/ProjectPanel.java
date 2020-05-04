@@ -25,9 +25,9 @@ import application.registeredUser.RegisteredUser;
 /**
  * This JPanel has the common Project user interface elements. Will be used by all the social and infrastructure panels
  * 
- * @author Álvaro Castillo García
+ * @author Ã�lvaro Castillo GarcÃ­a
  * @author Alejandro Benimeli
- * @author Miguel Álvarez Valiente
+ * @author Miguel Ã�lvarez Valiente
  *
  */
 public class ProjectPanel extends JPanel {

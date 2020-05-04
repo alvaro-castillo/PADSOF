@@ -22,6 +22,7 @@ public class RegisterPanel extends JPanel{
     private JTextField nationalIDField = new JTextField(30);
     private JPasswordField passwordField = new JPasswordField(30);
     private JButton createButton = new JButton("Create Account");
+    private JButton mainScreen = new JButton("Go to the Main Screen");
     private RegisterController controller;
     
     
@@ -100,8 +101,13 @@ public class RegisterPanel extends JPanel{
         c.gridy = yPos;
         yPos++;
         this.add(createButton, c);
+        
+        c.gridy = yPos;
+        yPos++;
+        this.add(mainScreen, c);
                 
-        this.createButton.addActionListener(controller);
+        this.createButton.addActionListener(event -> controller.pressedRegister(event));
+        this.mainScreen.addActionListener(event -> controller.goToMainScreen(event));
         passwordField.addKeyListener(controller);
         usernameField.addKeyListener(controller);
         nationalIDField.addKeyListener(controller);

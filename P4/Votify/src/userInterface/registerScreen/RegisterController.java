@@ -7,10 +7,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import application.Application;
 import application.registeredUser.RegisteredUser;
 import userInterface.AppFrame;
+import userInterface.initialScreen.InitialPanel;
 import userInterface.loginScreen.LoginPanel;
 /**
 * This is the controller of the Register Panel. It will perform some methods when the register
@@ -18,7 +20,7 @@ import userInterface.loginScreen.LoginPanel;
 *
 * @author Miguel Álvarez Valiente, Alejandro Benimeli Miranda, Álvaro Castillo García
 */
-public class RegisterController extends KeyAdapter implements ActionListener {
+public class RegisterController extends KeyAdapter {
 	
 	private RegisterPanel panel;
 	private Application app;
@@ -34,13 +36,25 @@ public class RegisterController extends KeyAdapter implements ActionListener {
 	}
 
 	/**
-	 * This will be executed when an action event is received.
+	 * This will be executed when the register button is pressed.
 	 *
 	 * @param e the event caused by an action
 	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void pressedRegister(ActionEvent e) {
 		this.register();
+	}
+	
+	/**
+	 * This will be executed when the initial screen button is pressed
+	 *
+	 * @param e the event caused by an action
+	 */
+	public void goToMainScreen(ActionEvent e) {
+		JFrame m = AppFrame.getAppFrame();
+		m.remove(panel);
+    	JPanel p = InitialPanel.getInitialPanel();
+    	m.add(p);
+    	p.setVisible(true);
 	}
 	
 	/**
@@ -79,7 +93,7 @@ public class RegisterController extends KeyAdapter implements ActionListener {
 			 return;
 		}
 		
-		for(int i=0; i<9; i++) {
+		for(int i=0; i<8; i++) {
 			if(Character.isLetter(userId.charAt(i))) {
 				JOptionPane.showMessageDialog(panel, "You must type a valid ID with 9 digits.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
