@@ -3,6 +3,9 @@ package application.project;
 import application.registeredUser.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import application.enums.District;
 import application.group.Group;
@@ -74,11 +77,16 @@ public class InfrastructureProject extends Project {
 	 */
 	private String setImage(String image) {
 		File originalFile = new File(image);
-	    String path = image;
-	    String newPath = path.substring(path.lastIndexOf('/') + 1);
+	    String newPath = originalFile.getName();
 	    newPath = getLastId() + newPath;
 	    File newFile = new File(newPath);
-		originalFile.renameTo(newFile);
+		
+	    try {
+	    	Files.copy(originalFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	    } catch (IOException e) {
+	    	
+	    }
+	    
 		return newPath;
 	}
 	
