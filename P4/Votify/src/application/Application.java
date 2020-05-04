@@ -11,7 +11,9 @@ import application.project.*;
 import application.group.*;
 import application.registeredUser.*;
 import es.uam.eps.sadp.grants.CCGG;
+import es.uam.eps.sadp.grants.InvalidIDException;
 import modifiableDates.ModifiableDate;
+import request.GovernmentGateway;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -326,6 +328,9 @@ public class Application extends Subject
 		ModifiableDate.setToday();
 		CCGG.getGateway().setDate(ModifiableDate.getModifiableDate());
 		
+		INSTANCE.checkExpiredProjects(ModifiableDate.getModifiableDate());
+		INSTANCE.checkSentProjects();
+		
 		return Application.INSTANCE;
 	}
 	
@@ -366,11 +371,9 @@ public class Application extends Subject
 		for(Project p: projects) {
 			if(p.getActualVotes()<p.getMinimumVotes()) {
 			LocalDate d = p.getAcceptDate();
-				if(now.compareTo(d.plusDays(30))==0) {
+				if(now.compareTo(d.plusDays(30))>=0) {
 					p.expireProject();
 					expired.add(p);
-					RegisteredUser c = p.getCreator();
-					c.update(new Notification("Your " + p.getClass().getName() + " project: " + p.getTitle() + " with ID " + p.getId() + " has expired!", LocalDate.now()));
 				}
 			}
 		}
@@ -387,11 +390,9 @@ public class Application extends Subject
 		for(Project p: projects) {
 			if(p.getActualVotes()<p.getMinimumVotes()) {
 			LocalDate d = p.getAcceptDate();
-				if(actualDate.compareTo(d.plusDays(30))==0) {
+				if(actualDate.compareTo(d.plusDays(30))>=0) {
 					p.expireProject();
 					expired.add(p);
-					RegisteredUser c = p.getCreator();
-					c.update(new Notification("Your " + p.getClass().getName() + " project: " + p.getTitle() + " with ID " + p.getId() + " has expired!", LocalDate.now()));
 				}
 			}
 		}
@@ -541,4 +542,29 @@ public class Application extends Subject
 	public Vector<String> queryProjects(String s){
 		return this.projects.parallelStream().map(p -> p.getTitle()+ " " + p.getId()).filter(n->n.contains(s)).collect(Vector::new, Vector::add, Vector::addAll);
 	}
+	
+	/**
+	 * Checks for the state of projects sent to the external entity
+	 */
+	private void checkSentProjects() {
+		
+		GovernmentGateway gw = GovernmentGateway.getInstance();
+		
+		for (Project p: projects) {
+			if (p.getState().equals(ProjectStatus.PENDING)) {
+				
+				// try to check 3 times in case of ioexception
+				for (int i=0; i<3; ++i) {
+					try {
+						gw.checkProject(p);
+					} catch (Exception e) {
+						// do nothing
+					}
+				}
+				
+			}
+		}
+		
+	}
+	
 }
