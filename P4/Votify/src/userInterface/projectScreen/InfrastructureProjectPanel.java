@@ -42,7 +42,6 @@ public class InfrastructureProjectPanel extends JPanel {
 		// Initialize component content
 		this.proj = new ProjectPanel(infr, reg);
 		this.img = new ImagePanel(infr.getImage());
-		System.out.println(infr.getImage());
 		this.districtLabel = new JLabel(infr.getDistrict().toString());
 		this.feed = new FeedButtonPanel(this);
 
